@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <title>管理平台 - 中国卫生监督</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg" id="body-gray-bg" style="overflow:hidden">
+    <div id="wrapper">
+        <!--左侧导航开始-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="nav-close"><i class="fa fa-times-circle"></i>
+            </div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <div class="header-logo">
+                                    <div class="header-logo-bzn"></div>
+                                    <div class="header-logo-rtext">中国卫生监督</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="logo-element"><div class="header-logo-bzn"></div></div>
+                    </li>
+                    ${(menuList)!}
+                </ul>
+            </div>
+            <div class="nav-background"></div>
+        </nav>
+        <!--左侧导航结束-->
+        <!--右侧部分开始-->
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row header-top border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-default btn-circle" href="#">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown" id="user-header">
+                            <a  data-toggle="dropdown" data-hover="dropdown"
+                               data-close-others="true" aria-expanded="false">
+                                <i class="fa fa-user"></i>
+                                <span class="username ng-binding" ng-bind="name">${userName!}</span>
+                                <input type="hidden" value="${userRoleType!}" id="userRoleType">
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="javascript:void(0)" id="updatePassword" >
+                                        <i class="fa fa-cog"></i> 修改密码
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/logout"><i class="fa fa-sign-out"></i> 退出</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row J_mainContent" id="content-main">
+                <iframe id="J_iframe" width="100%" height="100%" src="/welcome"
+                        frameborder="0" data-id="welcome" seamless></iframe>
+            </div>
+        </div>
+        <!--右侧部分结束-->
+        <#include "./system/user/update_password.html" />
+    </div>
+    <div class="loading animated fadeIn" style="display: none" id="loading">
+        <div class="loadbg"></div>
+        <div class="sk-spinner sk-spinner-double-bounce p-center">
+            <div class="sk-double-bounce1"></div>
+            <div class="sk-double-bounce2"></div>
+        </div>
+    </div>
+    <!-- 全局js -->
+    <script src="/plugins/jquery/jquery.min.js?v=2.1.4"></script>
+    <script src="/plugins/bootstrap/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/plugins/layer/layer.min.js"></script>
+
+    <!-- jQuery Validation plugin javascript-->
+    <script src="/plugins/validate/jquery.validate.min.js"></script>
+    <script src="/js/common/form_validate_common.js"></script>
+    <script src="/js/common/jquery_validate_extend.js"></script>
+    <script src="/plugins/validate/messages_zh.min.js"></script>
+
+    <!-- Sweet alert -->
+    <script src="/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <!-- 自定义js -->
+    <script src="/js/admin.js?v=4.1.0"></script>
+    <script src="/js/common/alert_common.js"></script>
+    <script src="/js/index.js"></script>
+
+    <script src="/js/common/ajax_common.js"></script>
+
+    <!-- 第三方插件 -->
+    <script src="/plugins/pace/pace.min.js"></script>
+<script>
+    $(window).resize(function() {
+        $("#body-gray-bg").height($(window).height());
+    });
+    $("#body-gray-bg").height($(window).height());
+</script>
+</body>
+
+</html>

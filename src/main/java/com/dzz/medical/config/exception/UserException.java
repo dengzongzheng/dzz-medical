@@ -1,0 +1,1 @@
+package com.dzz.medical.config.exception;import lombok.Data;/** * 自定义用户异常 * * @author dzz * @since  2017年04月22 上午7:56 * @version  1.0.0 */@Datapublic class UserException extends RuntimeException {    private String code;    private String message;}

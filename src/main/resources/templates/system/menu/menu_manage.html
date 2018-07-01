@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <title>菜单管理页</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/css/plugins/jsTree/style.min.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <style>
+        .jstree-open > .jstree-anchor > .fa-folder:before {  content: "\f07c";  }
+        .jstree-default .jstree-icon.none {  width: 0;  }
+        .fa{
+            margin-top: 10px;
+        }
+        .delBtn{
+            width: 40px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: #dc3838;
+            color: #fff;
+            display: inline-block;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+        .delBtn:hover{
+            cursor: pointer;
+        }
+        .modal-body .ibox-content .form-group .help-block {
+            position: static;
+            margin-top: 0;
+        }
+        .iboxMain .m-b-none{
+            width: 100%;
+            position: static;
+        }
+    </style>
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>菜单列表</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link" id="addOneLevelMenu">
+                                <i class="glyphicon glyphicon-plus"></i> 添加一级菜单
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div id="menuTree"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal" style="z-index:9999" id="addMenuModal" tabindex="-1"
+            aria-labelledby="myModalLabel" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInDown">
+                <input type="hidden" id="actionType" name="actionType" value="1">
+                <form class="form-horizontal" id="addMenuForm">
+                    <input type="hidden" id="isExtremity" value="0" />
+                    <input type="hidden" id="id" value="" />
+                    <input type="hidden" id="parentId" value="0" />
+                    <input type="hidden" id="menuType" value="1" />
+                    <div class="modal-body">
+                        <div class="ibox float-e-margins" style="border: none">
+                            <div class="ibox-content iboxMain">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">菜单名称：</label>
+                                        <div class="col-sm-8">
+                                            <input id="menuName" name="menuName" value="" placeholder="菜单名称"
+                                                   class="form-control" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">菜单排序：</label>
+                                        <div class="col-sm-8">
+                                            <input id="sortNo" name="sortNo" placeholder="菜单排序" class="form-control"
+                                                value="" type="number" min=0 aria-required="true" aria-invalid="false"
+                                                class="valid"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">是否最后一级：</label>
+                                        <div class="col-sm-8">
+                                            <div class="col-sm-4">
+                                                <div class="radio i-checks">
+                                                    <label>
+                                                        <input type="radio" checked value="1" name="extremity">
+                                                        <i></i>是
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="radio i-checks">
+                                                    <label>
+                                                        <input type="radio" value="0" name="extremity">
+                                                        <i></i>否</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="menu_url_div">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">url</label>
+                                            <div class="col-sm-8">
+                                                <input id="url" name="url" placeholder="菜单url" class="form-control" type="text"
+                                                       value=""  aria-required="true" aria-invalid="false" class="valid"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">菜单图标：</label>
+                                        <div class="col-sm-5">
+                                            <input id="icon" type="hidden" name="icon" value=""/>
+                                            <i class="" id="iconShow"></i>
+                                            <span class="delBtn" style="display: none;" id="delBtn">删除</span>
+                                        </div>
+                                        <div class="col-sm-4" style="line-height:30px;height:30px">
+
+                                            <a href="javascript:void(0)" data-toggle="modal"
+                                               data-target="#fontModal">设置图标</a>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-white" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <#include "../../common/font_awesome.html">
+
+    <!-- 全局js -->
+    <script src="/plugins/jquery/jquery.min.js?v=2.1.4"></script>
+    <script src="/plugins/bootstrap/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- jsTree plugin javascript -->
+    <script src="/plugins/jsTree/jstree.min.js"></script>
+
+    <!-- 自定义js -->
+    <script src="/js/content.js?v=1.0.0"></script>
+
+    <!-- jQuery Validation plugin javascript-->
+    <script src="/plugins/validate/jquery.validate.min.js"></script>
+    <script src="/plugins/validate/messages_zh.min.js"></script>
+    <!-- Toastr script -->
+    <script src="/plugins/toastr/toastr.min.js"></script>
+    <!-- Sweet alert -->
+    <script src="/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <!-- iCheck -->
+    <script src="/plugins/iCheck/icheck.min.js"></script>
+
+    <script>
+        var menuTreeData = '${menuTree}';
+    </script>
+    <!-- 自定义js -->
+    <script src="/js/common/ajax_common.js"></script>
+    <script src="/js/common/alert_common.js"></script>
+    <script src="/js/common/toast_common.js"></script>
+    <script src="/js/common/form_validate_common.js"></script>
+    <script src="/js/common/jquery_validate_extend.js"></script>
+    <script src="/js/system/menu/menu_manage.js"></script>
+
+</body>
+
+</html>

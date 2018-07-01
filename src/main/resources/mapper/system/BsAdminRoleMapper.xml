@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dzz.medical.controller.system.dao.BsAdminRoleMapper">
+  <resultMap id="BaseResultMap" type="com.dzz.medical.controller.system.domain.model.BsAdminRole">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="updator" jdbcType="VARCHAR" property="updator" />
+    <result column="role_type" jdbcType="INTEGER" property="roleType"/>
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+  </resultMap>
+
+  <resultMap id="ListRoleBO" type="com.dzz.medical.controller.system.domain.bo.ListRoleBO"
+             extends="BaseResultMap">
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+  </resultMap>
+
+  <resultMap id="BsRoleBO" type="com.dzz.medical.controller.system.domain.bo.BsRoleBO" extends="BaseResultMap">
+
+  </resultMap>
+
+  <select id="selectByParam" resultMap="ListRoleBO">
+    select r.role_id,r.name,r.department_id,d.name as department_name,r.create_time
+    from bs_admin_role r
+    left join bs_admin_department d on d.department_id=r.department_id
+    where r.status=1
+    <if test="departmentName!=null and departmentName!=''">
+      and d.name like concat('%',#{departmentName},'%')
+    </if>
+    <if test="roleName!=null and roleName!=''">
+      and r.name like concat('%',#{roleName},'%')
+    </if>
+    <if test="departmentId!=null and departmentId!=''">
+      and r.department_id = #{departmentId}
+    </if>
+
+    order by create_time desc
+  </select>
+
+  <select id="selectByDepartmentId" resultMap="BsRoleBO">
+    SELECT r.role_id,r.role_type,r.role_type,r.name,r.department_id
+    FROM bs_admin_role r
+    where r.department_id=#{departmentId}
+  </select>
+
+  <select id="getByParam" resultMap="BsRoleBO">
+    SELECT r.role_id,r.role_type,r.role_type,r.name,r.department_id
+    FROM bs_admin_role r
+    where r.department_id=#{departmentId}
+    and role_type=#{roleType}
+  </select>
+</mapper>

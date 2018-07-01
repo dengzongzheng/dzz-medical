@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dzz.medical.controller.system.dao.BsAdminUserPermitMapper">
+  <resultMap id="BaseResultMap" type="com.dzz.medical.controller.system.domain.model.BsAdminUserPermit">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="permit_id" jdbcType="VARCHAR" property="permitId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="updator" jdbcType="VARCHAR" property="updator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+  </resultMap>
+
+  <delete id="deleteByUserId">
+    delete from bs_admin_user_permit where user_id=#{userId}
+  </delete>
+
+  <select id="selectByUserId" resultType="java.lang.String">
+    select permit_id from bs_admin_user_permit where user_id=#{userId} and status=1
+  </select>
+
+  <select id="selectRemovedPermitUserId" resultType="java.lang.String">
+    select id  from bs_admin_user_permit where user_id in (
+     select user_id from bs_admin_user_role where role_id in (
+     select role_id from bs_admin_role where department_id=#{departmentId})
+    ) and permit_id not in
+    (
+    <foreach collection="permitList" item="data" separator="," index="index">
+      #{data.permitId}
+    </foreach>
+    )
+     and status=1
+  </select>
+
+  <update id="updateStatus">
+    UPDATE bs_admin_user_permit set status=#{status} ,updator=#{userCode},update_time=NOW() where id=#{id}
+  </update>
+
+</mapper>

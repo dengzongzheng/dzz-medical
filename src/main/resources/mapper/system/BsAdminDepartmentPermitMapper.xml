@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dzz.medical.controller.system.dao.BsAdminDepartmentPermitMapper">
+  <resultMap id="BaseResultMap" type="com.dzz.medical.controller.system.domain.model.BsAdminDepartmentPermit">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
+    <result column="permit_id" jdbcType="VARCHAR" property="permitId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="updator" jdbcType="VARCHAR" property="updator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+  </resultMap>
+
+  <delete id="deletByDepartmentId">
+    delete from bs_admin_department_permit where department_id=#{departmentId}
+  </delete>
+
+  <select id="selectByDepartmentId" resultType="java.lang.String">
+    SELECT  permit_id from bs_admin_department_permit where department_id=#{departmentId}
+  </select>
+</mapper>

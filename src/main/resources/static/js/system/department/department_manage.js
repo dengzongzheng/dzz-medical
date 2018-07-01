@@ -1,0 +1,1 @@
+$(function () {  commonListQuery.listQuery();  $("#query").on("click", function () {    $("#pageNo").attr("value", 1);    var pagination = $("#pagination-list");    if (pagination.data("twbs-pagination")) {      pagination.twbsPagination("destroy");    }    commonListQuery.listQuery();  });});

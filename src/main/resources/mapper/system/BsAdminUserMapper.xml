@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dzz.medical.controller.system.dao.BsAdminUserMapper">
+    <resultMap id="BaseResultMap" type="com.dzz.medical.controller.system.domain.model.BsAdminUser">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="contact_name" jdbcType="VARCHAR" property="contactName"/>
+        <result column="contact_mobile" jdbcType="VARCHAR" property="contactMobile"/>
+        <result column="contact_email" jdbcType="VARCHAR" property="contactEmail"/>
+        <result column="wx_id" jdbcType="VARCHAR" property="wxId"/>
+        <result column="qq" jdbcType="VARCHAR" property="qq"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="updator" jdbcType="VARCHAR" property="updator"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="creator" jdbcType="VARCHAR" property="creator"/>
+    </resultMap>
+
+    <resultMap id="ListUserBO" type="com.dzz.medical.controller.system.domain.bo.ListUserBO"
+               extends="BaseResultMap">
+        <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
+        <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+        <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+        <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+        <result column="role_type" jdbcType="INTEGER" property="roleType"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+    </resultMap>
+
+    <resultMap id="BsAdminUserBO" type="com.dzz.medical.controller.system.domain.bo.BsAdminUserBO">
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="contact_name" jdbcType="VARCHAR" property="contactName"/>
+        <result column="contact_mobile" jdbcType="VARCHAR" property="contactMobile"/>
+        <result column="contact_email" jdbcType="VARCHAR" property="contactEmail"/>
+        <result column="wx_id" jdbcType="VARCHAR" property="wxId"/>
+        <result column="qq" jdbcType="VARCHAR" property="qq"/>
+    </resultMap>
+
+    <resultMap id="AdminUserDetailBO" type="com.dzz.medical.controller.system.domain.bo.AdminUserDetailBO" extends="BsAdminUserBO">
+        <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
+        <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+        <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+        <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+        <result column="role_type" jdbcType="INTEGER" property="roleType"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+
+    <select id="pageListDepartment" resultMap="ListUserBO">
+        select u.user_id,d.department_id,d.name as department_name,r.role_id,r.name as role_name,r.role_type
+            ,u.mobile,u.create_time,u.status,u.account,u.user_name
+        from bs_admin_user u
+        left join bs_admin_user_role ur on ur.user_id=u.user_id
+        left join bs_admin_role r on r.role_id =ur.role_id
+        left join bs_admin_department d on r.department_id=d.department_id
+        where 1=1
+        <if test="departmentName!=null and departmentName!=''">
+            and  d.name like concat('%',#{departmentName},'%')
+        </if>
+        <if test="roleName!=null and roleName!=''">
+            and r.name like concat('%',#{roleName},'%')
+        </if>
+        <if test="currentUser!=null and currentUser!=''">
+            and u.user_id != #{currentUser}
+        </if>
+        order by u.update_time desc,u.create_time desc
+    </select>
+
+    <select id="pageListDepartmentId" resultMap="ListUserBO">
+        select u.user_id,d.department_id,d.name as department_name,r.role_id,r.name as role_name,r.role_type
+        ,u.mobile,u.create_time,u.status,u.account,u.user_name
+        from bs_admin_user u
+        left join bs_admin_user_role ur on ur.user_id=u.user_id
+        left join bs_admin_role r on r.role_id =ur.role_id
+        left join bs_admin_department d on r.department_id=d.department_id
+        where 1=1 and d.department_id=#{departmentId}
+        <if test="departmentName!=null and departmentName!=''">
+            and  d.name like concat('%',#{departmentName},'%')
+        </if>
+        <if test="roleName!=null and roleName!=''">
+            and r.name like concat('%',#{roleName},'%')
+        </if>
+        <if test="departmentId!=null and departmentId!=''">
+            and d.department_id=#{departmentId}
+        </if>
+        <if test="currentUser!=null and currentUser!=''">
+            and u.user_id != #{currentUser}
+        </if>
+        order by u.update_time desc,u.create_time desc
+    </select>
+
+    <select id="selectUserByRoleId" resultMap="BsAdminUserBO">
+        SELECT u.user_id,u.user_name,u.password,u.mobile,u.account,u.email,u.contact_name,u,contact_mobile,
+        u.contact_email,u.wx_id,u.qq
+        from bs_admin_user u
+        left join bs_admin_user_role ur on ur.user_id =u.user_id
+        where ur.role_id=#{roleId}
+    </select>
+    <select id="listUsersByParam" resultMap="BsAdminUserBO">
+        SELECT u.user_id,u.user_name,u.password,u.mobile,u.account,u.email,u.contact_name,u.contact_mobile,
+        u.contact_email,u.wx_id,u.qq
+        from bs_admin_user u
+        left join bs_admin_user_role ur on ur.user_id =u.user_id
+        left join bs_admin_role r on r.role_id=ur.role_id
+        where r.department_id = #{departmentId}
+        and r.role_type =#{roleType}
+    </select>
+
+    <select id="selectUserByDepartmentId" resultMap="BsAdminUserBO">
+        select user_id,user_name from bs_admin_user where user_id in (
+                select user_id from bs_admin_user_role where role_id in (
+                       select role_id from bs_admin_role where department_id=#{departmentId} and status=1)
+                       and status=1 ) and status=1
+    </select>
+
+
+    <select id="getByMail" resultMap="BsAdminUserBO">
+        SELECT u.user_id,u.user_name,u.account
+        from bs_admin_user u
+        where u.email=#{mail}
+    </select>
+    <update id="updateStatus">
+        update bs_admin_user set status=#{status},updator=#{userCode},update_time=NOW() where user_id=#{userId}
+    </update>
+    <select id="selectUserDetailByUserId" resultMap="AdminUserDetailBO">
+        select u.user_id,u.user_name,u.password,u.mobile,u.account,u.email,u.contact_name,u.contact_mobile,
+        u.contact_email,u.wx_id,u.qq,r.role_id,r.role_type,r.name as role_name,d.department_id,d.name as department_name
+        ,u.status
+        from bs_admin_user u
+        LEFT JOIN bs_admin_user_role ur on ur.user_id=u.user_id
+        LEFT JOIN  bs_admin_role r on r.role_id =ur.role_id
+        LEFT JOIN bs_admin_department d on d.department_id=r.department_id
+        where u.user_id=#{userId}
+    </select>
+
+    <select id="selectUserDetailByAccount" resultMap="AdminUserDetailBO">
+        select u.user_id,u.user_name,u.password,u.mobile,u.account,u.email,u.contact_name,u.contact_mobile,
+        u.contact_email,u.wx_id,u.qq,r.role_id,r.role_type,r.name as role_name,
+        d.department_id,d.name as department_name,u.status
+        from bs_admin_user u
+        LEFT JOIN bs_admin_user_role ur on ur.user_id=u.user_id
+        LEFT JOIN  bs_admin_role r on r.role_id =ur.role_id
+        LEFT JOIN bs_admin_department d on d.department_id=r.department_id
+        where u.account=#{account}
+    </select>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select * from bs_admin_user where user_id=#{userId}
+    </select>
+
+</mapper>

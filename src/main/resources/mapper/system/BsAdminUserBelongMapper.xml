@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dzz.medical.controller.system.dao.BsAdminUserBelongMapper">
+  <resultMap id="BaseResultMap" type="com.dzz.medical.controller.system.domain.model.BsAdminUserBelong">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="subordinate_id" jdbcType="VARCHAR" property="subordinateId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="updator" jdbcType="VARCHAR" property="updator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+  </resultMap>
+
+  <resultMap id="BsAdminUserBO" type="com.dzz.medical.controller.system.domain.bo.BsAdminUserBO">
+    <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+    <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+    <result column="password" jdbcType="VARCHAR" property="password"/>
+    <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+    <result column="account" jdbcType="VARCHAR" property="account"/>
+    <result column="email" jdbcType="VARCHAR" property="email"/>
+    <result column="contact_name" jdbcType="VARCHAR" property="contactName"/>
+    <result column="contact_mobile" jdbcType="VARCHAR" property="contactMobile"/>
+    <result column="contact_email" jdbcType="VARCHAR" property="contactEmail"/>
+    <result column="wx_id" jdbcType="VARCHAR" property="wxId"/>
+    <result column="qq" jdbcType="VARCHAR" property="qq"/>
+  </resultMap>
+
+  <select id="listHigherLevelUsersByUserId" resultMap="BsAdminUserBO">
+    SELECT u.user_id,u.user_name,u.password,u.mobile,u.account,u.email,u.contact_name,u.contact_mobile,
+        u.contact_email,u.wx_id,u.qq FROM bs_admin_user_belong b
+    left join bs_admin_user u on u.user_id=b.user_id
+    where b.subordinate_id=#{userId}
+    and b.status = 1
+  </select>
+
+  <select id="listLowerLevelUsersByUserId" resultMap="BsAdminUserBO">
+    SELECT u.user_id,u.user_name,u.password,u.mobile,u.account,u.email,u.contact_name,u.contact_mobile,
+        u.contact_email,u.wx_id,u.qq FROM bs_admin_user_belong b
+    left join bs_admin_user u on u.user_id=b.subordinate_id
+    where b.user_id=#{userId}
+    and b.status = 1
+  </select>
+
+  <select id="listBelongByUserId" resultMap="BsAdminUserBO">
+    SELECT u.user_id,u.user_name,u.password,u.mobile,u.account,u.email,u.contact_name,u.contact_mobile,
+    u.contact_email,u.wx_id,u.qq FROM bs_admin_user_belong b
+    left join bs_admin_user u on u.user_id=b.subordinate_id
+    where b.user_id=#{userId}
+    and b.subordinate_id=#{subordinateId}
+    and b.status = 1
+  </select>
+
+  <update id="updateUserId" >
+    update bs_admin_user_belong set user_id=#{assignUserId},updator=#{userCode},update_time=NOW()
+    where user_id=#{userId} and status=1
+  </update>
+
+  <delete id="deleteAllByUserId">
+    delete from bs_admin_user_belong where user_id=#{userId} or subordinate_id=#{userId}
+  </delete>
+</mapper>

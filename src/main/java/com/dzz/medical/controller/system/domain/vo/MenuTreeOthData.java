@@ -1,0 +1,1 @@
+package com.dzz.medical.controller.system.domain.vo;import lombok.Data;/** * tree树自定义数据部分。用于前端逻辑。 * @author dzz * @since  2017年06月22 上午11:32 * @version  1.0.0 */@Datapublic class MenuTreeOthData {    /*是否为末级菜单*/    private Boolean extremity;    /*子菜单个数*/    private Integer childrenSize;}
