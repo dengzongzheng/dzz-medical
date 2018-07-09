@@ -1,5 +1,0 @@
-INSERT INTO bzn_user.bs_admin_platform (id, platform_id, name, status, update_time, updator, create_time, creator) VALUES (1, 'central00001', '核心管理后台代码', 1, '2017-09-15 00:00:00', 123, '2017-07-09 00:00:00', '');
-INSERT INTO bzn_user.bs_admin_platform (id, platform_id, name, status, update_time, updator, create_time, creator) VALUES (2, 'business00001', '业务管理后台代码', 1, '2017-09-15 00:00:00', 123, '2017-07-09 00:00:00', '');
-INSERT INTO bzn_user.bs_admin_platform (id, platform_id, name, status, update_time, updator, create_time, creator) VALUES (3, 'portal00001', '主站管理后台代码', 1, '2017-09-15 00:00:00', 123, '2017-07-09 00:00:00', '');
-INSERT INTO bzn_user.bs_admin_platform (id, platform_id, name, status, update_time, updator, create_time, creator) VALUES (4, 'user00001', '用户管理后台', 1, '2017-11-29 10:03:29', 123, '2017-11-29 10:03:29', '');
-INSERT INTO bzn_user.bs_admin_platform (id, platform_id, name, status, update_time, updator, create_time, creator) VALUES (5, 'manage00001', '运营管理后台', 1, '2017-09-15 00:00:00', 123, '2017-07-09 00:00:00', '');
