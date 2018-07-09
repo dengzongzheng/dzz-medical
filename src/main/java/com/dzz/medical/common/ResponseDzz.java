@@ -17,6 +17,8 @@ public class ResponseDzz<T> implements Serializable {
 
     private static final long serialVersionUID = -5802418480250581704L;
 
+    private static final String FAIL_CODE = "0";
+
     /**
      * 响应成功编码
      */
@@ -81,6 +83,43 @@ public class ResponseDzz<T> implements Serializable {
      */
     public Boolean isSuccess() {
         return SUCCESS_CODE.equals(this.getCode());
+    }
+
+    /**
+     * 失败结果构造器
+     * @param message 说明
+     * @return 结果
+     */
+    public static<T> ResponseDzz<T> fail(String message) {
+
+        return build(FAIL_CODE, message);
+    }
+
+    /**
+     * 失败结果构造器
+     * @param message 说明
+     * @param data 数据
+     * @return 结果
+     */
+    public static<T> ResponseDzz<T> fail(String message, T data) {
+
+        return build(FAIL_CODE, message, data);
+    }
+
+    /**
+     * 验证结果是否成功
+     * @return 是否成功
+     */
+    public Boolean checkSuccess() {
+        return this.code.equals(SUCCESS_CODE);
+    }
+
+    /**
+     * 验证结果是否挫败
+     * @return 是否成功
+     */
+    public Boolean checkFail() {
+        return this.code.equals(FAIL_CODE);
     }
 
 }
