@@ -29,4 +29,18 @@ public class WxConfig {
      */
     @Value("${wx.app.access_token.url}")
     private String accessTokenUrl;
+
+
+    /**
+     * 删除菜单地址
+     */
+    @Value("${wx.app.menu.delete.url}")
+    private String deleteMenuUrl;
+
+
+    /**
+     * 创建菜单地址
+     */
+    @Value("${wx.app.menu.create.url}")
+    private String createMenuUrl;
 }

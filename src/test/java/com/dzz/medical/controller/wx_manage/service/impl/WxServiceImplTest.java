@@ -29,7 +29,7 @@ public class WxServiceImplTest {
     @Test
     public void getAccessToken() throws Exception {
 
-        log.info("获取到的token:{}",wxService.getAccessToken(wxConfig.getAppId(),wxConfig.getAppSecret()));
+        log.info("获取到的token:{}",wxService.getAccessToken(wxConfig.getAppId(),wxConfig.getAppSecret()).toString());
 
     }
 

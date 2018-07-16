@@ -1,6 +1,7 @@
 package com.dzz.medical.controller.wx_manage.service.impl;
 
 import com.dzz.medical.common.http.HttpService;
+import com.dzz.medical.common.response.ResponseDzz;
 import com.dzz.medical.config.wx.WxConfig;
 import com.dzz.medical.controller.wx_manage.service.WxService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,27 @@ public class WxServiceImpl implements WxService {
     private WxConfig wxConfig;
 
     @Override
-    public String getAccessToken(String appId, String secret) {
+    public ResponseDzz getAccessToken(String appId, String secret) {
 
-        String requestUrl = wxConfig.getAccessTokenUrl();
-        StringBuilder urlBuilder = new StringBuilder(requestUrl);
+        StringBuilder urlBuilder = new StringBuilder(wxConfig.getAccessTokenUrl());
         urlBuilder.append("grant_type=client_credential").append("&appid=").append(appId).append("&secret=")
                 .append(secret);
-        return HttpService.sendRequest(urlBuilder.toString(), "get", "");
+        String result = HttpService.sendRequest(urlBuilder.toString(), "get", "");
+        return checkResult(result);
+    }
+
+    @Override
+    public ResponseDzz deleteMenu(String accessToken) {
+
+        StringBuilder urlBuilder = new StringBuilder(wxConfig.getDeleteMenuUrl());
+        urlBuilder.append("access_token=").append("");
+        String result = HttpService.sendRequest(urlBuilder.toString(), "get", "");
+        return checkResult(result);
+    }
+
+    @Override
+    public ResponseDzz createMenu(String menuJsonString) {
+
+        return null;
     }
 }
