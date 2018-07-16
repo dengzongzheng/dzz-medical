@@ -1,4 +1,4 @@
-package com.dzz.medical.common;
+package com.dzz.medical.common.decode;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

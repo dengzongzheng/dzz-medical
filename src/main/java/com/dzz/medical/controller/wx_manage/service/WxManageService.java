@@ -1,6 +1,6 @@
 package com.dzz.medical.controller.wx_manage.service;
 
-import com.dzz.medical.common.ResponseDzz;
+import com.dzz.medical.common.response.ResponseDzz;
 import com.dzz.medical.config.wx.WxConfig;
 import com.dzz.medical.controller.wx_manage.api.MenuAPI;
 import com.dzz.medical.controller.wx_manage.api.TokenAPI;

@@ -1,9 +1,9 @@
 package com.dzz.medical.controller.system.service.impl;
 
 
-import com.dzz.medical.common.PageUtil;
-import com.dzz.medical.common.ResponseDzz;
-import com.dzz.medical.common.UserAccountUtil;
+import com.dzz.medical.common.page.PageUtil;
+import com.dzz.medical.common.response.ResponseDzz;
+import com.dzz.medical.controller.system.common.tools.UserAccountUtil;
 import com.dzz.medical.controller.system.dao.BsAdminPermitMapper;
 import com.dzz.medical.controller.system.dao.BsAdminUserBelongMapper;
 import com.dzz.medical.controller.system.dao.BsAdminUserMapper;

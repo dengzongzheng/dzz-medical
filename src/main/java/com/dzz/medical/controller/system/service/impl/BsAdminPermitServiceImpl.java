@@ -1,8 +1,8 @@
 package com.dzz.medical.controller.system.service.impl;
 
 
-import com.dzz.medical.common.BsMenuBuildTools;
-import com.dzz.medical.common.PlatformEnum;
+import com.dzz.medical.controller.system.common.tools.BsMenuBuildTools;
+import com.dzz.medical.controller.system.common.enums.PlatformEnum;
 import com.dzz.medical.controller.system.dao.BsAdminPermitMapper;
 import com.dzz.medical.controller.system.domain.bo.PermitBO;
 import com.dzz.medical.controller.system.domain.dto.permit.BsAdminPermitDTO;

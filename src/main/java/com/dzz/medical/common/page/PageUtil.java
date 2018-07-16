@@ -1,4 +1,4 @@
-package com.dzz.medical.common;
+package com.dzz.medical.common.page;
 
 
 import io.swagger.annotations.ApiModelProperty;

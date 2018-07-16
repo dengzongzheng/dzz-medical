@@ -1,4 +1,4 @@
-package com.dzz.medical.common;
+package com.dzz.medical.common.mybatis;
 
 
 import tk.mybatis.mapper.common.Mapper;

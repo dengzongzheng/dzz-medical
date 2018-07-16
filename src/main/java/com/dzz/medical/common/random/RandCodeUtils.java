@@ -1,4 +1,4 @@
-package com.dzz.medical.common;
+package com.dzz.medical.common.random;
 
 import java.util.Random;
 

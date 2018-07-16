@@ -23,4 +23,10 @@ public class WxConfig {
 
     @Value("${wx.serverPath}")
     private String serverPath;
+
+    /**
+     * 获取access_token_url
+     */
+    @Value("${wx.app.access_token.url}")
+    private String accessTokenUrl;
 }

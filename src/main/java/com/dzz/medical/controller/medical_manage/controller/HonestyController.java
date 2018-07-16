@@ -5,23 +5,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * 医药管理控制层
+ * 诚信自律
  *
  * @author dzz
  * @version 1.0.0
- * @since 2018年06月30 下午2:15
+ * @since 2018年07月09 下午11:00
  */
 @Controller
-@RequestMapping("/manage")
-public class MedicalManageController {
+@RequestMapping("/honesty")
+public class HonestyController {
 
     /**
-     * 管理
-     * @return 页面
+     * 公共场所
+     * @return 公共场所上报
      */
-    @RequestMapping(value = "/medicalManage", method = RequestMethod.GET)
-    public String medicalManage() {
+    @RequestMapping(value = "/publicPlace", method = RequestMethod.GET)
+    public String publicPlace() {
 
-        return "/medical_manage/manage";
+        return "";
     }
 }

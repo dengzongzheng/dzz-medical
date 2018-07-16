@@ -1,4 +1,4 @@
-package com.dzz.medical.common;
+package com.dzz.medical.controller.system.common.tools;
 
 
 import com.dzz.medical.controller.system.domain.bo.PermitBO;

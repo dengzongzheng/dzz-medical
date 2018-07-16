@@ -1,6 +1,8 @@
-package com.dzz.medical.common;
+package com.dzz.medical.controller.system.common.tools;
 
 
+import com.dzz.medical.common.decode.DigestUtils;
+import com.dzz.medical.common.decode.EncodeUtils;
 
 /**
  * 账号密码工具类

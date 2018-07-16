@@ -1,4 +1,4 @@
-package com.dzz.medical.common;
+package com.dzz.medical.common.response;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;

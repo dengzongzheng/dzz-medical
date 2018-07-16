@@ -1,8 +1,8 @@
 package com.dzz.medical.controller.system.service;
 
 
-import com.dzz.medical.common.PageUtil;
-import com.dzz.medical.common.ResponseDzz;
+import com.dzz.medical.common.page.PageUtil;
+import com.dzz.medical.common.response.ResponseDzz;
 import com.dzz.medical.controller.system.domain.bo.DepartmentBO;
 import com.dzz.medical.controller.system.domain.bo.ListDepartmentBO;
 import com.dzz.medical.controller.system.domain.dto.department.DepartmentAddDTO;

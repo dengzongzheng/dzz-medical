@@ -1,7 +1,7 @@
 package com.dzz.medical.controller.util.service;
 
-import com.dzz.medical.common.RandCodeUtils;
-import com.dzz.medical.common.SnowFlake;
+import com.dzz.medical.common.random.RandCodeUtils;
+import com.dzz.medical.common.id.SnowFlake;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.springframework.stereotype.Service;

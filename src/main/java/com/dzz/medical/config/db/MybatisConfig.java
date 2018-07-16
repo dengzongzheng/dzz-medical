@@ -109,7 +109,7 @@ public class MybatisConfig implements EnvironmentAware {
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
         mapperScannerConfigurer.setBasePackage("com.dzz.medical.controller.*.dao");
         Properties properties = new Properties();
-        properties.setProperty("mappers", "com.dzz.medical.common.BaseMapper");
+        properties.setProperty("mappers", "com.dzz.medical.common.mybatis.BaseMapper");
         properties.setProperty("IDENTITY", "MYSQL");
         properties.setProperty("notEmpty", "false");
         mapperScannerConfigurer.setProperties(properties);

@@ -1,4 +1,4 @@
-package com.dzz.medical.common;
+package com.dzz.medical.controller.system.common.enums;
 
 /**
  * 管理平台代码枚举

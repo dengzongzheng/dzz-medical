@@ -1,4 +1,4 @@
-package com.dzz.medical.common;
+package com.dzz.medical.common.id;
 
 /**
  * twitter的snowflake算法 -- java实现

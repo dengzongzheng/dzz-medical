@@ -1,8 +1,8 @@
 package com.dzz.medical.controller.system.service.impl;
 
 
-import com.dzz.medical.common.PageUtil;
-import com.dzz.medical.common.ResponseDzz;
+import com.dzz.medical.common.page.PageUtil;
+import com.dzz.medical.common.response.ResponseDzz;
 import com.dzz.medical.controller.system.dao.BsAdminDepartmentMapper;
 import com.dzz.medical.controller.system.dao.BsAdminDepartmentPermitMapper;
 import com.dzz.medical.controller.system.dao.BsAdminPermitMapper;

@@ -1,8 +1,8 @@
 package com.dzz.medical.controller.system.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.dzz.medical.common.PageUtil;
-import com.dzz.medical.common.ResponseDzz;
+import com.dzz.medical.common.page.PageUtil;
+import com.dzz.medical.common.response.ResponseDzz;
 import com.dzz.medical.controller.system.common.enums.SystemUrlConstants;
 import com.dzz.medical.controller.system.domain.bo.DepartmentBO;
 import com.dzz.medical.controller.system.domain.bo.ListDepartmentBO;
