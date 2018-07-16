@@ -35,6 +35,22 @@ public interface WxService {
     }
 
     /**
+     * 构建菜单对象
+     * @param name 菜单名称
+     * @param type 类型
+     * @param url 地址
+     * @return 结果
+     */
+    default JSONObject createMenuJSONObject(String name, String type, String url) {
+
+        JSONObject menuJSONObject = new JSONObject();
+        menuJSONObject.put("name", name);
+        menuJSONObject.put("type", type);
+        menuJSONObject.put("url", url);
+        return menuJSONObject;
+    }
+
+    /**
      * 获取AccessToken
      * @param appId appId
      * @param secret 凭证密钥
@@ -44,10 +60,9 @@ public interface WxService {
 
     /**
      * 删除菜单
-     * @param accessToken token
      * @return 删除结果
      */
-    ResponseDzz deleteMenu(String accessToken);
+    ResponseDzz deleteMenu();
 
     /**
      * 创建菜单

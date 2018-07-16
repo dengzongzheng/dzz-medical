@@ -1,9 +1,11 @@
 package com.dzz.medical.controller.wx_manage.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.dzz.medical.common.http.HttpService;
 import com.dzz.medical.common.response.ResponseDzz;
 import com.dzz.medical.config.wx.WxConfig;
 import com.dzz.medical.controller.wx_manage.service.WxService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
  * @since 2018年07月16 下午10:08
  */
 @Service
+@Slf4j
 public class WxServiceImpl implements WxService {
 
     @Autowired
@@ -26,22 +29,40 @@ public class WxServiceImpl implements WxService {
         StringBuilder urlBuilder = new StringBuilder(wxConfig.getAccessTokenUrl());
         urlBuilder.append("grant_type=client_credential").append("&appid=").append(appId).append("&secret=")
                 .append(secret);
+        log.info("request url:{}", urlBuilder.toString());
         String result = HttpService.sendRequest(urlBuilder.toString(), "get", "");
         return checkResult(result);
     }
 
     @Override
-    public ResponseDzz deleteMenu(String accessToken) {
+    public ResponseDzz deleteMenu() {
 
         StringBuilder urlBuilder = new StringBuilder(wxConfig.getDeleteMenuUrl());
-        urlBuilder.append("access_token=").append("");
-        String result = HttpService.sendRequest(urlBuilder.toString(), "get", "");
-        return checkResult(result);
+        ResponseDzz responseDzz = getAccessToken(wxConfig.getAppId(), wxConfig.getAppSecret());
+        if (responseDzz.checkSuccess()) {
+            JSONObject jsonObject = (JSONObject) responseDzz.getData();
+            urlBuilder.append("access_token=").append(jsonObject.getString("access_token"));
+            log.info("request url:{}", urlBuilder.toString());
+            String result = HttpService.sendRequest(urlBuilder.toString(), "get", "");
+            return checkResult(result);
+        }else{
+            return ResponseDzz.fail("获取access_token失败");
+        }
     }
 
     @Override
     public ResponseDzz createMenu(String menuJsonString) {
 
-        return null;
+        StringBuilder urlBuilder = new StringBuilder(wxConfig.getCreateMenuUrl());
+        ResponseDzz responseDzz = getAccessToken(wxConfig.getAppId(), wxConfig.getAppSecret());
+        if (responseDzz.checkSuccess()) {
+            JSONObject jsonObject = (JSONObject) responseDzz.getData();
+            urlBuilder.append("access_token=").append(jsonObject.getString("access_token"));
+            log.info("request url:{}", urlBuilder.toString());
+            String result = HttpService.sendRequest(urlBuilder.toString(), "post", menuJsonString);
+            return checkResult(result);
+        }else{
+            return ResponseDzz.fail("获取access_token失败");
+        }
     }
 }
