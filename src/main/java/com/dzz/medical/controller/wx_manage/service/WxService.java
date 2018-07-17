@@ -39,14 +39,20 @@ public interface WxService {
      * @param name 菜单名称
      * @param type 类型
      * @param url 地址
+     * @param key key
      * @return 结果
      */
-    default JSONObject createMenuJSONObject(String name, String type, String url) {
+    default JSONObject createMenuJSONObject(String name, String type, String url,String key) {
 
         JSONObject menuJSONObject = new JSONObject();
         menuJSONObject.put("name", name);
         menuJSONObject.put("type", type);
-        menuJSONObject.put("url", url);
+        if ("view".equals(type)) {
+            menuJSONObject.put("url", url);
+        }
+        if ("click".equals(type)) {
+            menuJSONObject.put("key", key);
+        }
         return menuJSONObject;
     }
 

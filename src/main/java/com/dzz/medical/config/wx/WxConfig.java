@@ -24,6 +24,12 @@ public class WxConfig {
     @Value("${wx.serverPath}")
     private String serverPath;
 
+    @Value("${wx.app.token}")
+    private String token;
+
+    @Value("${wx.app.encodingAESKey}")
+    private String aesKey;
+
     /**
      * 获取access_token_url
      */

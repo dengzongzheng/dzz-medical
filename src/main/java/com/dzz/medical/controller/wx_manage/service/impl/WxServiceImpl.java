@@ -31,6 +31,7 @@ public class WxServiceImpl implements WxService {
                 .append(secret);
         log.info("request url:{}", urlBuilder.toString());
         String result = HttpService.sendRequest(urlBuilder.toString(), "get", "");
+        log.info("处理结果:{}", result);
         return checkResult(result);
     }
 

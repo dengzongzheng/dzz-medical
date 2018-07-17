@@ -10,5 +10,10 @@ package com.dzz.medical.controller.wx_manage.service;
 
 public interface WxManageService {
 
-
+    /**
+     * 消息事件处理
+     * @param key 消息关键字
+     * @return 处理结果
+     */
+    String messageEventHandler(String key);
 }
