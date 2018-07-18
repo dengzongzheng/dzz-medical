@@ -22,7 +22,7 @@ public class MedicalBroadcastController {
     @RequestMapping(value = "/notice", method = RequestMethod.GET)
     public String notice() {
 
-        return "";
+        return "/medical_manage/medical_broadcast/notice";
     }
 
 
@@ -33,7 +33,7 @@ public class MedicalBroadcastController {
     @RequestMapping(value = "/workNews", method = RequestMethod.GET)
     public String workNews() {
 
-        return "";
+        return "/medical_manage/medical_broadcast/work_news";
     }
 
 
@@ -44,7 +44,7 @@ public class MedicalBroadcastController {
     @RequestMapping(value = "/medicalInformation", method = RequestMethod.GET)
     public String medicalInformation() {
 
-        return "";
+        return "/medical_manage/medical_broadcast/medical_information";
     }
 
 
@@ -56,7 +56,7 @@ public class MedicalBroadcastController {
     @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
     public String aboutUs() {
 
-        return "";
+        return "/medical_manage/medical_broadcast/about_us";
     }
 
 
