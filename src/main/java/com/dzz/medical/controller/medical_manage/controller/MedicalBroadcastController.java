@@ -53,8 +53,8 @@ public class MedicalBroadcastController {
      * 关于我们
      * @return 关于我们页面
      */
-    @RequestMapping(value = "/about", method = RequestMethod.GET)
-    public String about() {
+    @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
+    public String aboutUs() {
 
         return "";
     }

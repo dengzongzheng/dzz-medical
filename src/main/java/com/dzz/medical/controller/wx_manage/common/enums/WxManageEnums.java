@@ -14,7 +14,9 @@ public interface WxManageEnums {
     /** 消息 */
     enum MessageEvent {
 
-        COMPLAINT("V10001_I_WANT_COMPLAINT", "我要投诉");
+        COMPLAINT("V10001_I_WANT_COMPLAINT", "我要投诉"),
+        GUIDE("V10001_WORK_GUIDE","办事指南")
+        ;
 
         /** 商品编号 */
         private String code;

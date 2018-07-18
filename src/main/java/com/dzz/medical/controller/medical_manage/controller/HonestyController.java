@@ -24,4 +24,50 @@ public class HonestyController {
 
         return "";
     }
+
+
+    /**
+     * 学校场所
+     * @return 学校场所上报
+     */
+    @RequestMapping(value = "/schoolPlace", method = RequestMethod.GET)
+    public String schoolPlace() {
+
+        return "";
+    }
+
+
+    /**
+     * 医疗场所
+     * @return 医疗场所上报
+     */
+    @RequestMapping(value = "/medicalPlace", method = RequestMethod.GET)
+    public String medicalPlace() {
+
+        return "";
+    }
+
+
+    /**
+     * 供水机构场所
+     * @return 供水机构场所
+     */
+    @RequestMapping(value = "/waterSupplyPlace", method = RequestMethod.GET)
+    public String waterSupplyPlace() {
+
+        return "";
+    }
+
+
+
+    /**
+     * 监督协管机构场所
+     * @return 监督协管机构场所
+     */
+    @RequestMapping(value = "/controlManage", method = RequestMethod.GET)
+    public String controlManage() {
+
+        return "";
+    }
+
 }

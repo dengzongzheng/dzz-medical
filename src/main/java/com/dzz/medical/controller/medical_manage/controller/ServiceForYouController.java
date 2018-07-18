@@ -25,4 +25,6 @@ public class ServiceForYouController {
 
         return "/medical_manage/for_service/legal";
     }
+
+
 }
