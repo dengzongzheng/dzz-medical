@@ -51,7 +51,7 @@ public class WxServiceImplTest {
 
         ResponseDzz responseDzz = wxService.deleteMenu();
         if (responseDzz.checkFail()) {
-            log.error("删除菜单失败，不能进行添加菜单。失败原因:{}", responseDzz.getMessage());
+            log.error("删除菜单失败，不能进行添加菜单。 失败原因:{}", responseDzz.getMessage());
             return;
         }
         JSONObject menuJSON = new JSONObject();
