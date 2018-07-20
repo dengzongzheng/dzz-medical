@@ -84,7 +84,7 @@ public class BsAdminUserServiceImpl implements BsAdminUserService {
         PageHelper.startPage(listUserQueryDTO.getPageNo(), listUserQueryDTO.getPageSize(), true);
         List<ListUserBO> list = bsAdminUserMapper.pageListDepartment(listUserQueryDTO);
         PageInfo<ListUserBO> pageInfo = new PageInfo<>(list);
-        PageUtil<ListUserBO> pageUtil = new PageUtil();
+        PageUtil<ListUserBO> pageUtil = new PageUtil<>();
         pageUtil.setPageNo(pageInfo.getPageNum());
         pageUtil.setPageSize(pageInfo.getPageSize());
         pageUtil.setTotalCount(pageInfo.getTotal());
@@ -104,7 +104,7 @@ public class BsAdminUserServiceImpl implements BsAdminUserService {
         List<ListUserBO> list = bsAdminUserMapper.pageListDepartmentId(listUserQueryDTO.getDepartmentName(),
                 listUserQueryDTO.getRoleName(),departmentId,listUserQueryDTO.getCurrentUser());
         PageInfo<ListUserBO> pageInfo = new PageInfo<>(list);
-        PageUtil<ListUserBO> pageUtil = new PageUtil();
+        PageUtil<ListUserBO> pageUtil = new PageUtil<>();
         pageUtil.setPageNo(pageInfo.getPageNum());
         pageUtil.setPageSize(pageInfo.getPageSize());
         pageUtil.setTotalCount(pageInfo.getTotal());
@@ -146,6 +146,17 @@ public class BsAdminUserServiceImpl implements BsAdminUserService {
         bsAdminUserRoleMapper.insert(record);
         return ResponseDzz.ok(userId);
     }
+
+    /**
+     * 查询超级管理员权限信息
+     * @return 权限信息
+     */
+    @Override
+    public ResponseDzz<List<PermitBO>> selectSupperAdminAuthorize() {
+
+        return ResponseDzz.ok(bsAdminPermitMapper.listAdminPermit());
+    }
+
 
     /**
      * 根据用户id查询权限信息

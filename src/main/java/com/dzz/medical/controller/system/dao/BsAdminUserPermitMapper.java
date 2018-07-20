@@ -33,11 +33,12 @@ public interface BsAdminUserPermitMapper extends Mapper<BsAdminUserPermit> {
      */
     List<String> selectByUserId(@Param("userId") String userId);
 
+
     /**
      * 查询部门权限编辑后 ,部门员工拥有多余权限的用户id
      * @param departmentId 部门id
      * @param permitList 部门现有权限id
-     * @return
+     * @return 结果
      */
     List<String> selectRemovedPermitUserId(@Param("departmentId") String departmentId,
             @Param("permitList") List<DepartmentPermitDTO> permitList);

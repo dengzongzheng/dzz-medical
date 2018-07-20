@@ -1,29 +1,31 @@
-package com.dzz.medical.common.http;
+package com.dzz.medical.controller.backend_medical_manage.common.utilities.http;
 
-import com.dzz.medical.controller.backend_medical_manage.common.utilities.http.BaseTrustManager;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.URL;
+
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
-import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * 核心管理后台启动类
- *
- * @author dzz
+ * 描述: HTTPS请求服务类</br>
+ * 
+ * @author Shangxp
  * @version 1.0.0
- * @since 2018年06月30 下午2:47
+ * @date 2015.12.03
  */
-@Slf4j
-public class HttpsService {
+public class SSLService {
 	
-
+	private static final Logger log = LoggerFactory.getLogger(SSLService.class);
+	
 	/**
 	 * 发起HTTPS请求并获取结果
 	 * 
@@ -46,16 +48,15 @@ public class HttpsService {
 			URL url = new URL(requestUrl);
 			HttpsURLConnection httpsUrlConn = (HttpsURLConnection) url.openConnection();
 			httpsUrlConn.setSSLSocketFactory(ssf);
-            httpsUrlConn.setDoOutput(true);
-            httpsUrlConn.setUseCaches(false);
-            httpsUrlConn.setDoInput(true);
-
+			httpsUrlConn.setDoOutput(true);
+			httpsUrlConn.setDoInput(true);
+			httpsUrlConn.setUseCaches(false);
+			
 			// 设置请求方式(GET/POST)
 			httpsUrlConn.setRequestMethod(method);
 
-			if ("GET".equalsIgnoreCase(method)){
-                httpsUrlConn.connect();
-            }
+			if ("GET".equalsIgnoreCase(method))
+				httpsUrlConn.connect();
 
 			// 当有数据需要提交时
 			if (null != data) {

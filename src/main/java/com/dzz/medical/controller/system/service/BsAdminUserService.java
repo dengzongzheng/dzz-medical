@@ -48,7 +48,7 @@ public interface BsAdminUserService {
      * @return
      */
     @RequestMapping(value = BASE_URL + "/pageListUserByDepartment", method = RequestMethod.POST)
-    ResponseDzz<PageUtil<ListUserBO>> pageListUserByDepartment(@RequestBody ListUserQueryDTO listUserQueryDTO,
+    ResponseDzz pageListUserByDepartment(@RequestBody ListUserQueryDTO listUserQueryDTO,
             @RequestParam("departmentId") String departmentId);
 
     /**
@@ -59,6 +59,13 @@ public interface BsAdminUserService {
      */
     @RequestMapping(value = BASE_URL + "/addUser", method = RequestMethod.POST)
     ResponseDzz<String> addUser(@RequestBody BsUserAddDTO userAddDTO);
+
+
+    /**
+     * 查询超级管理员权限信息
+     * @return 权限信息
+     */
+    ResponseDzz<List<PermitBO>> selectSupperAdminAuthorize();
 
     /**
      * 根据用户id查询权限信息
