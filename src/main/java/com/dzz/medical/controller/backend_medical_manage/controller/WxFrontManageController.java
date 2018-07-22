@@ -9,6 +9,7 @@ import com.dzz.medical.controller.backend_medical_manage.service.WxService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @since 2018年07月20 上午7:39
  */
 @Controller
-@RequestMapping("/frontManage")
+@RequestMapping("/manage")
 @Slf4j
 public class WxFrontManageController {
 
@@ -30,6 +31,42 @@ public class WxFrontManageController {
 
     @Autowired
     private WxConfig wxConfig;
+
+
+    /**
+     * 法律法规
+     * @return 法律法规介绍
+     */
+    @RequestMapping(value = "/legalManage", method = RequestMethod.GET)
+    public String legalManage() {
+
+        return "/backend_medical_manage/legal_manage";
+    }
+
+
+    /**
+     * 去新增法律法规
+     * @param map map
+     * @return 法律法规新增页
+     */
+    @RequestMapping(value = "/addLegal", method = RequestMethod.GET)
+    public String addLegal(ModelMap map) {
+
+        return "/backend_medical_manage/add_legal";
+    }
+
+    /**
+     * 新增法律法规
+     * @return 法律法规管理列表页
+     */
+    @RequestMapping(value = "/addLegal", method = RequestMethod.POST)
+    public String addLegal() {
+
+        return "/backend_medical_manage/legal_manage";
+    }
+
+
+
 
     /**
      * 创建菜单信息

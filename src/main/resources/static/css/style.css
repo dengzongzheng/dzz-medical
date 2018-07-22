@@ -4493,7 +4493,7 @@ a.close-canvas-menu:hover {
 }
 
 .modal-backdrop {
-    z-index: 240 !important;
+    /*z-index: 240 !important;*/
 }
 
 .modal {

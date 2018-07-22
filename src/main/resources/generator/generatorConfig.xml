@@ -21,19 +21,15 @@
         </jdbcConnection>
 
       <!--如果同一工程中分多个模块，请手动修改包路径-->
-      <javaModelGenerator targetPackage="com.dzz.medical.controller.wx_manage.domain.model" targetProject="${targetJavaProject}"/>
+      <javaModelGenerator targetPackage="com.dzz.medical.controller.backend_medical_manage.domain.model" targetProject="${targetJavaProject}"/>
 
       <sqlMapGenerator targetPackage="mapper"  targetProject="${targetResourcesProject}"/>
 
-      <javaClientGenerator targetPackage="com.dzz.medical.controller.wx_manage.dao" targetProject="${targetJavaProject}" type="XMLMAPPER" />
+      <javaClientGenerator targetPackage="com.dzz.medical.controller.backend_medical_manage.dao" targetProject="${targetJavaProject}" type="XMLMAPPER" />
 
-        <table tableName="wx_menu">
+        <table tableName="ss_medical_legal">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
-
-        <!--<table tableName="refund_order">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>-->
 
     </context>
 </generatorConfiguration>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="_csrf" content="${_csrf.token}"/>
+  <meta name="_csrf_header" content="${_csrf.headerName}"/>
+  <title>保单基本信息录入</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+  <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+  <link href="/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+  <link href="/css/animate.css" rel="stylesheet">
+  <link href="/css/style.css?v=4.1.0" rel="stylesheet">
+  <link href="/css/select2.min.css" rel="stylesheet">
+  <link href="/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+  <link href="/css/plugins/summernote/summernote.css" rel="stylesheet">
+  <link href="/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+  <style>
+    .col-sm-3 {
+      width: 26%;
+    }
+    .ibox-content .col-sm-12 {
+      margin-bottom: 10px;
+    }
+    .select2-container--default .select2-selection--single{
+      border-color: #cfdadd;
+      height: 30px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+      font-size: 12px;
+      line-height: 30px;
+      padding-left: 16px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+      border-color: #565656 transparent transparent transparent;
+      border-width: 6px 3px 0 3px;
+      margin-left: -2px;
+    }
+    .in{
+      display: none;
+    }
+  </style>
+</head>
+
+<body class="gray-bg" style="background: #FFF;">
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+
+  <div id="tab-2" class="tab-pane" style="margin-top: 20px">
+    <div style="margin-bottom: 20px;overflow: hidden;">
+      <form class="form-horizontal" id="addForm">
+        <div class="col-sm-12">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="col-sm-4 control-label required">主标题：</label>
+              <div class="col-sm-8">
+                <input type="text" name="title" id="title" maxlength="200"
+                       placeholder="主标题" class="form-control"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="col-sm-4 control-label required">副标题：</label>
+              <div class="col-sm-8">
+                <input type="text" name="title" id="subTitle" maxlength="200"
+                       placeholder="副标题" class="form-control"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="col-sm-4 control-label required">标题图片：</label>
+              <div class="col-sm-8">
+                <a class="btn btn-sm btn-default" href="javascript:void(0)">
+                  <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-10">
+              <div class="image-show">
+
+              </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="col-sm-4 control-label required">展示排序：</label>
+              <div class="col-sm-8">
+                <input type="text" name="title" id="sort" maxlength="100"
+                       placeholder="展示排序" class="form-control"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="col-sm-4 control-label required">是否置顶：</label>
+              <div class="col-sm-8">
+                <select class="form-control" name="toping" id="toping">
+                  <option value="">请选择</option>
+                  <option value="1">是</option>
+                  <option value="0">否</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="col-sm-2 control-label required">法律法规内容：</label>
+            <div class="col-sm-10">
+              <div class="form-group ibox-content" id="text_data">
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12">
+          <div class="col-sm-offset-4 col-sm-6">
+            <a data-bind="click:$root.save.bind($root)" class="col-sm-offset-4 btn btn-info">保存</a>
+            <button class="btn btn-info" data-bind="click:$root.next.bind($root)">取消</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-12">
+      <div class="col-sm-offset-4">
+        <ul id="pagination-list" class="pagination-sm"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 全局js -->
+<script src="/plugins/jquery/jquery.min.js?v=2.1.4"></script>
+<script src="/plugins/bootstrap/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- layer javascript -->
+<script src="/plugins/layer/layer.min.js"></script>
+<script src="/plugins/layer/laydate/laydate.js?v=5.0.7"></script>
+<script src="/js/common/toast_common.js"></script>
+<script src="/plugins/toastr/toastr.min.js"></script>
+<!-- Sweet alert -->
+<script src="/plugins/sweetalert/sweetalert.min.js"></script>
+
+<!-- 自定义js -->
+<script src="/js/common/ajax_common.js"></script>
+<script src="/js/common/alert_common.js"></script>
+
+<!--页面模板渲染-->
+<script src="/plugins/jsrender/jsrender.min.js"></script>
+
+<!--页面分页渲染-->
+<script src="/plugins/jquery.twbsPagination/jquery.twbsPagination.min.js"></script>
+
+<!-- SUMMERNOTE -->
+<script src="/plugins/summernote/summernote.min.js"></script>
+<script src="/plugins/summernote/summernote-zh-CN.js"></script>
+
+<!-- knockout -->
+<script src="/plugins/knockout/knockout-3.4.2.min.js"></script>
+
+<!-- clazz -->
+<script src="/js/common/clazz.js"></script>
+<!-- jquery.validate -->
+<script src="/plugins/validate/jquery.validate.min.js"></script>
+<script src="/js/common/jquery_validate_extend.js"></script>
+<script src="/plugins/validate/messages_zh.min.js"></script>
+<!-- 自定义js -->
+<script src="/js/content.js?v=1.0.0"></script>
+<script src="/js/common/common_list_query.js"></script>
+<script src="/js/backend_medical_manage/add_legal.js"></script>
+</body>
+
+</html>

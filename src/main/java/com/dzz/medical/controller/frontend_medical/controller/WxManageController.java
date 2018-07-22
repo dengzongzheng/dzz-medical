@@ -1,4 +1,4 @@
-package com.dzz.medical.controller.backend_medical_manage.controller;
+package com.dzz.medical.controller.frontend_medical.controller;
 
 import com.dzz.medical.config.wx.WxConfig;
 import com.dzz.medical.controller.backend_medical_manage.service.WxManageService;
