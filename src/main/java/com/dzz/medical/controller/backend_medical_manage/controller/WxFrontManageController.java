@@ -5,13 +5,19 @@ import com.alibaba.fastjson.JSONObject;
 import com.dzz.medical.common.response.ResponseDzz;
 import com.dzz.medical.config.wx.WxConfig;
 import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.MessageEvent;
+import com.dzz.medical.controller.backend_medical_manage.domain.dto.AddMedicalLegalDTO;
+import com.dzz.medical.controller.backend_medical_manage.domain.dto.MedicalLegalListQueryDTO;
+import com.dzz.medical.controller.backend_medical_manage.service.WxFrontManageService;
 import com.dzz.medical.controller.backend_medical_manage.service.WxService;
+import com.dzz.medical.controller.util.controller.BaseController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 微信前台管理
@@ -23,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/manage")
 @Slf4j
-public class WxFrontManageController {
+public class WxFrontManageController extends BaseController{
 
 
     @Autowired
@@ -31,6 +37,9 @@ public class WxFrontManageController {
 
     @Autowired
     private WxConfig wxConfig;
+
+    @Autowired
+    private WxFrontManageService wxFrontManageService;
 
 
     /**
@@ -43,6 +52,17 @@ public class WxFrontManageController {
         return "/backend_medical_manage/legal_manage";
     }
 
+    /**
+     * 法律法规列表
+     * @param queryDTO 查询条件
+     * @return 列表结果
+     */
+    @RequestMapping(value = "/listLegal", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> listLegal(MedicalLegalListQueryDTO queryDTO) {
+
+        return ResponseEntity.ok(wxFrontManageService.listLegal(queryDTO));
+    }
 
     /**
      * 去新增法律法规
@@ -60,9 +80,13 @@ public class WxFrontManageController {
      * @return 法律法规管理列表页
      */
     @RequestMapping(value = "/addLegal", method = RequestMethod.POST)
-    public String addLegal() {
+    public String addLegal(AddMedicalLegalDTO addLegalDTO) {
 
-        return "/backend_medical_manage/legal_manage";
+        log.info(addLegalDTO.toString());
+        addLegalDTO.setCreator(getUserAccount());
+        addLegalDTO.setUpdator(addLegalDTO.getCreator());
+        wxFrontManageService.saveLegal(addLegalDTO);
+        return "redirect:/manage/legalManage";
     }
 
 
