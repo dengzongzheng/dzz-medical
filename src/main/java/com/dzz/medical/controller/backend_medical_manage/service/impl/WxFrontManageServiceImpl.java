@@ -43,7 +43,7 @@ public class WxFrontManageServiceImpl implements WxFrontManageService {
     }
 
     @Override
-    public PageUtil<MedicalLegalListBO> listLegal(MedicalLegalListQueryDTO queryDTO) {
+    public PageUtil<MedicalLegalListBO> listMedicalLegal(MedicalLegalListQueryDTO queryDTO) {
 
         if (0 > queryDTO.getPageNo()) {
             queryDTO.setPageNo(1);

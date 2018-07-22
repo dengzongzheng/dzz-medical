@@ -47,4 +47,60 @@ public class PageUtil<T> implements Serializable {
                             : this.totalCount / this.pageSize);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) {
+            return true;
+        } else if(!(o instanceof PageUtil)) {
+            return false;
+        } else {
+            PageUtil<?> other = (PageUtil)o;
+            if(!other.canEqual(this)) {
+                return false;
+            } else if(this.getPageNo() != other.getPageNo()) {
+                return false;
+            } else if(this.getTotalCount() != other.getTotalCount()) {
+                return false;
+            } else if(this.getTotalPage() != other.getTotalPage()) {
+                return false;
+            } else if(this.getPageSize() != other.getPageSize()) {
+                return false;
+            } else {
+                Object this$data = this.getData();
+                Object other$data = other.getData();
+                if(this$data == null) {
+                    if(other$data != null) {
+                        return false;
+                    }
+                } else if(!this$data.equals(other$data)) {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+    }
+
+    protected boolean canEqual(Object other) {
+        return other instanceof PageUtil;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = result * 59 + this.getPageNo();
+        long $totalCount = this.getTotalCount();
+        result = result * 59 + (int)($totalCount >>> 32 ^ $totalCount);
+        result = result * 59 + this.getTotalPage();
+        result = result * 59 + this.getPageSize();
+        Object $data = this.getData();
+        result = result * 59 + ($data == null?43:$data.hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "PageUtil(pageNo=" + this.getPageNo() + ", totalCount=" + this.getTotalCount() + ", totalPage=" + this.getTotalPage() + ", pageSize=" + this.getPageSize() + ", data=" + this.getData() + ")";
+    }
 }

@@ -59,9 +59,9 @@ public class WxFrontManageController extends BaseController{
      */
     @RequestMapping(value = "/listLegal", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<?> listLegal(MedicalLegalListQueryDTO queryDTO) {
+    public ResponseEntity<?> listMedicalLegal(MedicalLegalListQueryDTO queryDTO) {
 
-        return ResponseEntity.ok(wxFrontManageService.listLegal(queryDTO));
+        return ResponseEntity.ok(ResponseDzz.ok(wxFrontManageService.listMedicalLegal(queryDTO)));
     }
 
     /**

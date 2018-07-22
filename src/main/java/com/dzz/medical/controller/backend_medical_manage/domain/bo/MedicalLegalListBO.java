@@ -1,5 +1,6 @@
 package com.dzz.medical.controller.backend_medical_manage.domain.bo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -52,14 +53,21 @@ public class MedicalLegalListBO implements Serializable{
      */
     private Integer toping;
 
+
+    private String topingName;
+
     /**
      * 状态：1:正常、2:下线、0:配置中
      */
     private Integer status;
 
+
+    private String statusName;
+
     /**
      * 创建时间
      */
     @Column(name = "create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 }

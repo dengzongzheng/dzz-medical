@@ -26,5 +26,5 @@ public interface WxFrontManageService {
      * @param queryDTO 查询条件
      * @return 结果
      */
-    PageUtil<MedicalLegalListBO> listLegal(MedicalLegalListQueryDTO queryDTO);
+    PageUtil<MedicalLegalListBO> listMedicalLegal(MedicalLegalListQueryDTO queryDTO);
 }
