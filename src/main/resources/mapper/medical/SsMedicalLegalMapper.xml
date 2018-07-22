@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dzz.medical.controller.backend_medical_manage.dao.SsMedicalLegalMapper">
+  <resultMap id="BaseResultMap" type="com.dzz.medical.controller.backend_medical_manage.domain.model.SsMedicalLegal">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="medical_legal_no" jdbcType="VARCHAR" property="medicalLegalNo" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+    <result column="title_images" jdbcType="VARCHAR" property="titleImages" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="toping" jdbcType="INTEGER" property="toping" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="updator" jdbcType="VARCHAR" property="updator" />
+    <result column="text_data" jdbcType="LONGVARCHAR" property="textData" />
+  </resultMap>
+
+  <resultMap id="ListMedicalLegalResultMap" type="com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalListBO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="medical_legal_no" jdbcType="VARCHAR" property="medicalLegalNo" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="toping" jdbcType="INTEGER" property="toping" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <select id="listMedicalLegal" resultMap="ListMedicalLegalResultMap">
+    select id,medical_legal_no,title,toping,status,create_time from ss_medical_legal where 1=1
+
+    <if test="title!=null and title!='' ">
+      and title=#{param.title}
+    </if>
+
+    <if test="toping!=null and toping!='' ">
+      and toping=#{toping}
+    </if>
+
+    <if test="status!=null and status!='' ">
+      and status=#{status}
+    </if>
+
+    <if test="createTime!=null and createTime!='' ">
+      and createTime=#{createTime}
+    </if>
+
+    order by create_time desc
+
+
+  </select>
+
+</mapper>
