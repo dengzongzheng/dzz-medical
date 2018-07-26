@@ -80,8 +80,9 @@
                   <div class="col-sm-8">
                     <select class="form-control" name="toping" id="toping">
                       <option value="">请选择</option>
-                      <option value="1">是</option>
-                      <option value="0">否</option>
+                      <#list toppings as item>
+                        <option value="${(item.code)!}">${(item.name)!}</option>
+                      </#list>
                     </select>
                   </div>
                 </div>
@@ -92,9 +93,9 @@
                   <div class="col-sm-8 clearfix">
                     <select class="form-control" name="status" id="status">
                       <option value="">请选择</option>
-                      <option value="0">配置中</option>
-                      <option value="1">上架</option>
-                      <option value="2">下架</option>
+                      <#list toppings as item>
+                        <option value="${(item.code)!}">${(item.name)!}</option>
+                      </#list>
                     </select>
                   </div>
                 </div>
@@ -191,11 +192,13 @@
             <td class="subTitle" title="{{:subTitle}}">{{:title}}</td>
             <td class="subTitle" title="{{:subTitle}}"><p>{{:subTitle}}</p></td>
             <td>{{:sort}}</td>
-            <td>{{:toping}}</td>
+            <td>{{:topingName}}</td>
             <td>{{:createTime}}</td>
-            <td>{{:status}}</td>
+            <td>{{:statusName}}</td>
             <td>
-
+              <a>上线</a>
+              <a>下线</a>
+              <a>修改</a>
             </td>
         </tr>
     {{/for}}

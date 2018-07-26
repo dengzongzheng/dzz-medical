@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dzz.medical.common.response.ResponseDzz;
 import com.dzz.medical.config.wx.WxConfig;
+import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.LegalStatusEnums;
 import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.MessageEvent;
+import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.ToppingEnums;
 import com.dzz.medical.controller.backend_medical_manage.domain.dto.AddMedicalLegalDTO;
 import com.dzz.medical.controller.backend_medical_manage.domain.dto.MedicalLegalListQueryDTO;
 import com.dzz.medical.controller.backend_medical_manage.service.WxFrontManageService;
@@ -47,8 +49,10 @@ public class WxFrontManageController extends BaseController{
      * @return 法律法规介绍
      */
     @RequestMapping(value = "/legalManage", method = RequestMethod.GET)
-    public String legalManage() {
+    public String legalManage(ModelMap map) {
 
+        map.put("toppings", ToppingEnums.getElementList());
+        map.put("statues", LegalStatusEnums.getElementList());
         return "/backend_medical_manage/legal_manage";
     }
 

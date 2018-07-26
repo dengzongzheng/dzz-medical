@@ -1,8 +1,11 @@
 package com.dzz.medical.controller.backend_medical_manage.domain.bo;
 
+import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.LegalStatusEnums;
+import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.ToppingEnums;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import lombok.Data;
 
@@ -70,4 +73,21 @@ public class MedicalLegalListBO implements Serializable{
     @Column(name = "create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
+
+
+    public String getTopingName() {
+
+        if (Objects.nonNull(this.toping)) {
+            return ToppingEnums.getNameByCode(toping);
+        }
+        return "";
+    }
+
+    public String getStatusName() {
+
+        if (Objects.nonNull(status)) {
+            return LegalStatusEnums.getNameByCode(status);
+        }
+        return "";
+    }
 }
