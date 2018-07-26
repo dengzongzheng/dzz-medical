@@ -27,7 +27,19 @@ public class MedicalLegalListQueryDTO implements Serializable{
     /**
      * 置顶
      */
-    private Integer toping;
+    private Integer topping;
+
+
+    /**
+     * 创建时间开始时间
+     */
+    private Date createTimeStart;
+
+
+    /**
+     * 创建时间结束时间
+     */
+    private Date createTimeEnd;
 
 
     /**

@@ -50,7 +50,7 @@ public class SsMedicalLegal {
     /**
      * 置顶
      */
-    private Integer toping;
+    private Integer topping;
 
     /**
      * 状态：1:正常、2:下线、0:配置中
@@ -77,7 +77,7 @@ public class SsMedicalLegal {
     /**
      * 修改者
      */
-    private String updator;
+    private String updater;
 
     /**
      * 法律法规内容

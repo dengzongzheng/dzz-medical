@@ -11,12 +11,12 @@
     <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
     <result column="title_images" jdbcType="VARCHAR" property="titleImages" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="toping" jdbcType="INTEGER" property="toping" />
+    <result column="topping" jdbcType="INTEGER" property="topping" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="creator" jdbcType="VARCHAR" property="creator" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="updator" jdbcType="VARCHAR" property="updator" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
     <result column="text_data" jdbcType="LONGVARCHAR" property="textData" />
   </resultMap>
 
@@ -24,20 +24,20 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="medical_legal_no" jdbcType="VARCHAR" property="medicalLegalNo" />
     <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="toping" jdbcType="INTEGER" property="toping" />
+    <result column="topping" jdbcType="INTEGER" property="topping" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
 
   <select id="listMedicalLegal" resultMap="ListMedicalLegalResultMap">
-    select id,medical_legal_no,title,toping,status,create_time from ss_medical_legal where 1=1
+    select id,medical_legal_no,title,topping,status,create_time from ss_medical_legal where 1=1
 
     <if test="title!=null and title!='' ">
       and title=#{param.title}
     </if>
 
-    <if test="toping!=null and toping!='' ">
-      and toping=#{toping}
+    <if test="topping!=null and topping!='' ">
+      and topping=#{topping}
     </if>
 
     <if test="status!=null and status!='' ">

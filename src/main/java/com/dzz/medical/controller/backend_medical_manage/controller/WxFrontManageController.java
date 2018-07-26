@@ -88,7 +88,7 @@ public class WxFrontManageController extends BaseController{
 
         log.info(addLegalDTO.toString());
         addLegalDTO.setCreator(getUserAccount());
-        addLegalDTO.setUpdator(addLegalDTO.getCreator());
+        addLegalDTO.setUpdater(addLegalDTO.getCreator());
         wxFrontManageService.saveLegal(addLegalDTO);
         return "redirect:/manage/legalManage";
     }

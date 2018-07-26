@@ -10,13 +10,13 @@ CREATE TABLE ss_medical.ss_medical_legal
     sub_title VARCHAR(100) COMMENT '副标题',
     title_images VARCHAR(200) NOT NULL COMMENT '标题图片',
     sort INT NOT NULL COMMENT '排序',
-    toping INT COMMENT '置顶',
+    topping INT COMMENT '置顶',
     text_data TEXT NOT NULL COMMENT '法律法规内容',
     status INT NOT NULL COMMENT '状态：1:正常、2:下线、0:配置中',
     create_time DATETIME NOT NULL COMMENT '创建时间',
     creator VARCHAR(64) NOT NULL COMMENT '创建者',
     update_time DATETIME NOT NULL COMMENT '修改时间',
-    updator VARCHAR(64) NOT NULL COMMENT '修改者'
+    updater VARCHAR(64) NOT NULL COMMENT '修改者'
 );
 CREATE INDEX ss_medical_legal_sort_update_time_index ON ss_medical.ss_medical_legal (sort, update_time DESC);
 CREATE INDEX ss_medical_legal_title_index ON ss_medical.ss_medical_legal (title);

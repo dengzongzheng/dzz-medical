@@ -61,12 +61,12 @@
                 <div class="form-group">
                   <label class="col-sm-4 control-label">创建时间：</label>
                   <div class="col-sm-8 clearfix">
-                    <input type="text" placeholder="最早创建日期" id="insuranceInsureTimeStart"
-                           name="insuranceInsureTimeStart"
+                    <input type="text" placeholder="最早创建日期" id="createTimeStart"
+                           name="createTimeStart"
                            class="laydate-icon form-control layer-date input-box-left" />
                     <span class="text-zhi">至</span>
-                    <input type="text" placeholder="最晚创建日期" id="insuranceInsureTimeEnd"
-                           name="insuranceInsureTimeEnd"
+                    <input type="text" placeholder="最晚创建日期" id="createTimeEnd"
+                           name="createTimeEnd"
                            class="laydate-icon form-control layer-date input-box-left" />
                   </div>
                 </div>
@@ -93,7 +93,7 @@
                   <div class="col-sm-8 clearfix">
                     <select class="form-control" name="status" id="status">
                       <option value="">请选择</option>
-                      <#list toppings as item>
+                      <#list statues as item>
                         <option value="${(item.code)!}">${(item.name)!}</option>
                       </#list>
                     </select>

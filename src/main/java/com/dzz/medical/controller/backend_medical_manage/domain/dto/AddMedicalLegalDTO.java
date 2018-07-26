@@ -41,7 +41,7 @@ public class AddMedicalLegalDTO implements Serializable{
     /**
      * 置顶
      */
-    private Integer toping;
+    private Integer topping;
 
 
     /**
@@ -58,5 +58,5 @@ public class AddMedicalLegalDTO implements Serializable{
     /**
      * 修改者
      */
-    private String updator;
+    private String updater;
 }

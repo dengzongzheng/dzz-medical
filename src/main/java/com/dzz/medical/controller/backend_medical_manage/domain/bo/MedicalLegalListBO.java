@@ -54,10 +54,10 @@ public class MedicalLegalListBO implements Serializable{
     /**
      * 置顶
      */
-    private Integer toping;
+    private Integer topping;
 
 
-    private String topingName;
+    private String toppingName;
 
     /**
      * 状态：1:正常、2:下线、0:配置中
@@ -75,10 +75,10 @@ public class MedicalLegalListBO implements Serializable{
     private Date createTime;
 
 
-    public String getTopingName() {
+    public String getToppingName() {
 
-        if (Objects.nonNull(this.toping)) {
-            return ToppingEnums.getNameByCode(toping);
+        if (Objects.nonNull(this.topping)) {
+            return ToppingEnums.getNameByCode(topping);
         }
         return "";
     }
