@@ -7,8 +7,10 @@ import com.dzz.medical.config.wx.WxConfig;
 import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.LegalStatusEnums;
 import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.MessageEvent;
 import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.ToppingEnums;
+import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalDetailBO;
 import com.dzz.medical.controller.backend_medical_manage.domain.dto.AddMedicalLegalDTO;
 import com.dzz.medical.controller.backend_medical_manage.domain.dto.MedicalLegalListQueryDTO;
+import com.dzz.medical.controller.backend_medical_manage.domain.dto.UpdateMedicalLegalDTO;
 import com.dzz.medical.controller.backend_medical_manage.service.WxFrontManageService;
 import com.dzz.medical.controller.backend_medical_manage.service.WxService;
 import com.dzz.medical.controller.util.controller.BaseController;
@@ -76,6 +78,7 @@ public class WxFrontManageController extends BaseController{
     @RequestMapping(value = "/addLegal", method = RequestMethod.GET)
     public String addLegal(ModelMap map) {
 
+        map.put("toppings", ToppingEnums.getElementList());
         return "/backend_medical_manage/add_legal";
     }
 
@@ -94,7 +97,59 @@ public class WxFrontManageController extends BaseController{
     }
 
 
+    /**
+     * 去修改法律法规
+     * @param map map
+     * @return 法律法规修改页
+     */
+    @RequestMapping(value = "/updateLegal", method = RequestMethod.GET)
+    public String updateLegal(ModelMap map,String medicalLegalNo) {
 
+        MedicalLegalDetailBO medicalLegalDetailBO = wxFrontManageService.detailMedicalLegal(medicalLegalNo);
+        map.put("medicalLegalDetailBO", medicalLegalDetailBO);
+        map.put("toppings", ToppingEnums.getElementList());
+        return "/backend_medical_manage/update_legal";
+    }
+
+    /**
+     * 下线法律法规
+     * @param medicalLegalNo 法律法规号
+     * @return 结果
+     */
+    @RequestMapping(value = "/offLineLegal", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> offLineLegal(String medicalLegalNo) {
+
+        return ResponseEntity.ok(ResponseDzz
+                .ok(wxFrontManageService.updateStatus(medicalLegalNo, LegalStatusEnums.OFFLINE.getCode())));
+    }
+
+    /**
+     * 上线法律法规
+     * @param medicalLegalNo 法律法规号
+     * @return 结果
+     */
+    @RequestMapping(value = "/onLineLegal", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> onLineLegal(String medicalLegalNo) {
+
+        return ResponseEntity.ok(ResponseDzz
+                .ok(wxFrontManageService.updateStatus(medicalLegalNo, LegalStatusEnums.NOMOR.getCode())));
+    }
+
+
+
+    /**
+     * 新增法律法规
+     * @return 法律法规管理列表页
+     */
+    @RequestMapping(value = "/updateLegal", method = RequestMethod.POST)
+    public String updateLegal(UpdateMedicalLegalDTO updateMedicalLegalDTO) {
+
+        updateMedicalLegalDTO.setUpdater(getUserAccount());
+        wxFrontManageService.updateMedicalLegal(updateMedicalLegalDTO);
+        return "redirect:/manage/legalManage";
+    }
 
     /**
      * 创建菜单信息

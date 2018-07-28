@@ -2,9 +2,11 @@ package com.dzz.medical.controller.backend_medical_manage.service.impl;
 
 import com.dzz.medical.common.page.PageUtil;
 import com.dzz.medical.controller.backend_medical_manage.dao.SsMedicalLegalMapper;
+import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalDetailBO;
 import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalListBO;
 import com.dzz.medical.controller.backend_medical_manage.domain.dto.AddMedicalLegalDTO;
 import com.dzz.medical.controller.backend_medical_manage.domain.dto.MedicalLegalListQueryDTO;
+import com.dzz.medical.controller.backend_medical_manage.domain.dto.UpdateMedicalLegalDTO;
 import com.dzz.medical.controller.backend_medical_manage.domain.model.SsMedicalLegal;
 import com.dzz.medical.controller.backend_medical_manage.service.WxFrontManageService;
 import com.dzz.medical.controller.util.service.BaseService;
@@ -58,5 +60,26 @@ public class WxFrontManageServiceImpl implements WxFrontManageService,BaseServic
         pageUtil.setData(legalListBOS);
         pageUtil.setTotalPage(pageInfo.getPages());
         return pageUtil;
+    }
+
+    @Override
+    public Boolean updateStatus(String medicalLegalNo, Integer status) {
+
+        return ssMedicalLegalMapper.updateStatus(medicalLegalNo, status) > 0;
+    }
+
+    @Override
+    public Boolean updateMedicalLegal(UpdateMedicalLegalDTO updateMedicalLegalDTO) {
+
+        SsMedicalLegal ssMedicalLegal = SsMedicalLegal.newInstance();
+        ssMedicalLegal.setCreateTime(null);
+        BeanUtils.copyProperties(updateMedicalLegalDTO, ssMedicalLegal);
+        return ssMedicalLegalMapper.updateByPrimaryKey(ssMedicalLegal)>0;
+    }
+
+    @Override
+    public MedicalLegalDetailBO detailMedicalLegal(String medicalLegalNo) {
+
+        return ssMedicalLegalMapper.detailMedicalLegal(medicalLegalNo);
     }
 }
