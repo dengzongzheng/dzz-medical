@@ -31,6 +31,14 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
 
+
+  <resultMap id="ListLegalResultMap" type="com.dzz.medical.controller.frontend_medical.domain.bo.ListLegalBO">
+    <result column="medical_legal_no" jdbcType="VARCHAR" property="medicalLegalNo" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+    <result column="title_images" jdbcType="VARCHAR" property="titleImages" />
+  </resultMap>
+
   <select id="listMedicalLegal" resultMap="ListMedicalLegalResultMap">
     select id,medical_legal_no,title,sub_title,sort,topping,status,create_time from ss_medical_legal where 1=1
 
@@ -53,6 +61,11 @@
     order by create_time desc
 
 
+  </select>
+
+  <select id="listLegal" resultMap="ListLegalResultMap">
+
+    select medical_legal_no,title,sub_title,title_images from ss_medical_legal order by sort desc,update_time desc
   </select>
 
 </mapper>

@@ -22,7 +22,7 @@ public class HonestyController {
     @RequestMapping(value = "/publicPlace", method = RequestMethod.GET)
     public String publicPlace() {
 
-        return "/medical_manage/honesty/public_place";
+        return "/frontend_medical/honesty/public_place";
     }
 
 
@@ -33,7 +33,7 @@ public class HonestyController {
     @RequestMapping(value = "/schoolPlace", method = RequestMethod.GET)
     public String schoolPlace() {
 
-        return "/medical_manage/honesty/school_place";
+        return "/frontend_medical/honesty/school_place";
     }
 
 
@@ -44,7 +44,7 @@ public class HonestyController {
     @RequestMapping(value = "/medicalPlace", method = RequestMethod.GET)
     public String medicalPlace() {
 
-        return "/medical_manage/honesty/medical_place";
+        return "/frontend_medical/honesty/medical_place";
     }
 
 
@@ -55,7 +55,7 @@ public class HonestyController {
     @RequestMapping(value = "/waterSupplyPlace", method = RequestMethod.GET)
     public String waterSupplyPlace() {
 
-        return "/medical_manage/honesty/water_supply_place";
+        return "/frontend_medical/honesty/water_supply_place";
     }
 
 
@@ -67,7 +67,7 @@ public class HonestyController {
     @RequestMapping(value = "/controlManage", method = RequestMethod.GET)
     public String controlManage() {
 
-        return "/medical_manage/honesty/control_manage";
+        return "/frontend_medical/honesty/control_manage";
     }
 
 }

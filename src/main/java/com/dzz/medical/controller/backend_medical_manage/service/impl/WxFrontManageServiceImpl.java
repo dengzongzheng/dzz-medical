@@ -7,6 +7,7 @@ import com.dzz.medical.controller.backend_medical_manage.domain.dto.AddMedicalLe
 import com.dzz.medical.controller.backend_medical_manage.domain.dto.MedicalLegalListQueryDTO;
 import com.dzz.medical.controller.backend_medical_manage.domain.model.SsMedicalLegal;
 import com.dzz.medical.controller.backend_medical_manage.service.WxFrontManageService;
+import com.dzz.medical.controller.util.service.BaseService;
 import com.dzz.medical.controller.util.service.IdService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -23,7 +24,7 @@ import org.springframework.stereotype.Service;
  * @since 2018年07月22 下午9:11
  */
 @Service
-public class WxFrontManageServiceImpl implements WxFrontManageService {
+public class WxFrontManageServiceImpl implements WxFrontManageService,BaseService {
 
     @Autowired
     private SsMedicalLegalMapper ssMedicalLegalMapper;
@@ -43,16 +44,12 @@ public class WxFrontManageServiceImpl implements WxFrontManageService {
     }
 
     @Override
-    public PageUtil<MedicalLegalListBO> listMedicalLegal(MedicalLegalListQueryDTO queryDTO) {
+    public PageUtil<MedicalLegalListBO> listMedicalLegal(MedicalLegalListQueryDTO query) {
 
-        if (0 > queryDTO.getPageNo()) {
-            queryDTO.setPageNo(1);
-        }
-        if (queryDTO.getPageSize() > 100) {
-            queryDTO.setPageSize(10);
-        }
-        PageHelper.startPage(queryDTO.getPageNo(), queryDTO.getPageSize(), true);
-        List<MedicalLegalListBO> legalListBOS = ssMedicalLegalMapper.listMedicalLegal(queryDTO);
+        query.setPageSize(pageSizeHandler(query.getPageSize()));
+        query.setPageNo(pageNoHandler(query.getPageNo()));
+        PageHelper.startPage(query.getPageNo(), query.getPageSize(), true);
+        List<MedicalLegalListBO> legalListBOS = ssMedicalLegalMapper.listMedicalLegal(query);
         PageInfo<MedicalLegalListBO> pageInfo = new PageInfo<>(legalListBOS);
         PageUtil<MedicalLegalListBO> pageUtil = new PageUtil<>();
         pageUtil.setPageNo(pageInfo.getPageNum());

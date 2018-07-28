@@ -86,9 +86,9 @@ public class WxFrontManageController extends BaseController{
     @RequestMapping(value = "/addLegal", method = RequestMethod.POST)
     public String addLegal(AddMedicalLegalDTO addLegalDTO) {
 
-        log.info(addLegalDTO.toString());
         addLegalDTO.setCreator(getUserAccount());
         addLegalDTO.setUpdater(addLegalDTO.getCreator());
+        log.info(addLegalDTO.toString());
         wxFrontManageService.saveLegal(addLegalDTO);
         return "redirect:/manage/legalManage";
     }

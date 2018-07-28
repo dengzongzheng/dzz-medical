@@ -7,6 +7,8 @@
   <meta content="telephone=no,email=no" name="format-detection">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="_csrf" content="${_csrf.token}"/>
+  <meta name="_csrf_header" content="${_csrf.headerName}"/>
   <title>法律法规</title>
   <link href="/css/for_service/legal.css" rel="stylesheet">
 </head>
@@ -20,21 +22,23 @@
   </div>
   <div class="content">
     <div class="content-title">消息</div>
-    <div class="msg-content">
-      <div class="msg-title">知识产权认证管理办法</div>
-      <div class="msg-img"><img src="/img/example.png"></div>
-    </div>
-    <div class="msg-content">
-      <div class="msg-title-2">知识产权认证管理办法</div>
-      <div class="img-content">
-        <div class="img-box"><img src="/img/example.png"></div>
-        <div class="img-box"><img src="/img/example.png"></div>
-        <div class="img-box"><img src="/img/example.png"></div>
+    <div id="content-box">
+      <!--<div class="msg-content">
+        <div class="msg-title">知识产权认证管理办法</div>
+        <div class="msg-img"><img src="/img/example.png"></div>
       </div>
-    </div>
-    <div class="msg-content">
-      <div class="msg-title">知识产权认证管理办法</div>
-      <div class="msg-img"><img src="/img/example.png"></div>
+      <div class="msg-content">
+        <div class="msg-title-2">知识产权认证管理办法</div>
+        <div class="img-content">
+          <div class="img-box"><img src="/img/example.png"></div>
+          <div class="img-box"><img src="/img/example.png"></div>
+          <div class="img-box"><img src="/img/example.png"></div>
+        </div>
+      </div>
+      <div class="msg-content">
+        <div class="msg-title">知识产权认证管理办法</div>
+        <div class="msg-img"><img src="/img/example.png"></div>
+      </div>-->
     </div>
     <div class="more-msg">
       <div class="all-msg">全部消息</div>
@@ -42,4 +46,31 @@
     </div>
   </div>
 </body>
+<script src="/plugins/jquery/jquery.min.js?v=2.1.4"></script>
+<!-- 自定义js -->
+<script src="/js/common/ajax_common.js"></script>
+<!-- Toast script -->
+<script src="/plugins/toastr/toastr.min.js"></script>
+<script src="/js/common/toast_common.js"></script>
+<!--页面模板渲染-->
+<script src="/plugins/jsrender/jsrender.min.js"></script>
+<script src="/js/frontend_medical/for_service/legal.js"></script>
+<!--保单列表渲染模板-->
+<script type="text/x-jsrender" id="listLegalTemplate1">
+    <div class="msg-content">
+      <div class="msg-title">{{:title}}</div>
+      <div class="msg-img"><img src="{{:oneTitleImage}}"></div>
+    </div>
+</script>
+
+<script type="text/x-jsrender" id="listLegalTemplate2">
+    <div class="msg-content">
+      <div class="msg-title-2">{{:title}}</div>
+      <div class="img-content">
+       {{for listTitleImage}}
+        <div class="img-box"><img src="{{:#data}}"></div>
+       {{/for}}
+      </div>
+    </div>
+</script>
 </html>

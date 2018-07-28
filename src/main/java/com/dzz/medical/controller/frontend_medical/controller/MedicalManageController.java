@@ -22,6 +22,6 @@ public class MedicalManageController {
     @RequestMapping(value = "/medicalManage", method = RequestMethod.GET)
     public String medicalManage() {
 
-        return "/medical_manage/manage";
+        return "/frontend_medical/manage";
     }
 }

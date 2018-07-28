@@ -18,6 +18,9 @@ public class UtilConfig {
     @Value("${upload.file.path}")
     private String uploadFilePath;
 
-    @Value(("${spring.profiles.active}"))
+    @Value("${spring.profiles.active}")
     private String profileActive;
+
+    @Value("${image.server.path}")
+    private String imageServerPath;
 }

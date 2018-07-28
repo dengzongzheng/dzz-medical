@@ -89,7 +89,11 @@ $().ready(function () {
         if(data.code=="1"){
           var titleImagesObj = $("#titleImages");
           var titleImages = titleImagesObj.val();
-          titleImages = titleImages+ ";"+data.data.fileName;
+          if(""!=titleImages) {
+            titleImages = titleImages+ ";"+data.data.fileName;
+          }else{
+            titleImages = data.data.fileName;
+          }
           titleImagesObj.attr("value", titleImages);
           $("#showTitleImages").prepend("<img src='"+uploadObj.image_server+data.data.fileName+"'/>");
         }else{

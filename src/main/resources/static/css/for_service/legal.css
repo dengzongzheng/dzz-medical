@@ -37,11 +37,10 @@ body {
 .logo {
   width: 100%;
   text-align: center;
-  padding-bottom: 27px;
+  padding-bottom: 24px;
 }
 .logo img {
   width: 70px;
-  height: 54px;
 }
 
 .content {
@@ -50,7 +49,7 @@ body {
   padding-left: 12px;
   padding-right: 12px;
   padding-top: 18px;
-  height: 450px;
+  /*height: 450px;*/
   overflow: auto;
 }
 
@@ -73,8 +72,7 @@ body {
 }
 .img-box img{
 
-  width: 84px;
-  height: 60px;
+  width: 80px;
 }
 
 .msg-title-2{
@@ -94,6 +92,7 @@ body {
   display: inline-block;
   float: left;
   width: 60%;
+  padding-top: 10px;
 }
 
 .msg-img {
@@ -103,8 +102,7 @@ body {
 }
 
 .msg-img img {
-  width: 84px;
-  height: 60px;
+  width: 80px;
 }
 
 .more-msg{
