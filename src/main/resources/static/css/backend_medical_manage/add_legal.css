@@ -3,3 +3,13 @@
   width: 60px;
   height: 50px;
 }
+
+#showTitleImages{
+  display: inline-block;
+  margin-left: 20px;
+}
+
+#showTitleImages img{
+  width: 80px;
+  height: 77px;
+}

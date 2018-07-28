@@ -83,4 +83,19 @@ $().ready(function () {
     }
   });
 
+  uploadObj.uploadFile("uploadTitleImage",
+      "/file/upload", ['jpg', 'png','jpeg'], 4096, $("meta[name='_csrf']").attr("content"), null, null, function (data) {
+        console.log(data);
+        if(data.code=="1"){
+          var titleImagesObj = $("#titleImages");
+          var titleImages = titleImagesObj.val();
+          titleImages = titleImages+ ";"+data.data.fileName;
+          titleImagesObj.attr("value", titleImages);
+          $("#showTitleImages").prepend("<img src='"+uploadObj.image_server+data.data.fileName+"'/>");
+        }else{
+
+        }
+
+      }, null);
+
 });

@@ -44,5 +44,6 @@ var uploadObj = {/*上传功能*/
             }
         });
        return uploadObject;
-    }
+    },
+    "image_server":"http://dzz.images.cc/"
 };

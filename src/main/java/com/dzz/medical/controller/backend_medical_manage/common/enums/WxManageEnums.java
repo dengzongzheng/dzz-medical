@@ -104,8 +104,8 @@ public interface WxManageEnums {
 
     enum ToppingEnums{
 
-        YES(1, "正常"),
-        NO(0,"已下线");
+        YES(1, "是"),
+        NO(0,"否");
 
         /** code */
         private Integer code;
