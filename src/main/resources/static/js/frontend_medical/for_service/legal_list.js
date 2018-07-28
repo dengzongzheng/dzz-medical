@@ -3,8 +3,8 @@ $().ready(function () {
   var legalObj = {
     "queryLegal":function () {
       var param = {};
-      param["pageSize"] = 10;
-      param["pageNo"] = 1;
+      param["pageSize"] = $("#pageSize").val();
+      param["pageNo"] = $("#pageNo").val();
       var ajaxObj = {
         url: "/forService/listLegal",
         param: param,
@@ -28,7 +28,7 @@ $().ready(function () {
         }
       });
     }
-  }
+  };
   legalObj.queryLegal();
 
 });

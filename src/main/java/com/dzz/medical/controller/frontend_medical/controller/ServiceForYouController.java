@@ -44,6 +44,16 @@ public class ServiceForYouController {
         return "/frontend_medical/for_service/legal";
     }
 
+    /**
+     * 法律法规列表
+     * @return 法律法规列表页
+     */
+    @RequestMapping(value = "/legalList", method = RequestMethod.GET)
+    public String legalList() {
+
+        return "/frontend_medical/for_service/legal_list";
+    }
+
 
     /**
      * 法律法规列表查询
