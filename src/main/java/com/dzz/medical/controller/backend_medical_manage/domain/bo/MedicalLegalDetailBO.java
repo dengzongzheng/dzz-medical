@@ -1,6 +1,7 @@
 package com.dzz.medical.controller.backend_medical_manage.domain.bo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import lombok.Data;
 
@@ -38,6 +39,11 @@ public class MedicalLegalDetailBO implements Serializable{
      */
     @Column(name = "title_images")
     private String titleImages;
+
+    /**
+     * 标题图片列表
+     */
+    private List<String> listTitleImage;
 
     /**
      * 排序

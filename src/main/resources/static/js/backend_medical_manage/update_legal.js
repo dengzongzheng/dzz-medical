@@ -4,12 +4,11 @@ $().ready(function () {
     lang: 'zh-CN',
     focus: false,
     placeholder:"法律法规",
-    height: 200,
+    height: 200
   });
 
   $.validator.addMethod("checkTextData", function (value, element) {
-    var code = $("#text_data").code();
-    console.log(code);
+    var code = $('#text_data').summernote('code');
     $("#textData").val(code);
     if(code==""){
       $(element).data('error-msg', icon + '请输入法律法规信息');
@@ -44,11 +43,11 @@ $().ready(function () {
       'sort': {
         required: true
       },
-      'toping': {
+      'topping': {
         required: true
       },
       'textData':{
-        required: true
+        checkTextData: true
       }
     },
     messages: {
@@ -68,11 +67,8 @@ $().ready(function () {
       'sort': {
         required: icon + "请输入排序"
       },
-      'toping': {
+      'topping': {
         required: icon + "请输入选择是否置顶"
-      },
-      'textData':{
-        required: icon + "请输入法律法规信息"
       }
     },
     submitHandler: function (form) {
@@ -95,11 +91,19 @@ $().ready(function () {
             titleImages = data.data.fileName;
           }
           titleImagesObj.attr("value", titleImages);
-          $("#showTitleImages").prepend("<img src='"+uploadObj.image_server+data.data.fileName+"'/>");
+          $("#showTitleImages").prepend("<div class='img-box'><img src='"+uploadObj.image_server+data.data.fileName+"' />"
+              + "<div class='operate'><a href='javascript:void(0)' data-fileName='"+uploadObj.image_server+data.data.fileName+"' class='preview-img'>预览</a>"
+              + "<a href='javascript:void(0)' data-fileName='"+uploadObj.image_server+data.data.fileName+"' class='del-img'>删除</a></div></div>");
         }else{
 
         }
 
       }, null);
+
+  $(document).on("click",".preview-img",function () {
+    var fileName = $(this).attr("data-fileName");
+    $("#preview-file").html("<img src='"+fileName+"'>");
+    $("#preview-file-box").show();
+  });
 
 });

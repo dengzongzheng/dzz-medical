@@ -3,6 +3,7 @@ package com.dzz.medical.controller.backend_medical_manage.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dzz.medical.common.response.ResponseDzz;
+import com.dzz.medical.config.wx.UtilConfig;
 import com.dzz.medical.config.wx.WxConfig;
 import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.LegalStatusEnums;
 import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.MessageEvent;
@@ -14,6 +15,10 @@ import com.dzz.medical.controller.backend_medical_manage.domain.dto.UpdateMedica
 import com.dzz.medical.controller.backend_medical_manage.service.WxFrontManageService;
 import com.dzz.medical.controller.backend_medical_manage.service.WxService;
 import com.dzz.medical.controller.util.controller.BaseController;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +50,8 @@ public class WxFrontManageController extends BaseController{
     @Autowired
     private WxFrontManageService wxFrontManageService;
 
+    @Autowired
+    private UtilConfig utilConfig;
 
     /**
      * 法律法规
@@ -106,6 +113,16 @@ public class WxFrontManageController extends BaseController{
     public String updateLegal(ModelMap map,String medicalLegalNo) {
 
         MedicalLegalDetailBO medicalLegalDetailBO = wxFrontManageService.detailMedicalLegal(medicalLegalNo);
+
+        if (Objects.nonNull(medicalLegalDetailBO)) {
+            Iterable<String> it = Splitter.on(";").split(medicalLegalDetailBO.getTitleImages());
+            List<String> listTitleImage = Lists.newArrayList();
+            for (String s : it) {
+                listTitleImage.add(utilConfig.getImageServerPath() + s);
+            }
+            medicalLegalDetailBO.setListTitleImage(listTitleImage);
+        }
+
         map.put("medicalLegalDetailBO", medicalLegalDetailBO);
         map.put("toppings", ToppingEnums.getElementList());
         return "/backend_medical_manage/update_legal";

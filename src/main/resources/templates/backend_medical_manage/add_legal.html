@@ -81,10 +81,14 @@
             <label class="control-label required" style="text-align: right">标题图片：</label>
           </div>
           <div class="col-sm-10">
+            <div class="upload-img">
               <a class="btn btn-sm btn-default" id="uploadTitleImage" href="javascript:void(0)">
                 <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
               </a>
-            <div id="showTitleImages"></div>
+            </div>
+            <div id="showTitleImages">
+
+            </div>
             <input type="hidden" name="titleImages" id="titleImages" value=""/>
           </div>
         </div>
@@ -123,7 +127,7 @@
               <div class="form-group ibox-content" id="text_data">
 
               </div>
-              <input type="hidden" name="textData" id="textData" value="123123"/>
+              <input type="hidden" name="textData" id="textData" value=""/>
             </div>
           </div>
         </div>
@@ -137,10 +141,9 @@
         </div>
       </form>
     </div>
-    <div class="col-sm-12">
-      <div class="col-sm-offset-4">
-        <ul id="pagination-list" class="pagination-sm"></ul>
-      </div>
+    <div class="preview-file-box" id="preview-file-box">
+      <div class="big-bg" onclick="$(this).parent().hide()"></div>
+      <div class="preview-file" id="preview-file"></div>
     </div>
   </div>
 </div>

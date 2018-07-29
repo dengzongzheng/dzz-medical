@@ -82,11 +82,19 @@
             <label class="control-label required" style="text-align: right">标题图片：</label>
           </div>
           <div class="col-sm-10">
+            <div class="upload-img">
               <a class="btn btn-sm btn-default" id="uploadTitleImage" href="javascript:void(0)">
                 <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
               </a>
-            <div id="showTitleImages"></div>
-            <input type="hidden" name="titleImages" id="titleImages" value=""/>
+            </div>
+            <div id="showTitleImages">
+              <#list medicalLegalDetailBO.listTitleImage as item>
+                <div class='img-box'><img src='${(item)!}' />
+                  <div class='operate'><a href='javascript:void(0)' data-fileName='${(item)!}' class='preview-img'>预览</a>
+                    <a href='javascript:void(0)' data-fileName='${(item)!}' class='del-img'>删除</a></div></div>
+              </#list>
+              </div>
+            <input type="hidden" name="titleImages" id="titleImages" value="${(medicalLegalDetailBO.titleImages)!}"/>
           </div>
         </div>
 
@@ -138,10 +146,9 @@
         </div>
       </form>
     </div>
-    <div class="col-sm-12">
-      <div class="col-sm-offset-4">
-        <ul id="pagination-list" class="pagination-sm"></ul>
-      </div>
+    <div class="preview-file-box" id="preview-file-box">
+      <div class="big-bg" onclick="$(this).parent().hide()"></div>
+      <div class="preview-file" id="preview-file"></div>
     </div>
   </div>
 </div>
@@ -183,6 +190,7 @@
 <script type="application/javascript">
   $(function () {
     $("#topping").val('${(medicalLegalDetailBO.topping)!}');
+    $("#text_data").code("${(medicalLegalDetailBO.textData)!}");
   });
 </script>
 </body>
