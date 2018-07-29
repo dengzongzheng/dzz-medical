@@ -91,9 +91,9 @@ $().ready(function () {
             titleImages = data.data.fileName;
           }
           titleImagesObj.attr("value", titleImages);
-          $("#showTitleImages").prepend("<div class='img-box'><img src='"+uploadObj.image_server+data.data.fileName+"' />"
-              + "<div class='operate'><a href='javascript:void(0)' data-fileName='"+uploadObj.image_server+data.data.fileName+"' class='preview-img'>预览</a>"
-              + "<a href='javascript:void(0)' data-fileName='"+uploadObj.image_server+data.data.fileName+"' class='del-img'>删除</a></div></div>");
+          $("#showTitleImages").prepend("<div class='img-box'><img src='"+data.data.imageServerPath+data.data.fileName+"' />"
+              + "<div class='operate'><a href='javascript:void(0)' data-fileName='"+data.data.imageServerPath+data.data.fileName+"' class='preview-img'>预览</a>"
+              + "<a href='javascript:void(0)' data-fileName='"+data.data.imageServerPath+data.data.fileName+"' class='del-img'>删除</a></div></div>");
         }else{
 
         }

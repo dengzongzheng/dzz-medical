@@ -73,6 +73,7 @@ public class UploadController {
         }
         map.put("originalFileName", originalFileName);
         map.put("fileName", fileName);
+        map.put("imageServerPath", utilConfig.getImageServerPath());
 
         ResponseDzz responseDzz = ResponseDzz.ok(map);
         response.setCharacterEncoding("UTF-8");
