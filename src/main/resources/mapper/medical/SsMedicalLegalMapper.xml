@@ -40,6 +40,7 @@
   </resultMap>
 
   <resultMap id="DetailMedicalLegalResultMap" type="com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalDetailBO">
+    <result column="id" jdbcType="VARCHAR" property="id" />
     <result column="medical_legal_no" jdbcType="VARCHAR" property="medicalLegalNo" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
@@ -86,7 +87,7 @@
 
   <select id="detailMedicalLegal" resultMap="DetailMedicalLegalResultMap">
 
-    select medical_legal_no,title,sub_title,sort,topping,title_images,text_data from ss_medical_legal
+    select id,medical_legal_no,title,sub_title,sort,topping,title_images,text_data from ss_medical_legal
 
     where medical_legal_no=#{medicalLegalNo};
 

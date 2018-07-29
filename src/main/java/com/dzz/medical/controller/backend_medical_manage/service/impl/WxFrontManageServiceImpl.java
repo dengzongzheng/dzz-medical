@@ -74,7 +74,8 @@ public class WxFrontManageServiceImpl implements WxFrontManageService,BaseServic
         SsMedicalLegal ssMedicalLegal = SsMedicalLegal.newInstance();
         ssMedicalLegal.setCreateTime(null);
         BeanUtils.copyProperties(updateMedicalLegalDTO, ssMedicalLegal);
-        return ssMedicalLegalMapper.updateByPrimaryKey(ssMedicalLegal)>0;
+        ssMedicalLegal.setId(Long.valueOf(updateMedicalLegalDTO.getId()));
+        return ssMedicalLegalMapper.updateByPrimaryKeySelective(ssMedicalLegal)>0;
     }
 
     @Override

@@ -17,6 +17,10 @@ public class MedicalLegalDetailBO implements Serializable{
 
     private static final long serialVersionUID = -1461593000044351772L;
 
+
+    private String id;
+
+
     /**
      * 法律法规编码
      */

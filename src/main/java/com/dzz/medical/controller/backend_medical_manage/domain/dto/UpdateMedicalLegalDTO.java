@@ -17,6 +17,8 @@ public class UpdateMedicalLegalDTO extends AddMedicalLegalDTO implements Seriali
 
     private static final long serialVersionUID = 7435461661864996364L;
 
+    private String id;
+
     /**
      * 法律法规编码
      */
