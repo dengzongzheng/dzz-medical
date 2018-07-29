@@ -118,7 +118,7 @@ a:focus {
 }
 
 .navbar-default .nav-background {
-    background-image: url(/img/loginbg.jpg);
+    background-image: url(/img/loginbg.jpeg);
     position: absolute;
     z-index: 1;
     height: 100%;
