@@ -13,7 +13,6 @@ $().ready(function () {
       };
       commonJS.sendAjaxRequest(ajaxObj, function (data) {
         if (data.code == "1") {
-          console.log(data);
           var html = "";
           $(data.data.data).each(function (index,value) {
             if(value.isOneImage){

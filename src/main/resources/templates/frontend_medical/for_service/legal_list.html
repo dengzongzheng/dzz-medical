@@ -29,18 +29,18 @@
 <script src="/js/frontend_medical/for_service/legal_list.js"></script>
 <!--保单列表渲染模板-->
 <script type="text/x-jsrender" id="listLegalTemplate1">
-    <div class="msg-content">
+    <div class="msg-content" onclick="window.location.href='/forService/legalDetail?medicalLegalNo={{:medicalLegalNo}}';">
       <div class="msg-title">{{:title}}</div>
-      <div class="msg-img"><img src="{{:oneTitleImage}}"></div>
+      <div class="msg-img"><img src="{{:imageServerPath}}{{:oneTitleImage}}"></div>
     </div>
 </script>
 
 <script type="text/x-jsrender" id="listLegalTemplate2">
-    <div class="msg-content">
+    <div class="msg-content" onclick="window.location.href='/forService/legalDetail?medicalLegalNo={{:medicalLegalNo}}';">
       <div class="msg-title-2">{{:title}}</div>
       <div class="img-content">
        {{for listTitleImage}}
-        <div class="img-box"><img src="{{:#data}}"></div>
+        <div class="img-box"><img src="{{:#parent.parent.data.imageServerPath}}{{:#data}}"></div>
        {{/for}}
       </div>
     </div>

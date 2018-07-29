@@ -3,6 +3,7 @@ package com.dzz.medical.controller.frontend_medical.controller;
 import com.dzz.medical.common.page.PageUtil;
 import com.dzz.medical.common.response.ResponseDzz;
 import com.dzz.medical.config.wx.UtilConfig;
+import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalDetailBO;
 import com.dzz.medical.controller.frontend_medical.domain.bo.ListLegalBO;
 import com.dzz.medical.controller.frontend_medical.domain.dto.ListLegalQueryDTO;
 import com.dzz.medical.controller.frontend_medical.service.ServiceForYouService;
@@ -12,6 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -70,24 +72,33 @@ public class ServiceForYouController {
             Splitter splitter = Splitter.on(";").omitEmptyStrings();
             List<String> titleImageList;
             for (ListLegalBO listLegalBO : legalBOList) {
-                Iterable<String> iterable = splitter.split(listLegalBO.getTitleImages());
-                titleImageList = Lists.newArrayList();
-                for (String image : iterable) {
-                    titleImageList.add(utilConfig.getImageServerPath() + image);
-                }
+                listLegalBO.setImageServerPath(utilConfig.getImageServerPath());
+                titleImageList = Lists.newArrayList(splitter.split(listLegalBO.getTitleImages()));
                 if (titleImageList.size() == 1) {
                     listLegalBO.setIsOneImage(Boolean.TRUE);
                     listLegalBO.setOneTitleImage(titleImageList.get(0));
                 }else{
                     listLegalBO.setIsOneImage(Boolean.FALSE);
                 }
-
                 listLegalBO.setListTitleImage(titleImageList);
                 listLegalBO.setTitleImages("");
             }
             pageUtil.setData(legalBOList);
         }
         return ResponseEntity.ok(ResponseDzz.ok(pageUtil));
+    }
+
+
+    /**
+     * 法律法规列表
+     * @return 法律法规列表页
+     */
+    @RequestMapping(value = "/legalDetail", method = RequestMethod.GET)
+    public String legalDetail(String medicalLegalNo,ModelMap map) {
+
+        MedicalLegalDetailBO medicalLegalDetailBO = serviceForYouService.detailMedicalLegal(medicalLegalNo);
+        map.put("medicalLegalDetailBO", medicalLegalDetailBO);
+        return "/frontend_medical/for_service/legal_detail";
     }
 
 }

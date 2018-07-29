@@ -2,6 +2,7 @@ package com.dzz.medical.controller.frontend_medical.service.impl;
 
 import com.dzz.medical.common.page.PageUtil;
 import com.dzz.medical.controller.backend_medical_manage.dao.SsMedicalLegalMapper;
+import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalDetailBO;
 import com.dzz.medical.controller.frontend_medical.domain.bo.ListLegalBO;
 import com.dzz.medical.controller.frontend_medical.domain.dto.ListLegalQueryDTO;
 import com.dzz.medical.controller.frontend_medical.service.ServiceForYouService;
@@ -40,5 +41,11 @@ public class ServiceForYouServiceImpl implements ServiceForYouService,BaseServic
         pageUtil.setData(legalListBOS);
         pageUtil.setTotalPage(pageInfo.getPages());
         return pageUtil;
+    }
+
+    @Override
+    public MedicalLegalDetailBO detailMedicalLegal(String medicalLegalNo) {
+
+        return ssMedicalLegalMapper.detailMedicalLegal(medicalLegalNo);
     }
 }

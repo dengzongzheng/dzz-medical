@@ -1,6 +1,7 @@
 package com.dzz.medical.controller.frontend_medical.service;
 
 import com.dzz.medical.common.page.PageUtil;
+import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalDetailBO;
 import com.dzz.medical.controller.frontend_medical.domain.bo.ListLegalBO;
 import com.dzz.medical.controller.frontend_medical.domain.dto.ListLegalQueryDTO;
 
@@ -19,4 +20,12 @@ public interface ServiceForYouService {
      * @return 结果
      */
     PageUtil<ListLegalBO> listLegal(ListLegalQueryDTO query);
+
+
+    /**
+     * 法律法规详情
+     * @param medicalLegalNo 法律法规号
+     * @return 详情
+     */
+    MedicalLegalDetailBO detailMedicalLegal(String medicalLegalNo);
 }
