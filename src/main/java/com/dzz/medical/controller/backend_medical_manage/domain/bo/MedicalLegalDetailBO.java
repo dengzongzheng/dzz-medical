@@ -44,6 +44,9 @@ public class MedicalLegalDetailBO implements Serializable{
     @Column(name = "title_images")
     private String titleImages;
 
+
+    private String imageServerPath;
+
     /**
      * 标题图片列表
      */

@@ -1,6 +1,6 @@
 $().ready(function () {
 
-  $('#text_data').summernote({
+  var textData = $('#text_data').summernote({
     lang: 'zh-CN',
     focus: false,
     placeholder:"法律法规",
@@ -8,10 +8,22 @@ $().ready(function () {
   });
 
   $.validator.addMethod("checkTextData", function (value, element) {
-    var code = $('#text_data').summernote('code');
-    $("#textData").val(code);
-    if(code==""){
+    var html = textData.code();
+    $("#textData").val(html);
+    if(""==html){
       $(element).data('error-msg', icon + '请输入法律法规信息');
+      return false;
+    }else{
+      return true;
+    }
+  }, function (params, element) {
+    return $(element).data('error-msg');
+  });
+
+  $.validator.addMethod("checkTitleImages", function (value, element) {
+    var fileNames = $("img[class='file-name']").attr("data-fileName");
+    if(undefined==fileNames||""==fileNames){
+      $(element).data('error-msg', icon + '请上传标题图片信息');
       return false;
     }else{
       return true;
@@ -38,7 +50,7 @@ $().ready(function () {
         maxlength: 200
       },
       'titleImages':{
-        required: true
+        checkTitleImages: true
       },
       'sort': {
         required: true
@@ -61,9 +73,6 @@ $().ready(function () {
         minlength: icon + "标题必须2个字符以上",
         maxlength: icon + "标题最长不能超过200字符"
       },
-      'titleImages':{
-        required: icon + "请上传标题图片"
-      },
       'sort': {
         required: icon + "请输入排序"
       },
@@ -72,6 +81,12 @@ $().ready(function () {
       }
     },
     submitHandler: function (form) {
+      var fileNames = $("[class='file-name']");
+      var files = "";
+      $(fileNames).each(function (index,value) {
+        files += $(value).attr("data-fileName")+";"
+      });
+      $("#titleImages").val(files.substring(0,files.length-1));
       form.submit();
     },
     invalidHandler: function (form, validator) {
@@ -81,17 +96,9 @@ $().ready(function () {
 
   uploadObj.uploadFile("uploadTitleImage",
       "/file/upload", ['jpg', 'png','jpeg'], 4096, $("meta[name='_csrf']").attr("content"), null, null, function (data) {
-        console.log(data);
         if(data.code=="1"){
-          var titleImagesObj = $("#titleImages");
-          var titleImages = titleImagesObj.val();
-          if(""!=titleImages) {
-            titleImages = titleImages+ ";"+data.data.fileName;
-          }else{
-            titleImages = data.data.fileName;
-          }
-          titleImagesObj.attr("value", titleImages);
-          $("#showTitleImages").prepend("<div class='img-box'><img src='"+data.data.imageServerPath+data.data.fileName+"' />"
+          $("#showTitleImages").prepend("<div class='img-box'><img data-fileName='"+data.data.fileName+"' class='file-name' src='"
+              +data.data.imageServerPath+data.data.fileName+"' />"
               + "<div class='operate'><a href='javascript:void(0)' data-fileName='"+data.data.imageServerPath+data.data.fileName+"' class='preview-img'>预览</a>"
               + "<a href='javascript:void(0)' data-fileName='"+data.data.imageServerPath+data.data.fileName+"' class='del-img'>删除</a></div></div>");
         }else{
@@ -104,6 +111,10 @@ $().ready(function () {
     var fileName = $(this).attr("data-fileName");
     $("#preview-file").html("<img src='"+fileName+"'>");
     $("#preview-file-box").show();
+  });
+
+  $(document).on("click",".del-img",function () {
+    $(this).parent().parent().remove();
   });
 
 });

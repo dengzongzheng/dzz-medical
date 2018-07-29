@@ -90,8 +90,11 @@
             </div>
             <div id="showTitleImages">
               <#list medicalLegalDetailBO.listTitleImage as item>
-                <div class='img-box'><img src='${(item)!}' />
-                  <div class='operate'><a href='javascript:void(0)' data-fileName='${(item)!}' class='preview-img'>预览</a>
+                <div class='img-box'><img data-fileName='${(item)!}' class='file-name'
+                                          src='${(medicalLegalDetailBO.imageServerPath)!}${(item)!}' />
+                  <div class='operate'>
+                    <a href='javascript:void(0)' data-fileName='${(medicalLegalDetailBO.imageServerPath)!}${(item)!}'
+                       class='preview-img'>预览</a>
                     <a href='javascript:void(0)' data-fileName='${(item)!}' class='del-img'>删除</a></div></div>
               </#list>
               </div>

@@ -116,13 +116,10 @@ public class WxFrontManageController extends BaseController{
 
         if (Objects.nonNull(medicalLegalDetailBO)) {
             Iterable<String> it = Splitter.on(";").split(medicalLegalDetailBO.getTitleImages());
-            List<String> listTitleImage = Lists.newArrayList();
-            for (String s : it) {
-                listTitleImage.add(utilConfig.getImageServerPath() + s);
-            }
+            List<String> listTitleImage = Lists.newArrayList(it);
             medicalLegalDetailBO.setListTitleImage(listTitleImage);
         }
-
+        medicalLegalDetailBO.setImageServerPath(utilConfig.getImageServerPath());
         map.put("medicalLegalDetailBO", medicalLegalDetailBO);
         map.put("toppings", ToppingEnums.getElementList());
         return "/backend_medical_manage/update_legal";
