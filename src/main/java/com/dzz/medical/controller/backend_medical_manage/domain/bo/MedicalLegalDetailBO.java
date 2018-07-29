@@ -1,6 +1,8 @@
 package com.dzz.medical.controller.backend_medical_manage.domain.bo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import lombok.Data;
@@ -68,4 +70,11 @@ public class MedicalLegalDetailBO implements Serializable{
      */
     @Column(name = "text_data")
     private String textData;
+
+    /**
+     * 创建时间
+     */
+    @Column(name = "create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private Date createTime;
 }

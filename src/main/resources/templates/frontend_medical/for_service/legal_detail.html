@@ -13,14 +13,23 @@
   <link href="/css/for_service/legal_detail.css" rel="stylesheet">
 </head>
 <body>
-  <div class="content" id="legal_detail">
+  <div class="content">
     <input type="hidden" value="${(medicalLegalDetailBO.textData)!}" id="textData" name="textData" />
-  </div>
+    <div class="title">
+      <h4>${(medicalLegalDetailBO.title)!}</h4>
+    </div>
+    <div class="read-record">
+      <div class="record-left"><label>时间：</label>${(medicalLegalDetailBO.createTime?date)!}</div>
+      <div class="record-right"><label>被浏览次数：</label>1022</div>
+    </div>
+    <div id="legal_detail">
+    </div>
+    </div>
 </body>
 <script src="/plugins/jquery/jquery.min.js?v=2.1.4"></script>
 <script type="text/javascript">
   $().ready(function () {
-    $("#legal_detail").append($("#textData").val());
+    $("#legal_detail").html($("#textData").val());
   });
 </script>
 </html>

@@ -48,6 +48,7 @@
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="topping" jdbcType="INTEGER" property="topping" />
     <result column="text_data" jdbcType="LONGVARCHAR" property="textData" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
 
   <select id="listMedicalLegal" resultMap="ListMedicalLegalResultMap">
@@ -87,7 +88,7 @@
 
   <select id="detailMedicalLegal" resultMap="DetailMedicalLegalResultMap">
 
-    select id,medical_legal_no,title,sub_title,sort,topping,title_images,text_data from ss_medical_legal
+    select id,medical_legal_no,title,sub_title,sort,topping,title_images,text_data,create_time from ss_medical_legal
 
     where medical_legal_no=#{medicalLegalNo};
 
