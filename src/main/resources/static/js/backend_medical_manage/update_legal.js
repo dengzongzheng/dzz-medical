@@ -117,4 +117,17 @@ $().ready(function () {
     $(this).parent().parent().remove();
   });
 
+  $("#preview").on("click",function () {
+    var title = $("#title").val();
+    var content = textData.code();
+    layer.open({
+      type: 2,
+      title: '法律法规配置预览页',
+      shadeClose: true,
+      shade: 0.8,
+      area: ['380px', '90%'],
+      content: '/manage/previewLegal?title='+title+"&content="+content
+    });
+  });
+
 });

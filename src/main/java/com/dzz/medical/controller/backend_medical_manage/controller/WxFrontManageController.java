@@ -17,6 +17,8 @@ import com.dzz.medical.controller.backend_medical_manage.service.WxService;
 import com.dzz.medical.controller.util.controller.BaseController;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
@@ -87,6 +89,21 @@ public class WxFrontManageController extends BaseController{
 
         map.put("toppings", ToppingEnums.getElementList());
         return "/backend_medical_manage/add_legal";
+    }
+
+    /**
+     * 预览法律法规
+     * @param map map
+     * @return 法律法规预览页
+     */
+    @RequestMapping(value = "/previewLegal", method = RequestMethod.GET)
+    public String previewLegal(ModelMap map,String content,String title) {
+
+        map.put("content", content);
+        map.put("title", title);
+        map.put("createTime", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        map.put("readCount", Math.round(10000D));
+        return "/backend_medical_manage/legal_preview";
     }
 
     /**
