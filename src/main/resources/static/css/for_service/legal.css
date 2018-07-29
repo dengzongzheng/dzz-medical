@@ -54,7 +54,7 @@ body {
 }
 
 .content-title {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: lighter;
   color: #635C5C;
   border-bottom: solid 1px #F1F1F1;
@@ -71,8 +71,8 @@ body {
   padding-right: 23px;
 }
 .img-box img{
-
-  width: 80px;
+  width: 85px;
+  height: 80px;
 }
 
 .msg-title-2{
@@ -102,7 +102,8 @@ body {
 }
 
 .msg-img img {
-  width: 80px;
+  width: 85px;
+  height: 80px;
 }
 
 .more-msg{
@@ -112,7 +113,7 @@ body {
 }
 .all-msg {
   color: #635C5C;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: normal;
   display: inline-block;
 }

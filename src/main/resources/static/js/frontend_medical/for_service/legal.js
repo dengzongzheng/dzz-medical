@@ -3,7 +3,7 @@ $().ready(function () {
   var legalObj = {
     "queryLegal":function () {
       var param = {};
-      param["pageSize"] = 10;
+      param["pageSize"] = 3;
       param["pageNo"] = 1;
       var ajaxObj = {
         url: "/forService/listLegal",
