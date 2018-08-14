@@ -101,4 +101,17 @@ public class ServiceForYouController {
         return "/frontend_medical/for_service/legal_detail";
     }
 
+
+    /**
+     * 法律法规列表
+     * @return 法律法规列表页
+     */
+    @RequestMapping(value = "/legalDetails", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> legalDetails(String medicalLegalNo,ModelMap map) {
+
+        MedicalLegalDetailBO medicalLegalDetailBO = serviceForYouService.detailMedicalLegal(medicalLegalNo);
+        return ResponseEntity.ok(ResponseDzz.ok(medicalLegalDetailBO));
+    }
+
 }

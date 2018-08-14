@@ -22,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -136,6 +137,7 @@ public class WxFrontManageController extends BaseController{
             List<String> listTitleImage = Lists.newArrayList(it);
             medicalLegalDetailBO.setListTitleImage(listTitleImage);
         }
+        medicalLegalDetailBO.setTextData(StringEscapeUtils.unescapeHtml4(medicalLegalDetailBO.getTextData()));
         medicalLegalDetailBO.setImageServerPath(utilConfig.getImageServerPath());
         map.put("medicalLegalDetailBO", medicalLegalDetailBO);
         map.put("toppings", ToppingEnums.getElementList());
