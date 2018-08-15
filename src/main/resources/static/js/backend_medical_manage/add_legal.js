@@ -4,7 +4,33 @@ $().ready(function () {
     lang: 'zh-CN',
     focus: false,
     placeholder:"法律法规内容",
-    height: 200
+    height: 800,
+    onImageUpload: function(files, editor, welEditable) {
+      var formData = new FormData();
+      formData.append('files', files[0]);
+      $.ajax({
+        url: "/file/upload",
+        type: "post",
+        data: formData,
+        dataType: "json",
+        processData : false,
+        contentType : false,
+        beforeSend:function (xhr) {
+          var token = $("meta[name='_csrf']").attr("content");
+          var header = $("meta[name='_csrf_header']").attr("content");
+          xhr.setRequestHeader(header, token);
+        },
+        success: function(data){
+          if(data.code==="1"){
+            $("#titleImages").val($("#titleImages").val()+data.data.fileName+";");
+            editor.insertImage(welEditable, data.data.imageServerPath + data.data.fileName);
+          }else{
+            layer.message(data.message);
+          }
+          $(".note-image-input").removeAttr("name");
+        }
+      });
+    }
   });
 
   $.validator.addMethod("checkTextData", function (value, element) {
@@ -42,7 +68,7 @@ $().ready(function () {
     rules: {
       'title': {
         required: true,
-        minlength: 2,
+        minlength: 20,
         maxlength: 200
       },
       'subTitle': {
@@ -66,7 +92,7 @@ $().ready(function () {
     messages: {
       'title': {
         required: icon + "请输入标题",
-        minlength: icon + "标题必须2个字符以上",
+        minlength: icon + "标题必须20个字符以上",
         maxlength: icon + "标题最长不能超过200字符"
       },
       'subTitle': {
@@ -103,7 +129,7 @@ $().ready(function () {
           + "<div class='operate'><a href='javascript:void(0)' data-fileName='"+data.data.imageServerPath+data.data.fileName+"' class='preview-img'>预览</a>"
           + "<a href='javascript:void(0)' data-fileName='"+data.data.imageServerPath+data.data.fileName+"' class='del-img'>删除</a></div></div>");
         }else{
-
+          layer.message(data.message);
         }
 
       }, null);

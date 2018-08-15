@@ -43,11 +43,12 @@ public class UploadController {
     /**
      * 文件上传
      *
-     * @param files   files
+     * @param files files
      * @param request request
      */
     @RequestMapping(value = UtilUrlConstants.FILE_UPLOAD, method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-    public void uploadFile(@RequestParam MultipartFile[] files, HttpServletRequest request,HttpServletResponse response) {
+    public void uploadFile(@RequestParam MultipartFile[] files, HttpServletRequest request,
+            HttpServletResponse response) {
 
         String fileName = "";
         String originalFileName = "";
@@ -60,7 +61,7 @@ public class UploadController {
                 if (!file.isEmpty()) {
                     originalFileName = file.getOriginalFilename();
                     String fileType = originalFileName.substring(originalFileName.indexOf("."));
-                    fileName = String.valueOf(idService.getId())+fileType;
+                    fileName = String.valueOf(idService.getId()) + fileType;
                     File file1 = new File(utilConfig.getUploadFilePath() + fileName);
                     file.transferTo(file1);
                     originalFileName = file.getOriginalFilename();
@@ -80,7 +81,7 @@ public class UploadController {
         try {
             response.getWriter().write(JSONObject.toJSONString(responseDzz));
         } catch (IOException e) {
-            log.error("文件上传写出结果异常",e);
+            log.error("文件上传写出结果异常", e);
         }
     }
 

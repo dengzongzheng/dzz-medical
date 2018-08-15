@@ -43,7 +43,7 @@
   text-align: center;
   z-index: 999;
   position: fixed;
-  top: 50%;
+  top: 26%;
   left: 50%;
   transform: translate(-50%,-50%);
 }

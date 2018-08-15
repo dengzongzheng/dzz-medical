@@ -4,7 +4,33 @@ $().ready(function () {
     lang: 'zh-CN',
     focus: false,
     placeholder:"法律法规",
-    height: 200
+    height: 800,
+    onImageUpload: function(files, editor, welEditable) {
+      var formData = new FormData();
+      formData.append('files', files[0]);
+      $.ajax({
+        url: "/file/upload",
+        type: "post",
+        data: formData,
+        dataType: "json",
+        processData : false,
+        contentType : false,
+        beforeSend:function (xhr) {
+          var token = $("meta[name='_csrf']").attr("content");
+          var header = $("meta[name='_csrf_header']").attr("content");
+          xhr.setRequestHeader(header, token);
+        },
+        success: function(data){
+          if(data.code==="1"){
+            $("#titleImages").val($("#titleImages").val()+data.data.fileName+";");
+            editor.insertImage(welEditable, data.data.imageServerPath + data.data.fileName);
+          }else{
+            layer.message(data.message);
+          }
+          $(".note-image-input").removeAttr("name");
+        }
+      });
+    }
   });
 
   $.validator.addMethod("checkTextData", function (value, element) {
@@ -102,7 +128,7 @@ $().ready(function () {
               + "<div class='operate'><a href='javascript:void(0)' data-fileName='"+data.data.imageServerPath+data.data.fileName+"' class='preview-img'>预览</a>"
               + "<a href='javascript:void(0)' data-fileName='"+data.data.imageServerPath+data.data.fileName+"' class='del-img'>删除</a></div></div>");
         }else{
-
+          layer.message(data.message);
         }
 
       }, null);

@@ -10,6 +10,7 @@ import com.dzz.medical.controller.frontend_medical.service.ServiceForYouService;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import java.util.List;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -111,6 +112,7 @@ public class ServiceForYouController {
     public ResponseEntity<?> legalDetails(String medicalLegalNo,ModelMap map) {
 
         MedicalLegalDetailBO medicalLegalDetailBO = serviceForYouService.detailMedicalLegal(medicalLegalNo);
+        medicalLegalDetailBO.setTextData(StringEscapeUtils.unescapeHtml4(medicalLegalDetailBO.getTextData()));
         return ResponseEntity.ok(ResponseDzz.ok(medicalLegalDetailBO));
     }
 
