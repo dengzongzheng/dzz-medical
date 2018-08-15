@@ -146,13 +146,15 @@ $().ready(function () {
   $("#preview").on("click",function () {
     var title = $("#title").val();
     var content = textData.code();
+    $("#content-title").html(title);
+    $("#content-data").html(content);
     layer.open({
-      type: 2,
-      title: '法律法规配置预览页',
-      shadeClose: true,
+      type: 1,
+      title: '预览',
+      skin: 'layui-layer-rim', //加上边框
       shade: 0.8,
       area: ['380px', '90%'],
-      content: '/manage/previewLegal?title='+title+"&content="+content
+      content: $("#preview-detail-box").html()
     });
   });
 

@@ -130,8 +130,9 @@
 
 
         <div class="col-sm-12">
-          <div class="col-sm-offset-4 col-sm-6">
-            <button data-bind="click:$root.save.bind($root)" name="保存" class="col-sm-offset-4 btn btn-info">保存</button>
+          <div class="col-sm-12" style="text-align: center;">
+            <button name="预览" type="button" id="preview" class="btn btn-info">预览</button>
+            <button name="保存" class="btn btn-info">保存</button>
             <a class="btn btn-info" name="取消" href="/manage/legalManage">取消</a>
           </div>
         </div>
@@ -140,6 +141,15 @@
     <div class="preview-file-box" id="preview-file-box">
       <div class="big-bg" onclick="$(this).parent().hide()"></div>
       <div class="preview-file" id="preview-file"></div>
+    </div>
+
+    <div class="preview-detail-box" style="display: none" id="preview-detail-box">
+      <div class="content-title" id="content-title"></div>
+      <div class="content-sub">
+        <div class="content-sub-left"><label class="label-title">时间:</label><span>2018-01-01</span></div>
+        <div class="content-sub-right"><label class="label-title">被浏览次数:</label><span>2019</span></div>
+      </div>
+      <div class="content-data" id="content-data"></div>
     </div>
   </div>
 </div>

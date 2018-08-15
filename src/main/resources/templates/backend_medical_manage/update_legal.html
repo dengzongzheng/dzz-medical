@@ -153,6 +153,16 @@
       <div class="big-bg" onclick="$(this).parent().hide()"></div>
       <div class="preview-file" id="preview-file"></div>
     </div>
+
+    <div class="preview-detail-box" style="display: none" id="preview-detail-box">
+      <div class="content-title" id="content-title"></div>
+      <div class="content-sub">
+        <div class="content-sub-left"><label class="label-title">时间:</label><span>2018-01-01</span></div>
+        <div class="content-sub-right"><label class="label-title">被浏览次数:</label><span>2019</span></div>
+      </div>
+      <div class="content-data" id="content-data"></div>
+    </div>
+
   </div>
 </div>
 <!-- 全局js -->
@@ -193,7 +203,7 @@
 <script type="application/javascript">
   $(function () {
     $("#topping").val('${(medicalLegalDetailBO.topping)!}');
-    $("#text_data").code("${(medicalLegalDetailBO.textData)!}");
+    $("#text_data").code('${(medicalLegalDetailBO.textData)!}');
   });
 </script>
 </body>
