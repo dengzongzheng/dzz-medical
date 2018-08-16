@@ -200,7 +200,7 @@ public class WxFrontManageController extends BaseController{
         JSONArray firstMenuJSONSub = new JSONArray();
         JSONObject firstSub1 = wxService.createMenuJSONObject("我要投诉","click","", MessageEvent.COMPLAINT.getCode());
         JSONObject firstSub2 = wxService.createMenuJSONObject("办事指南","click","",MessageEvent.GUIDE.getCode());
-        JSONObject firstSub3 = wxService.createMenuJSONObject("法律法规","view",wxConfig.getServerPath() + "/forService/legal","");
+        JSONObject firstSub3 = wxService.createMenuJSONObject("法律法规","view",wxConfig.getMServerPath() + "for-service/legal","");
         firstMenuJSONSub.add(firstSub1);
         firstMenuJSONSub.add(firstSub2);
         firstMenuJSONSub.add(firstSub3);

@@ -49,4 +49,8 @@ public class WxConfig {
      */
     @Value("${wx.app.menu.create.url}")
     private String createMenuUrl;
+
+
+    @Value("http://m.sswjjd.cn")
+    private String mServerPath;
 }
