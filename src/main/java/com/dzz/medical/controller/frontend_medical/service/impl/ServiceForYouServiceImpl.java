@@ -31,7 +31,7 @@ public class ServiceForYouServiceImpl implements ServiceForYouService,BaseServic
 
         query.setPageSize(pageSizeHandler(query.getPageSize()));
         query.setPageNo(pageNoHandler(query.getPageNo()));
-        PageHelper.startPage(query.getPageNo(), query.getPageSize(), false);
+        PageHelper.startPage(query.getPageNo(), query.getPageSize(), true);
         List<ListLegalBO> legalListBOS = ssMedicalLegalMapper.listLegal(query);
         PageInfo<ListLegalBO> pageInfo = new PageInfo<>(legalListBOS);
         PageUtil<ListLegalBO> pageUtil = new PageUtil<>();
