@@ -84,7 +84,6 @@ public class ServiceForYouController {
                 listLegalBO.setListTitleImage(titleImageList);
                 listLegalBO.setTitleImages("");
             }
-            pageUtil.setData(legalBOList);
         }
         return ResponseEntity.ok(ResponseDzz.ok(pageUtil));
     }
