@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="_csrf" content="${_csrf.token}"/>
-  <meta name="_csrf_header" content="${_csrf.headerName}"/>
+  <meta name="_csrf" content="${(_csrf.token)!}"/>
+  <meta name="_csrf_header" content="${(_csrf.headerName)!}"/>
   <title>法律法规信息修改</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
@@ -53,7 +53,7 @@
   <div id="tab-2" class="tab-pane" style="margin-top: 20px">
     <div style="margin-bottom: 20px;overflow: hidden;">
       <form class="form-horizontal" id="addForm" action="/manage/updateLegal" method="post">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="hidden" name="${(_csrf.parameterName)!}" value="${(_csrf.token)!}"/>
         <input type="hidden" name="medicalLegalNo" id="medicalLegalNo" value="${(medicalLegalDetailBO.medicalLegalNo)!}"/>
         <input type="hidden" name="id" id="id" value="${(medicalLegalDetailBO.id)!}"/>
         <div class="col-sm-12">

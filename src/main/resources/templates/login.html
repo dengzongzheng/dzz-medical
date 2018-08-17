@@ -25,7 +25,7 @@
         <div class="login-hello">欢迎您</div>
         <div class="login-bzn-logo"></div>
         <form class="m-t" role="form" id="loginForm" action="/login" method="post">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="hidden" name="${(_csrf.parameterName)!}" value="${(_csrf.token)!}"/>
             <div class="login-form-group">
                 <input type="text" name="username" id="username"
                        class="login-form-control" placeholder="用户名" maxlength="20"/>

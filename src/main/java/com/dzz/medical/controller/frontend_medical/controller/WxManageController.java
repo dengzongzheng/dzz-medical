@@ -38,9 +38,9 @@ public class WxManageController {
      *
      * @return 消息处理
      */
-    @RequestMapping(value = "/messageEvent", method = {RequestMethod.GET})
+    @RequestMapping(value = "/messageEventValidate", method = {RequestMethod.GET})
     @ResponseBody
-    public String messageEvent(HttpServletRequest request) {
+    public String messageEventValidate(HttpServletRequest request) {
 
         String signature = request.getParameter("signature");
         String timestamp = request.getParameter("timestamp");
