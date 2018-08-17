@@ -1,5 +1,7 @@
 package com.dzz.medical.controller.backend_medical_manage.service.impl;
 
+import static com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.MessageEvent.COMPLAINT;
+
 import com.dzz.medical.controller.backend_medical_manage.service.WxManageService;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,11 @@ public class WxManageServiceImpl implements WxManageService {
     @Override
     public String messageEventHandler(String key) {
 
-        return null;
+        if (COMPLAINT.getCode().equals(key)) {
+
+
+        }
+
+        return "success";
     }
 }

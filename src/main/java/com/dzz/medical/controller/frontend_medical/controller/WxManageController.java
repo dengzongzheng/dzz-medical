@@ -4,6 +4,7 @@ import com.dzz.medical.config.wx.WxConfig;
 import com.dzz.medical.controller.backend_medical_manage.service.WxManageService;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -75,6 +76,12 @@ public class WxManageController {
 
         String key = request.getParameter("key");
         log.info("接收到的消息关键字为:{}", key);
+
+        Enumeration<String> enumeration = request.getParameterNames();
+        while (enumeration.hasMoreElements()) {
+            log.info("接到的参数：{}",enumeration.nextElement());
+
+        }
         wxManageService.messageEventHandler(key);
         return "success";
     }
