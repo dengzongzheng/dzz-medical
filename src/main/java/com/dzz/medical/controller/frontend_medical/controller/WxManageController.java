@@ -79,10 +79,10 @@ public class WxManageController {
 
         Enumeration<String> enumeration = request.getParameterNames();
         while (enumeration.hasMoreElements()) {
-            log.info("接到的参数：{}",enumeration.nextElement());
+            String param = enumeration.nextElement();
+            log.info("接到的参数：{},数据：{}",param,request.getParameter(param));
 
         }
-        wxManageService.messageEventHandler(key);
-        return "success";
+        return wxManageService.messageEventHandler(key);
     }
 }

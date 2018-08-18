@@ -151,4 +151,54 @@ public interface WxManageEnums {
             return list;
         }
     }
+
+
+    enum MessageTypeEnums{
+
+        TEXT(1, "text");
+
+        /** code */
+        private Integer code;
+
+        /** 名称 */
+        private String name;
+
+        MessageTypeEnums(Integer code, String name) {
+            this.code = code;
+            this.name = name;
+        }
+
+        public Integer getCode() {
+            return code;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public static String getNameByCode(Integer code) {
+            for (MessageTypeEnums info : MessageTypeEnums.values()) {
+                if (Objects.equals(code, info.getCode())) {
+                    return info.getName();
+                }
+            }
+            return null;
+        }
+
+        /**
+         * 获取当前枚举的属性列表
+         *
+         * @return 属性列表
+         */
+        public static List<ConstantBean> getElementList() {
+            List<ConstantBean> list = Lists.newArrayList();
+            for (MessageTypeEnums property : MessageTypeEnums.values()) {
+                ConstantBean constantBean = new ConstantBean();
+                constantBean.setName(property.name);
+                constantBean.setCode(property.code);
+                list.add(constantBean);
+            }
+            return list;
+        }
+    }
 }
