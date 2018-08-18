@@ -211,7 +211,7 @@ public class WxFrontManageController extends BaseController{
         JSONObject secondSub1 = wxService.createMenuJSONObject("通知公告","view",wxConfig.getServerPath() + "/broadcast/notice","");
         JSONObject secondSub2 = wxService.createMenuJSONObject("工作动态","view",wxConfig.getServerPath() + "/broadcast/workNews","");
         JSONObject secondSub3 = wxService.createMenuJSONObject("卫生知识","view",wxConfig.getServerPath() + "/broadcast/medicalInformation","");
-        JSONObject secondSub4 = wxService.createMenuJSONObject("关于我们","view",wxConfig.getServerPath() + "/broadcast/aboutUs","");
+        JSONObject secondSub4 = wxService.createMenuJSONObject("关于我们","view",wxConfig.getMServerPath() + "/broadcast/about-me","");
         secondMenuJSONSub.add(secondSub1);
         secondMenuJSONSub.add(secondSub2);
         secondMenuJSONSub.add(secondSub3);
