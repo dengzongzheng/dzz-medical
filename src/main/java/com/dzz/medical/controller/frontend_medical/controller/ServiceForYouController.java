@@ -7,6 +7,7 @@ import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalD
 import com.dzz.medical.controller.frontend_medical.domain.bo.ListLegalBO;
 import com.dzz.medical.controller.frontend_medical.domain.dto.ListLegalQueryDTO;
 import com.dzz.medical.controller.frontend_medical.service.ServiceForYouService;
+import com.dzz.medical.controller.util.service.RedisToolService;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import java.util.List;
@@ -36,6 +37,9 @@ public class ServiceForYouController {
 
     @Autowired
     private UtilConfig utilConfig;
+
+    @Autowired
+    private RedisToolService redisToolService;
 
     /**
      * 法律法规
@@ -73,6 +77,7 @@ public class ServiceForYouController {
             Splitter splitter = Splitter.on(";").omitEmptyStrings();
             List<String> titleImageList;
             for (ListLegalBO listLegalBO : legalBOList) {
+                listLegalBO.setReadCount(redisToolService.getReadCount(listLegalBO.getMedicalLegalNo()));
                 listLegalBO.setImageServerPath(utilConfig.getImageServerPath());
                 titleImageList = Lists.newArrayList(splitter.split(listLegalBO.getTitleImages()));
                 if (titleImageList.size() == 1) {
@@ -112,6 +117,7 @@ public class ServiceForYouController {
 
         MedicalLegalDetailBO medicalLegalDetailBO = serviceForYouService.detailMedicalLegal(medicalLegalNo);
         medicalLegalDetailBO.setTextData(StringEscapeUtils.unescapeHtml4(medicalLegalDetailBO.getTextData()));
+        medicalLegalDetailBO.setReadCount(redisToolService.readCountRecord(medicalLegalNo));
         return ResponseEntity.ok(ResponseDzz.ok(medicalLegalDetailBO));
     }
 

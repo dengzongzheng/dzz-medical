@@ -77,4 +77,10 @@ public class MedicalLegalDetailBO implements Serializable{
     @Column(name = "create_time")
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date createTime;
+
+
+    /**
+     * 阅读次数
+     */
+    private Long readCount;
 }

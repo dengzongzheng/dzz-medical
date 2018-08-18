@@ -37,6 +37,7 @@
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
     <result column="title_images" jdbcType="VARCHAR" property="titleImages" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
 
   <resultMap id="DetailMedicalLegalResultMap" type="com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalDetailBO">
@@ -77,7 +78,7 @@
 
   <select id="listLegal" resultMap="ListLegalResultMap">
 
-    select medical_legal_no,title,sub_title,title_images from ss_medical_legal order by sort desc,update_time desc
+    select medical_legal_no,title,sub_title,title_images,update_time from ss_medical_legal order by sort desc,update_time desc
   </select>
 
 

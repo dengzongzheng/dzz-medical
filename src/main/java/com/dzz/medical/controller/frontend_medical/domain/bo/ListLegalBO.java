@@ -1,6 +1,8 @@
 package com.dzz.medical.controller.frontend_medical.domain.bo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import lombok.Data;
@@ -62,4 +64,15 @@ public class ListLegalBO implements Serializable{
     private List<String> listTitleImage;
 
 
+    /**
+     * 阅读次数
+     */
+    private Long readCount;
+
+
+    /**
+     * 更新时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private Date updateTime;
 }
