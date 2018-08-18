@@ -53,7 +53,7 @@ public interface WxService {
         if (WxConstant.BUTTON_TYPE_VIEW.equals(type)) {
             menuJSONObject.put("url", url);
         }
-        if (WxConstant.BUTTON_TYPE_CLICK.equals(type.toUpperCase())) {
+        if (WxConstant.BUTTON_TYPE_CLICK.equals(type)) {
             menuJSONObject.put("key", key);
         }
         return menuJSONObject;
