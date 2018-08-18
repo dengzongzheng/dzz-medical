@@ -78,11 +78,12 @@ public class WxManageController {
         log.info("接收到的消息关键字为:{}", key);
 
         Enumeration<String> enumeration = request.getParameterNames();
+        String openId = request.getParameter("openid");
         while (enumeration.hasMoreElements()) {
             String param = enumeration.nextElement();
             log.info("接到的参数：{},数据：{}",param,request.getParameter(param));
 
         }
-        return wxManageService.messageEventHandler(key);
+        return wxManageService.messageEventHandler(key,openId);
     }
 }

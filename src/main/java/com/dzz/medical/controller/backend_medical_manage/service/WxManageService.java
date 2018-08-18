@@ -15,5 +15,5 @@ public interface WxManageService {
      * @param key 消息关键字
      * @return 处理结果
      */
-    String messageEventHandler(String key);
+    String messageEventHandler(String key,String openId);
 }

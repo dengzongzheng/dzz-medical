@@ -28,17 +28,17 @@ public class WxManageServiceImpl implements WxManageService {
     private MessageConfig messageConfig;
 
     @Override
-    public String messageEventHandler(String key) {
+    public String messageEventHandler(String key,String openId) {
 
         if (COMPLAINT.getCode().equals(key)) {
 
             TextMessage textMessage = new TextMessage();
-            textMessage.setFromUserName(wxConfig.getAppId());
+            textMessage.setFromUserName(openId);
             textMessage.setCreateTime(System.currentTimeMillis());
             textMessage.setMsgId(System.currentTimeMillis());
             textMessage.setMsgType(MessageTypeEnums.TEXT.getName());
             textMessage.setContent(messageConfig.getComplaintMessage());
-            textMessage.setToUserName("dzz_hi");
+            textMessage.setToUserName(wxConfig.getAppId());
 
             XStream xStream = new XStream();
             xStream.autodetectAnnotations(true);
