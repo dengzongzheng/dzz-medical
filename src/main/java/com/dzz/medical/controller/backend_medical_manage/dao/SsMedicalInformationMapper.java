@@ -6,7 +6,7 @@ import com.dzz.medical.controller.backend_medical_manage.domain.dto.MedicalListQ
 import com.dzz.medical.controller.backend_medical_manage.domain.dto.UpdateMedicalInformationDTO;
 import com.dzz.medical.controller.backend_medical_manage.domain.model.SsMedicalInformation;
 import com.dzz.medical.controller.frontend_medical.domain.bo.ListInformationBO;
-import com.dzz.medical.controller.frontend_medical.domain.dto.ListLegalQueryDTO;
+import com.dzz.medical.controller.frontend_medical.domain.dto.ListQueryDTO;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
@@ -33,7 +33,7 @@ public interface SsMedicalInformationMapper extends Mapper<SsMedicalInformation>
      * @param param 查询条件
      * @return 结果
      */
-    List<ListInformationBO> listInformation(ListLegalQueryDTO param);
+    List<ListInformationBO> listInformation(ListQueryDTO param);
 
 
     /**

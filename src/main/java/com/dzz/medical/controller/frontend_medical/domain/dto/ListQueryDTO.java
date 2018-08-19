@@ -11,7 +11,7 @@ import lombok.Data;
  * @since 2018年07月28 下午6:21
  */
 @Data
-public class ListLegalQueryDTO implements Serializable{
+public class ListQueryDTO implements Serializable{
 
     private static final long serialVersionUID = -2116407564310929671L;
 

@@ -19,6 +19,6 @@ public class ListNoticeBO extends ListBaseBO implements Serializable{
     /**
      * 通知编码
      */
-    private String medicalNoticeNo;
+    private String noticeNo;
 
 }

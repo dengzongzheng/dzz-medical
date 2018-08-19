@@ -16,7 +16,7 @@ public class UpdateMedicalNoticeDTO extends AddMedicalDTO implements Serializabl
 
     private static final long serialVersionUID = 7435461661864996364L;
 
-    private String id;
+    private Long id;
 
     /**
      * 通知编码

@@ -6,7 +6,7 @@ import com.dzz.medical.controller.backend_medical_manage.domain.dto.MedicalListQ
 import com.dzz.medical.controller.backend_medical_manage.domain.dto.UpdateMedicalWorkNewsDTO;
 import com.dzz.medical.controller.backend_medical_manage.domain.model.SsMedicalWorkNews;
 import com.dzz.medical.controller.frontend_medical.domain.bo.ListWorkNewsBO;
-import com.dzz.medical.controller.frontend_medical.domain.dto.ListLegalQueryDTO;
+import com.dzz.medical.controller.frontend_medical.domain.dto.ListQueryDTO;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
@@ -33,7 +33,7 @@ public interface SsMedicalWorkNewsMapper extends Mapper<SsMedicalWorkNews> {
      * @param param 查询条件
      * @return 结果
      */
-    List<ListWorkNewsBO> listWorkNews(ListLegalQueryDTO param);
+    List<ListWorkNewsBO> listWorkNews(ListQueryDTO param);
 
 
     /**

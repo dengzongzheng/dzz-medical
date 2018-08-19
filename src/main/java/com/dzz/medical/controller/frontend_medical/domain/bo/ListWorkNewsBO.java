@@ -1,6 +1,5 @@
 package com.dzz.medical.controller.frontend_medical.domain.bo;
 
-import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalBaseBO;
 import java.io.Serializable;
 import lombok.Data;
 
@@ -12,7 +11,7 @@ import lombok.Data;
  * @since 2018年07月22 下午9:25
  */
 @Data
-public class ListWorkNewsBO extends MedicalBaseBO implements Serializable{
+public class ListWorkNewsBO extends ListBaseBO implements Serializable{
 
     private static final long serialVersionUID = 8228032268481976747L;
 

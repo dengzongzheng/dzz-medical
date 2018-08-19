@@ -74,7 +74,7 @@ public class WxFrontNoticeManageServiceImpl implements WxFrontNoticeManageServic
         SsMedicalNotice ssMedicalNotice = SsMedicalNotice.newInstance();
         ssMedicalNotice.setCreateTime(null);
         BeanUtils.copyProperties(updateMedicalNoticeDTO, ssMedicalNotice);
-        ssMedicalNotice.setId(Long.valueOf(updateMedicalNoticeDTO.getId()));
+        ssMedicalNotice.setId(updateMedicalNoticeDTO.getId());
         return ssMedicalNoticeMapper.updateByPrimaryKeySelective(ssMedicalNotice)>0;
     }
 

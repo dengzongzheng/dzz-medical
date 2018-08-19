@@ -1,8 +1,29 @@
 package com.dzz.medical.controller.frontend_medical.controller;
 
+import com.dzz.medical.common.page.PageUtil;
+import com.dzz.medical.common.response.ResponseDzz;
+import com.dzz.medical.config.wx.UtilConfig;
+import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalInformationDetailBO;
+import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalNoticeDetailBO;
+import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalWorkNewsDetailBO;
+import com.dzz.medical.controller.frontend_medical.domain.bo.ListInformationBO;
+import com.dzz.medical.controller.frontend_medical.domain.bo.ListNoticeBO;
+import com.dzz.medical.controller.frontend_medical.domain.bo.ListWorkNewsBO;
+import com.dzz.medical.controller.frontend_medical.domain.dto.ListQueryDTO;
+import com.dzz.medical.controller.frontend_medical.service.MedicalBroadcastService;
+import com.dzz.medical.controller.util.service.RedisToolService;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
+import java.util.List;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 卫监播报控制层
@@ -15,49 +36,153 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/broadcast")
 public class MedicalBroadcastController {
 
-    /**
-     * 通知公告
-     * @return 通知公告页面
-     */
-    @RequestMapping(value = "/notice", method = RequestMethod.GET)
-    public String notice() {
+    @Autowired
+    private MedicalBroadcastService medicalBroadcastService;
 
-        return "/frontend_medical/medical_broadcast/notice";
+    @Autowired
+    private UtilConfig utilConfig;
+
+    @Autowired
+    private RedisToolService redisToolService;
+
+    /**
+     * 通知列表查询
+     * @param query 查询条件
+     * @return 结果
+     */
+    @RequestMapping(value = "/listNotice", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> listNotice(ListQueryDTO query) {
+
+        PageUtil<ListNoticeBO> pageUtil = medicalBroadcastService.listNotice(query);
+        List<ListNoticeBO> legalBOList = pageUtil.getData();
+        if (!CollectionUtils.isEmpty(legalBOList)) {
+            Splitter splitter = Splitter.on(";").omitEmptyStrings();
+            List<String> titleImageList;
+            for (ListNoticeBO listNoticeBO : legalBOList) {
+                listNoticeBO.setReadCount(redisToolService.getReadCount(listNoticeBO.getNoticeNo()));
+                listNoticeBO.setImageServerPath(utilConfig.getImageServerPath());
+                titleImageList = Lists.newArrayList(splitter.split(listNoticeBO.getTitleImages()));
+                if (titleImageList.size() == 1) {
+                    listNoticeBO.setIsOneImage(Boolean.TRUE);
+                    listNoticeBO.setOneTitleImage(titleImageList.get(0));
+                }else{
+                    listNoticeBO.setIsOneImage(Boolean.FALSE);
+                }
+                listNoticeBO.setListTitleImage(titleImageList);
+                listNoticeBO.setTitleImages("");
+            }
+        }
+        return ResponseEntity.ok(ResponseDzz.ok(pageUtil));
     }
 
 
     /**
-     * 工作动态
-     * @return 工作动态页面
+     * 通知列表
+     * @return 通知列表页
      */
-    @RequestMapping(value = "/workNews", method = RequestMethod.GET)
-    public String workNews() {
+    @RequestMapping(value = "/noticeDetails", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> noticeDetails(String medicalNo,ModelMap map) {
 
-        return "/frontend_medical/medical_broadcast/work_news";
+        MedicalNoticeDetailBO medicalNoticeDetailBO = medicalBroadcastService.detailMedicalNotice(medicalNo);
+        medicalNoticeDetailBO.setTextData(StringEscapeUtils.unescapeHtml4(medicalNoticeDetailBO.getTextData()));
+        medicalNoticeDetailBO.setReadCount(redisToolService.readCountRecord(medicalNo));
+        return ResponseEntity.ok(ResponseDzz.ok(medicalNoticeDetailBO));
     }
 
 
     /**
-     * 卫生知识
-     * @return 卫生知识页面
+     * 卫生知识列表查询
+     * @param query 查询条件
+     * @return 结果
      */
-    @RequestMapping(value = "/medicalInformation", method = RequestMethod.GET)
-    public String medicalInformation() {
+    @RequestMapping(value = "/listInformation", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> listInformation(ListQueryDTO query) {
 
-        return "/frontend_medical/medical_broadcast/medical_information";
+        PageUtil<ListInformationBO> pageUtil = medicalBroadcastService.listInformation(query);
+        List<ListInformationBO> informationBOList = pageUtil.getData();
+        if (!CollectionUtils.isEmpty(informationBOList)) {
+            Splitter splitter = Splitter.on(";").omitEmptyStrings();
+            List<String> titleImageList;
+            for (ListInformationBO listInformationBO : informationBOList) {
+                listInformationBO.setReadCount(redisToolService.getReadCount(listInformationBO.getInformationNo()));
+                listInformationBO.setImageServerPath(utilConfig.getImageServerPath());
+                titleImageList = Lists.newArrayList(splitter.split(listInformationBO.getTitleImages()));
+                if (titleImageList.size() == 1) {
+                    listInformationBO.setIsOneImage(Boolean.TRUE);
+                    listInformationBO.setOneTitleImage(titleImageList.get(0));
+                }else{
+                    listInformationBO.setIsOneImage(Boolean.FALSE);
+                }
+                listInformationBO.setListTitleImage(titleImageList);
+                listInformationBO.setTitleImages("");
+            }
+        }
+        return ResponseEntity.ok(ResponseDzz.ok(pageUtil));
     }
-
 
 
     /**
-     * 关于我们
-     * @return 关于我们页面
+     * 卫生知识列表
+     * @return 通知列表页
      */
-    @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
-    public String aboutUs() {
+    @RequestMapping(value = "/informationDetails", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> informationDetails(String medicalNo,ModelMap map) {
 
-        return "/frontend_medical/medical_broadcast/about_us";
+        MedicalInformationDetailBO medicalInformationDetailBO = medicalBroadcastService.detailMedicalInformation(medicalNo);
+        medicalInformationDetailBO.setTextData(StringEscapeUtils.unescapeHtml4(medicalInformationDetailBO.getTextData()));
+        medicalInformationDetailBO.setReadCount(redisToolService.readCountRecord(medicalNo));
+        return ResponseEntity.ok(ResponseDzz.ok(medicalInformationDetailBO));
     }
 
+
+    /**
+     * 工作动态列表查询
+     * @param query 查询条件
+     * @return 结果
+     */
+    @RequestMapping(value = "/listWorkNews", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> listWorkNews(ListQueryDTO query) {
+
+        PageUtil<ListWorkNewsBO> pageUtil = medicalBroadcastService.listWorkNews(query);
+        List<ListWorkNewsBO> workNewsBOList = pageUtil.getData();
+        if (!CollectionUtils.isEmpty(workNewsBOList)) {
+            Splitter splitter = Splitter.on(";").omitEmptyStrings();
+            List<String> titleImageList;
+            for (ListWorkNewsBO listWorkNewsBO : workNewsBOList) {
+                listWorkNewsBO.setReadCount(redisToolService.getReadCount(listWorkNewsBO.getWorkNewsNo()));
+                listWorkNewsBO.setImageServerPath(utilConfig.getImageServerPath());
+                titleImageList = Lists.newArrayList(splitter.split(listWorkNewsBO.getTitleImages()));
+                if (titleImageList.size() == 1) {
+                    listWorkNewsBO.setIsOneImage(Boolean.TRUE);
+                    listWorkNewsBO.setOneTitleImage(titleImageList.get(0));
+                }else{
+                    listWorkNewsBO.setIsOneImage(Boolean.FALSE);
+                }
+                listWorkNewsBO.setListTitleImage(titleImageList);
+                listWorkNewsBO.setTitleImages("");
+            }
+        }
+        return ResponseEntity.ok(ResponseDzz.ok(pageUtil));
+    }
+
+
+    /**
+     * 工作动态列表
+     * @return 工作动态列表页
+     */
+    @RequestMapping(value = "/workNewsDetails", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> workNewsDetails(String medicalNo,ModelMap map) {
+
+        MedicalWorkNewsDetailBO medicalWorkNewsDetailBO = medicalBroadcastService.detailMedicalWorkNews(medicalNo);
+        medicalWorkNewsDetailBO.setTextData(StringEscapeUtils.unescapeHtml4(medicalWorkNewsDetailBO.getTextData()));
+        medicalWorkNewsDetailBO.setReadCount(redisToolService.readCountRecord(medicalNo));
+        return ResponseEntity.ok(ResponseDzz.ok(medicalWorkNewsDetailBO));
+    }
 
 }

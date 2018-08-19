@@ -208,9 +208,9 @@ public class WxFrontLegalManageController extends BaseController{
 
         JSONObject secondMenuJSON = wxService.createMenuJSONObject("卫监播报","","","");
         JSONArray secondMenuJSONSub = new JSONArray();
-        JSONObject secondSub1 = wxService.createMenuJSONObject("通知公告","view",wxConfig.getServerPath() + "/broadcast/notice","");
-        JSONObject secondSub2 = wxService.createMenuJSONObject("工作动态","view",wxConfig.getServerPath() + "/broadcast/workNews","");
-        JSONObject secondSub3 = wxService.createMenuJSONObject("卫生知识","view",wxConfig.getServerPath() + "/broadcast/medicalInformation","");
+        JSONObject secondSub1 = wxService.createMenuJSONObject("通知公告","view",wxConfig.getMServerPath() + "/broadcast/notice","");
+        JSONObject secondSub2 = wxService.createMenuJSONObject("工作动态","view",wxConfig.getMServerPath() + "/broadcast/work-news","");
+        JSONObject secondSub3 = wxService.createMenuJSONObject("卫生知识","view",wxConfig.getMServerPath() + "/broadcast/medical-informations","");
         JSONObject secondSub4 = wxService.createMenuJSONObject("关于我们","view",wxConfig.getMServerPath() + "/broadcast/about-me","");
         secondMenuJSONSub.add(secondSub1);
         secondMenuJSONSub.add(secondSub2);

@@ -11,18 +11,18 @@ $().ready(function () {
 
   $(document).on("click",".offline",function () {
 
-    var medicalNoticeNo = $(this).attr("data-no");
+    var medicalInformationNo = $(this).attr("data-no");
     var param = {};
-    param["medicalNoticeNo"] = medicalNoticeNo;
+    param["medicalInformationNo"] = medicalInformationNo;
     var ajaxObj = {
-      url: "/manage/offLineNotice",
+      url: "/manage/offLineInformation",
       param: param,
       method: "POST",
       contentType : "application/x-www-form-urlencoded"
     };
     commonJS.sendAjaxRequest(ajaxObj, function (data) {
       if (data.code == "1") {
-        window.location.href="/manage/noticeManage"
+        window.location.href="/manage/informationManage"
       } else {
 
       }
@@ -31,18 +31,18 @@ $().ready(function () {
 
   $(document).on("click",".online",function () {
 
-    var medicalNoticeNo = $(this).attr("data-no");
+    var medicalInformationNo = $(this).attr("data-no");
     var param = {};
-    param["medicalNoticeNo"] = medicalNoticeNo;
+    param["medicalInformationNo"] = medicalInformationNo;
     var ajaxObj = {
-      url: "/manage/onLineNotice",
+      url: "/manage/onLineInformation",
       param: param,
       method: "POST",
       contentType : "application/x-www-form-urlencoded"
     };
     commonJS.sendAjaxRequest(ajaxObj, function (data) {
       if (data.code == "1") {
-        location.href="/manage/noticeManage"
+        location.href="/manage/informationManage"
       } else {
 
       }

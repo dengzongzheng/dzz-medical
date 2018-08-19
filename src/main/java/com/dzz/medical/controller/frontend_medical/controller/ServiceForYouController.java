@@ -5,7 +5,7 @@ import com.dzz.medical.common.response.ResponseDzz;
 import com.dzz.medical.config.wx.UtilConfig;
 import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalDetailBO;
 import com.dzz.medical.controller.frontend_medical.domain.bo.ListLegalBO;
-import com.dzz.medical.controller.frontend_medical.domain.dto.ListLegalQueryDTO;
+import com.dzz.medical.controller.frontend_medical.domain.dto.ListQueryDTO;
 import com.dzz.medical.controller.frontend_medical.service.ServiceForYouService;
 import com.dzz.medical.controller.util.service.RedisToolService;
 import com.google.common.base.Splitter;
@@ -41,25 +41,6 @@ public class ServiceForYouController {
     @Autowired
     private RedisToolService redisToolService;
 
-    /**
-     * 法律法规
-     * @return 法律法规介绍
-     */
-    @RequestMapping(value = "/legal", method = RequestMethod.GET)
-    public String legal() {
-
-        return "/frontend_medical/for_service/legal";
-    }
-
-    /**
-     * 法律法规列表
-     * @return 法律法规列表页
-     */
-    @RequestMapping(value = "/legalList", method = RequestMethod.GET)
-    public String legalList() {
-
-        return "/frontend_medical/for_service/legal_list";
-    }
 
 
     /**
@@ -69,7 +50,7 @@ public class ServiceForYouController {
      */
     @RequestMapping(value = "/listLegal", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<?> listLegal(ListLegalQueryDTO query) {
+    public ResponseEntity<?> listLegal(ListQueryDTO query) {
 
         PageUtil<ListLegalBO> pageUtil = serviceForYouService.listLegal(query);
         List<ListLegalBO> legalBOList = pageUtil.getData();
@@ -98,26 +79,13 @@ public class ServiceForYouController {
      * 法律法规列表
      * @return 法律法规列表页
      */
-    @RequestMapping(value = "/legalDetail", method = RequestMethod.GET)
-    public String legalDetail(String medicalLegalNo,ModelMap map) {
-
-        MedicalLegalDetailBO medicalLegalDetailBO = serviceForYouService.detailMedicalLegal(medicalLegalNo);
-        map.put("medicalLegalDetailBO", medicalLegalDetailBO);
-        return "/frontend_medical/for_service/legal_detail";
-    }
-
-
-    /**
-     * 法律法规列表
-     * @return 法律法规列表页
-     */
     @RequestMapping(value = "/legalDetails", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<?> legalDetails(String medicalLegalNo,ModelMap map) {
+    public ResponseEntity<?> legalDetails(String medicalNo,ModelMap map) {
 
-        MedicalLegalDetailBO medicalLegalDetailBO = serviceForYouService.detailMedicalLegal(medicalLegalNo);
+        MedicalLegalDetailBO medicalLegalDetailBO = serviceForYouService.detailMedicalLegal(medicalNo);
         medicalLegalDetailBO.setTextData(StringEscapeUtils.unescapeHtml4(medicalLegalDetailBO.getTextData()));
-        medicalLegalDetailBO.setReadCount(redisToolService.readCountRecord(medicalLegalNo));
+        medicalLegalDetailBO.setReadCount(redisToolService.readCountRecord(medicalNo));
         return ResponseEntity.ok(ResponseDzz.ok(medicalLegalDetailBO));
     }
 

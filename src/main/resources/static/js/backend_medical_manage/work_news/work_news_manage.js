@@ -22,7 +22,7 @@ $().ready(function () {
     };
     commonJS.sendAjaxRequest(ajaxObj, function (data) {
       if (data.code == "1") {
-        window.location.href="/manage/noticeManage"
+        window.location.href="/manage/workNewsManage"
       } else {
 
       }
@@ -42,7 +42,7 @@ $().ready(function () {
     };
     commonJS.sendAjaxRequest(ajaxObj, function (data) {
       if (data.code == "1") {
-        location.href="/manage/noticeManage"
+        location.href="/manage/workNewsManage"
       } else {
 
       }

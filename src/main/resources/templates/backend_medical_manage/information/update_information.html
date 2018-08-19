@@ -52,16 +52,16 @@
 
   <div id="tab-2" class="tab-pane" style="margin-top: 20px">
     <div style="margin-bottom: 20px;overflow: hidden;">
-      <form class="form-horizontal" id="addForm" action="/manage/updateLegal" method="post">
+      <form class="form-horizontal" id="addForm" action="/manage/updateInformation" method="post">
         <input type="hidden" name="${(_csrf.parameterName)!}" value="${(_csrf.token)!}"/>
-        <input type="hidden" name="medicalLegalNo" id="medicalLegalNo" value="${(medicalLegalDetailBO.medicalLegalNo)!}"/>
-        <input type="hidden" name="id" id="id" value="${(medicalLegalDetailBO.id)!?c}"/>
+        <input type="hidden" name="medicalLegalNo" id="medicalLegalNo" value="${(medicalInformationDetailBO.medicalLegalNo)!}"/>
+        <input type="hidden" name="id" id="id" value="${(medicalInformationDetailBO.id)!?c}"/>
         <div class="col-sm-12">
           <div class="col-sm-6">
             <div class="form-group">
               <label class="col-sm-4 control-label required">主标题：</label>
               <div class="col-sm-8">
-                <input type="text" name="title" id="title" maxlength="200" value="${(medicalLegalDetailBO.title)!}"
+                <input type="text" name="title" id="title" maxlength="200" value="${(medicalInformationDetailBO.title)!}"
                        placeholder="主标题" class="form-control"/>
               </div>
             </div>
@@ -71,7 +71,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label required">副标题：</label>
               <div class="col-sm-8">
-                <input type="text" name="subTitle" id="subTitle" maxlength="200" value="${(medicalLegalDetailBO.subTitle)!}"
+                <input type="text" name="subTitle" id="subTitle" maxlength="200" value="${(medicalInformationDetailBO.subTitle)!}"
                        placeholder="副标题" class="form-control"/>
               </div>
             </div>
@@ -89,16 +89,16 @@
               </a>
             </div>
             <div id="showTitleImages">
-              <#list medicalLegalDetailBO.listTitleImage as item>
+              <#list medicalInformationDetailBO.listTitleImage as item>
                 <div class='img-box'><img data-fileName='${(item)!}' class='file-name'
-                                          src='${(medicalLegalDetailBO.imageServerPath)!}${(item)!}' />
+                                          src='${(medicalInformationDetailBO.imageServerPath)!}${(item)!}' />
                   <div class='operate'>
-                    <a href='javascript:void(0)' data-fileName='${(medicalLegalDetailBO.imageServerPath)!}${(item)!}'
+                    <a href='javascript:void(0)' data-fileName='${(medicalInformationDetailBO.imageServerPath)!}${(item)!}'
                        class='preview-img'>预览</a>
                     <a href='javascript:void(0)' data-fileName='${(item)!}' class='del-img'>删除</a></div></div>
               </#list>
               </div>
-            <input type="hidden" name="titleImages" id="titleImages" value="${(medicalLegalDetailBO.titleImages)!}"/>
+            <input type="hidden" name="titleImages" id="titleImages" value="${(medicalInformationDetailBO.titleImages)!}"/>
           </div>
         </div>
 
@@ -107,7 +107,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label required">展示排序：</label>
               <div class="col-sm-8">
-                <input type="text" name="sort" id="sort" maxlength="100" value="${(medicalLegalDetailBO.sort)!}"
+                <input type="text" name="sort" id="sort" maxlength="100" value="${(medicalInformationDetailBO.sort)!}"
                        placeholder="展示排序" class="form-control"/>
               </div>
             </div>
@@ -199,11 +199,11 @@
 <script src="/js/common/jquery_validate_extend.js"></script>
 <script src="/plugins/validate/messages_zh.min.js"></script>
 <!-- 自定义js -->
-<script src="/js/backend_medical_manage/legal/update_legal.js"></script>
+<script src="/js/backend_medical_manage/notice/update_notice.js"></script>
 <script type="application/javascript">
   $(function () {
-    $("#topping").val('${(medicalLegalDetailBO.topping)!}');
-    $("#text_data").code('${(medicalLegalDetailBO.textData)!}');
+    $("#topping").val('${(medicalInformationDetailBO.topping)!}');
+    $("#text_data").code('${(medicalInformationDetailBO.textData)!}');
   });
 </script>
 </body>

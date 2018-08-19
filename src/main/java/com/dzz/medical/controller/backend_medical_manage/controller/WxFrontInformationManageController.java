@@ -55,7 +55,7 @@ public class WxFrontInformationManageController extends BaseController{
 
         map.put("toppings", ToppingEnums.getElementList());
         map.put("statues", MedicalStatusEnums.getElementList());
-        return "/backend_medical_manage/information_manage";
+        return "/backend_medical_manage/information/information_manage";
     }
 
     /**
@@ -79,7 +79,7 @@ public class WxFrontInformationManageController extends BaseController{
     public String addInformation(ModelMap map) {
 
         map.put("toppings", ToppingEnums.getElementList());
-        return "/backend_medical_manage/add_information";
+        return "/backend_medical_manage/information/add_information";
     }
 
     /**
@@ -94,7 +94,7 @@ public class WxFrontInformationManageController extends BaseController{
         map.put("title", title);
         map.put("createTime", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         map.put("readCount", Math.round(10000D));
-        return "/backend_medical_manage/information_preview";
+        return "/backend_medical_manage/information/information_preview";
     }
 
     /**
@@ -131,7 +131,7 @@ public class WxFrontInformationManageController extends BaseController{
         medicalInformationDetailBO.setImageServerPath(utilConfig.getImageServerPath());
         map.put("medicalInformationDetailBO", medicalInformationDetailBO);
         map.put("toppings", ToppingEnums.getElementList());
-        return "/backend_medical_manage/update_information";
+        return "/backend_medical_manage/information/update_information";
     }
 
     /**

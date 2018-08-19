@@ -4,7 +4,7 @@ import com.dzz.medical.common.page.PageUtil;
 import com.dzz.medical.controller.backend_medical_manage.dao.SsMedicalLegalMapper;
 import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalDetailBO;
 import com.dzz.medical.controller.frontend_medical.domain.bo.ListLegalBO;
-import com.dzz.medical.controller.frontend_medical.domain.dto.ListLegalQueryDTO;
+import com.dzz.medical.controller.frontend_medical.domain.dto.ListQueryDTO;
 import com.dzz.medical.controller.frontend_medical.service.ServiceForYouService;
 import com.dzz.medical.controller.util.service.BaseService;
 import com.github.pagehelper.PageHelper;
@@ -27,7 +27,7 @@ public class ServiceForYouServiceImpl implements ServiceForYouService,BaseServic
     private SsMedicalLegalMapper ssMedicalLegalMapper;
 
     @Override
-    public PageUtil<ListLegalBO> listLegal(ListLegalQueryDTO query) {
+    public PageUtil<ListLegalBO> listLegal(ListQueryDTO query) {
 
         query.setPageSize(pageSizeHandler(query.getPageSize()));
         query.setPageNo(pageNoHandler(query.getPageNo()));

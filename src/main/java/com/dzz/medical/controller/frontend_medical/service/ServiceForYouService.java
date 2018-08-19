@@ -3,7 +3,7 @@ package com.dzz.medical.controller.frontend_medical.service;
 import com.dzz.medical.common.page.PageUtil;
 import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalDetailBO;
 import com.dzz.medical.controller.frontend_medical.domain.bo.ListLegalBO;
-import com.dzz.medical.controller.frontend_medical.domain.dto.ListLegalQueryDTO;
+import com.dzz.medical.controller.frontend_medical.domain.dto.ListQueryDTO;
 
 /**
  * 为您服务接口定义
@@ -19,7 +19,7 @@ public interface ServiceForYouService {
      * @param query 查询条件
      * @return 结果
      */
-    PageUtil<ListLegalBO> listLegal(ListLegalQueryDTO query);
+    PageUtil<ListLegalBO> listLegal(ListQueryDTO query);
 
 
     /**

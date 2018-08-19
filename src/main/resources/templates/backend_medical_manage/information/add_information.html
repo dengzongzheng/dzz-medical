@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="_csrf" content="${(_csrf.token)!}"/>
   <meta name="_csrf_header" content="${(_csrf.headerName)!}"/>
-  <title>法律法规信息修改</title>
+  <title>卫生知识信息录入</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
   <link rel="shortcut icon" href="favicon.ico">
@@ -52,16 +52,14 @@
 
   <div id="tab-2" class="tab-pane" style="margin-top: 20px">
     <div style="margin-bottom: 20px;overflow: hidden;">
-      <form class="form-horizontal" id="addForm" action="/manage/updateLegal" method="post">
+      <form class="form-horizontal" id="addForm" action="/manage/addInformation" method="post">
         <input type="hidden" name="${(_csrf.parameterName)!}" value="${(_csrf.token)!}"/>
-        <input type="hidden" name="medicalLegalNo" id="medicalLegalNo" value="${(medicalLegalDetailBO.medicalLegalNo)!}"/>
-        <input type="hidden" name="id" id="id" value="${(medicalLegalDetailBO.id)!?c}"/>
         <div class="col-sm-12">
           <div class="col-sm-6">
             <div class="form-group">
               <label class="col-sm-4 control-label required">主标题：</label>
               <div class="col-sm-8">
-                <input type="text" name="title" id="title" maxlength="200" value="${(medicalLegalDetailBO.title)!}"
+                <input type="text" name="title" id="title" maxlength="200"
                        placeholder="主标题" class="form-control"/>
               </div>
             </div>
@@ -71,7 +69,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label required">副标题：</label>
               <div class="col-sm-8">
-                <input type="text" name="subTitle" id="subTitle" maxlength="200" value="${(medicalLegalDetailBO.subTitle)!}"
+                <input type="text" name="subTitle" id="subTitle" maxlength="200"
                        placeholder="副标题" class="form-control"/>
               </div>
             </div>
@@ -88,16 +86,7 @@
                 <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
               </a>
             </div>
-            <div id="showTitleImages">
-              <#list medicalLegalDetailBO.listTitleImage as item>
-                <div class='img-box'><img data-fileName='${(item)!}' class='file-name'
-                                          src='${(medicalLegalDetailBO.imageServerPath)!}${(item)!}' />
-                  <div class='operate'>
-                    <a href='javascript:void(0)' data-fileName='${(medicalLegalDetailBO.imageServerPath)!}${(item)!}'
-                       class='preview-img'>预览</a>
-                    <a href='javascript:void(0)' data-fileName='${(item)!}' class='del-img'>删除</a></div></div>
-              </#list>
-              </div>
+            <div id="showTitleImages"></div>
             <input type="hidden" name="titleImages" id="titleImages" value="${(medicalLegalDetailBO.titleImages)!}"/>
           </div>
         </div>
@@ -107,7 +96,7 @@
             <div class="form-group">
               <label class="col-sm-4 control-label required">展示排序：</label>
               <div class="col-sm-8">
-                <input type="text" name="sort" id="sort" maxlength="100" value="${(medicalLegalDetailBO.sort)!}"
+                <input type="text" name="sort" id="sort" maxlength="100"
                        placeholder="展示排序" class="form-control"/>
               </div>
             </div>
@@ -131,7 +120,7 @@
 
         <div class="col-sm-12">
           <div class="form-group">
-            <label class="col-sm-2 control-label required">法律法规内容：</label>
+            <label class="col-sm-2 control-label required">内容：</label>
             <div class="col-sm-10">
               <div class="form-group ibox-content" id="text_data"></div>
               <input type="hidden" name="textData" id="textData" value=""/>
@@ -144,7 +133,7 @@
           <div class="col-sm-12" style="text-align: center;">
             <button name="预览" type="button" id="preview" class="btn btn-info">预览</button>
             <button name="保存" class="btn btn-info">保存</button>
-            <a class="btn btn-info" name="取消" href="/manage/legalManage">取消</a>
+            <a class="btn btn-info" name="取消" href="/manage/noticeManage">取消</a>
           </div>
         </div>
       </form>
@@ -162,7 +151,6 @@
       </div>
       <div class="content-data" id="content-data"></div>
     </div>
-
   </div>
 </div>
 <!-- 全局js -->
@@ -194,18 +182,19 @@
 <script src="/plugins/summernote/summernote.min.js"></script>
 <script src="/plugins/summernote/summernote-zh-CN.js"></script>
 
+<!-- knockout -->
+<script src="/plugins/knockout/knockout-3.4.2.min.js"></script>
+
+<!-- clazz -->
+<script src="/js/common/clazz.js"></script>
 <!-- jquery.validate -->
 <script src="/plugins/validate/jquery.validate.min.js"></script>
 <script src="/js/common/jquery_validate_extend.js"></script>
 <script src="/plugins/validate/messages_zh.min.js"></script>
 <!-- 自定义js -->
-<script src="/js/backend_medical_manage/legal/update_legal.js"></script>
-<script type="application/javascript">
-  $(function () {
-    $("#topping").val('${(medicalLegalDetailBO.topping)!}');
-    $("#text_data").code('${(medicalLegalDetailBO.textData)!}');
-  });
-</script>
+<script src="/js/content.js?v=1.0.0"></script>
+<script src="/js/common/common_list_query.js"></script>
+<script src="/js/backend_medical_manage/information/add_information.js"></script>
 </body>
 
 </html>

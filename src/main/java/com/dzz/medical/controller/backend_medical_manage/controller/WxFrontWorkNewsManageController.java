@@ -55,7 +55,7 @@ public class WxFrontWorkNewsManageController extends BaseController{
 
         map.put("toppings", ToppingEnums.getElementList());
         map.put("statues", MedicalStatusEnums.getElementList());
-        return "/backend_medical_manage/workNews_manage";
+        return "/backend_medical_manage/work_news/work_news_manage";
     }
 
     /**
@@ -79,7 +79,7 @@ public class WxFrontWorkNewsManageController extends BaseController{
     public String addWorkNews(ModelMap map) {
 
         map.put("toppings", ToppingEnums.getElementList());
-        return "/backend_medical_manage/add_workNews";
+        return "/backend_medical_manage/work_news/add_work_news";
     }
 
     /**
@@ -94,7 +94,7 @@ public class WxFrontWorkNewsManageController extends BaseController{
         map.put("title", title);
         map.put("createTime", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         map.put("readCount", Math.round(10000D));
-        return "/backend_medical_manage/workNews_preview";
+        return "/backend_medical_manage/work_news/work_news_preview";
     }
 
     /**
@@ -131,7 +131,7 @@ public class WxFrontWorkNewsManageController extends BaseController{
         medicalWorkNewsDetailBO.setImageServerPath(utilConfig.getImageServerPath());
         map.put("medicalWorkNewsDetailBO", medicalWorkNewsDetailBO);
         map.put("toppings", ToppingEnums.getElementList());
-        return "/backend_medical_manage/update_workNews";
+        return "/backend_medical_manage/work_news/update_work_news";
     }
 
     /**

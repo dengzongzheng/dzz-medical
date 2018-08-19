@@ -55,7 +55,7 @@
       <form class="form-horizontal" id="addForm" action="/manage/updateNotice" method="post">
         <input type="hidden" name="${(_csrf.parameterName)!}" value="${(_csrf.token)!}"/>
         <input type="hidden" name="medicalLegalNo" id="medicalLegalNo" value="${(medicalNoticeDetailBO.medicalLegalNo)!}"/>
-        <input type="hidden" name="id" id="id" value="${(medicalNoticeDetailBO.id)!}"/>
+        <input type="hidden" name="id" id="id" value="${(medicalNoticeDetailBO.id)!?c}"/>
         <div class="col-sm-12">
           <div class="col-sm-6">
             <div class="form-group">
