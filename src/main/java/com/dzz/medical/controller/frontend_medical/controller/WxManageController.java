@@ -70,7 +70,7 @@ public class WxManageController {
      *
      * @return 消息处理
      */
-    @RequestMapping(value = "/messageEvent", method = {RequestMethod.POST})
+    @RequestMapping(value = "/messageEvent", method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public String messageEvent(HttpServletRequest request,HttpServletResponse response) {
 
