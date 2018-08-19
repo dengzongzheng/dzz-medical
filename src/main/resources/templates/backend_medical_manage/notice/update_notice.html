@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="_csrf" content="${(_csrf.token)!}"/>
+  <meta name="_csrf_header" content="${(_csrf.headerName)!}"/>
+  <title>法律法规信息修改</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+  <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+  <link href="/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+  <link href="/css/animate.css" rel="stylesheet">
+  <link href="/css/style.css?v=4.1.0" rel="stylesheet">
+  <link href="/css/select2.min.css" rel="stylesheet">
+  <link href="/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+  <link href="/css/plugins/summernote/summernote.css" rel="stylesheet">
+  <link href="/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+  <link href="/css/backend_medical_manage/add_legal.css" rel="stylesheet">
+  <style>
+    .col-sm-3 {
+      width: 26%;
+    }
+    .ibox-content .col-sm-12 {
+      margin-bottom: 10px;
+    }
+    .select2-container--default .select2-selection--single{
+      border-color: #cfdadd;
+      height: 30px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+      font-size: 12px;
+      line-height: 30px;
+      padding-left: 16px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+      border-color: #565656 transparent transparent transparent;
+      border-width: 6px 3px 0 3px;
+      margin-left: -2px;
+    }
+    .in{
+      display: none;
+    }
+  </style>
+</head>
+
+<body class="gray-bg" style="background: #FFF;">
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+
+  <div id="tab-2" class="tab-pane" style="margin-top: 20px">
+    <div style="margin-bottom: 20px;overflow: hidden;">
+      <form class="form-horizontal" id="addForm" action="/manage/updateNotice" method="post">
+        <input type="hidden" name="${(_csrf.parameterName)!}" value="${(_csrf.token)!}"/>
+        <input type="hidden" name="medicalLegalNo" id="medicalLegalNo" value="${(medicalNoticeDetailBO.medicalLegalNo)!}"/>
+        <input type="hidden" name="id" id="id" value="${(medicalNoticeDetailBO.id)!}"/>
+        <div class="col-sm-12">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="col-sm-4 control-label required">主标题：</label>
+              <div class="col-sm-8">
+                <input type="text" name="title" id="title" maxlength="200" value="${(medicalNoticeDetailBO.title)!}"
+                       placeholder="主标题" class="form-control"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="col-sm-4 control-label required">副标题：</label>
+              <div class="col-sm-8">
+                <input type="text" name="subTitle" id="subTitle" maxlength="200" value="${(medicalNoticeDetailBO.subTitle)!}"
+                       placeholder="副标题" class="form-control"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12" style="line-height: 60px;margin-bottom: 20px;">
+          <div class="col-sm-2" style="text-align: right">
+            <label class="control-label required" style="text-align: right">标题图片：</label>
+          </div>
+          <div class="col-sm-10">
+            <div class="upload-img">
+              <a class="btn btn-sm btn-default" id="uploadTitleImage" href="javascript:void(0)">
+                <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+              </a>
+            </div>
+            <div id="showTitleImages">
+              <#list medicalNoticeDetailBO.listTitleImage as item>
+                <div class='img-box'><img data-fileName='${(item)!}' class='file-name'
+                                          src='${(medicalNoticeDetailBO.imageServerPath)!}${(item)!}' />
+                  <div class='operate'>
+                    <a href='javascript:void(0)' data-fileName='${(medicalNoticeDetailBO.imageServerPath)!}${(item)!}'
+                       class='preview-img'>预览</a>
+                    <a href='javascript:void(0)' data-fileName='${(item)!}' class='del-img'>删除</a></div></div>
+              </#list>
+              </div>
+            <input type="hidden" name="titleImages" id="titleImages" value="${(medicalNoticeDetailBO.titleImages)!}"/>
+          </div>
+        </div>
+
+        <div class="col-sm-12">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="col-sm-4 control-label required">展示排序：</label>
+              <div class="col-sm-8">
+                <input type="text" name="sort" id="sort" maxlength="100" value="${(medicalNoticeDetailBO.sort)!}"
+                       placeholder="展示排序" class="form-control"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="col-sm-4 control-label required">是否置顶：</label>
+              <div class="col-sm-8">
+                <select class="form-control" name="topping" id="topping">
+                  <option value="">请选择</option>
+                  <#list toppings as item>
+                    <option value="${(item.code)!}">${(item.name)!}</option>
+                  </#list>
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="col-sm-2 control-label required">法律法规内容：</label>
+            <div class="col-sm-10">
+              <div class="form-group ibox-content" id="text_data"></div>
+              <input type="hidden" name="textData" id="textData" value=""/>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12">
+          <div class="col-sm-12" style="text-align: center;">
+            <button name="预览" type="button" id="preview" class="btn btn-info">预览</button>
+            <button name="保存" class="btn btn-info">保存</button>
+            <a class="btn btn-info" name="取消" href="/manage/legalManage">取消</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="preview-file-box" id="preview-file-box">
+      <div class="big-bg" onclick="$(this).parent().hide()"></div>
+      <div class="preview-file" id="preview-file"></div>
+    </div>
+
+    <div class="preview-detail-box" style="display: none" id="preview-detail-box">
+      <div class="content-title" id="content-title"></div>
+      <div class="content-sub">
+        <div class="content-sub-left"><label class="label-title">时间:</label><span>2018-01-01</span></div>
+        <div class="content-sub-right"><label class="label-title">被浏览次数:</label><span>2019</span></div>
+      </div>
+      <div class="content-data" id="content-data"></div>
+    </div>
+
+  </div>
+</div>
+<!-- 全局js -->
+<script src="/plugins/jquery/jquery.min.js?v=2.1.4"></script>
+<script src="/plugins/bootstrap/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- layer javascript -->
+<script src="/plugins/layer/layer.min.js"></script>
+<script src="/plugins/layer/laydate/laydate.js?v=5.0.7"></script>
+<script src="/js/common/toast_common.js"></script>
+<script src="/plugins/toastr/toastr.min.js"></script>
+<!-- Sweet alert -->
+<script src="/plugins/sweetalert/sweetalert.min.js"></script>
+
+<script src="/plugins/simple-ajax-uploader/SimpleAjaxUploader.min.js"></script>
+<script src="/js/common/upload.js"></script>
+
+<!-- 自定义js -->
+<script src="/js/common/ajax_common.js"></script>
+<script src="/js/common/alert_common.js"></script>
+
+<!--页面模板渲染-->
+<script src="/plugins/jsrender/jsrender.min.js"></script>
+
+<!--页面分页渲染-->
+<script src="/plugins/jquery.twbsPagination/jquery.twbsPagination.min.js"></script>
+
+<!-- SUMMERNOTE -->
+<script src="/plugins/summernote/summernote.min.js"></script>
+<script src="/plugins/summernote/summernote-zh-CN.js"></script>
+
+<!-- jquery.validate -->
+<script src="/plugins/validate/jquery.validate.min.js"></script>
+<script src="/js/common/jquery_validate_extend.js"></script>
+<script src="/plugins/validate/messages_zh.min.js"></script>
+<!-- 自定义js -->
+<script src="/js/backend_medical_manage/notice/update_notice.js"></script>
+<script type="application/javascript">
+  $(function () {
+    $("#topping").val('${(medicalNoticeDetailBO.topping)!}');
+    $("#text_data").code('${(medicalNoticeDetailBO.textData)!}');
+  });
+</script>
+</body>
+
+</html>

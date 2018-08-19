@@ -27,9 +27,19 @@
 
       <javaClientGenerator targetPackage="com.dzz.medical.controller.backend_medical_manage.dao" targetProject="${targetJavaProject}" type="XMLMAPPER" />
 
-        <table tableName="ss_medical_legal">
+        <table tableName="ss_medical_notice">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
+
+        <table tableName="ss_medical_work_news">
+          <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table tableName="ss_medical_information">
+          <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+
 
     </context>
 </generatorConfiguration>

@@ -50,7 +50,7 @@ public interface WxManageEnums {
         }
     }
 
-    enum LegalStatusEnums{
+    enum MedicalStatusEnums{
 
         NOMOR(1, "正常"),
         OFFLINE(2,"已下线"),
@@ -63,7 +63,7 @@ public interface WxManageEnums {
         /** 名称 */
         private String name;
 
-        LegalStatusEnums(Integer code, String name) {
+        MedicalStatusEnums(Integer code, String name) {
             this.code = code;
             this.name = name;
         }
@@ -77,7 +77,7 @@ public interface WxManageEnums {
         }
 
         public static String getNameByCode(Integer code) {
-            for (LegalStatusEnums info : LegalStatusEnums.values()) {
+            for (MedicalStatusEnums info : MedicalStatusEnums.values()) {
                 if (Objects.equals(code, info.getCode())) {
                     return info.getName();
                 }
@@ -92,7 +92,7 @@ public interface WxManageEnums {
          */
         public static List<ConstantBean> getElementList() {
             List<ConstantBean> list = Lists.newArrayList();
-            for (LegalStatusEnums property : LegalStatusEnums.values()) {
+            for (MedicalStatusEnums property : MedicalStatusEnums.values()) {
                 ConstantBean constantBean = new ConstantBean();
                 constantBean.setCode(property.code);
                 constantBean.setName(property.name);

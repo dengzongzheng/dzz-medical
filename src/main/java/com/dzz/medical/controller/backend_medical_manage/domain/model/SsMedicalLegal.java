@@ -80,12 +80,15 @@ public class SsMedicalLegal {
     private String updater;
 
     /**
-     * 法律法规内容
+     * 内容
      */
     @Column(name = "text_data")
     private String textData;
 
-
+    /**
+     * 创建实例
+     * @return 结果
+     */
     public static SsMedicalLegal newInstance() {
 
         SsMedicalLegal ssMedicalLegal = new SsMedicalLegal();

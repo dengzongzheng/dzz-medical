@@ -17,8 +17,74 @@ CREATE TABLE ss_medical.ss_medical_legal
     creator VARCHAR(64) NOT NULL COMMENT '创建者',
     update_time DATETIME NOT NULL COMMENT '修改时间',
     updater VARCHAR(64) NOT NULL COMMENT '修改者'
-);
+)ENGINE=InnoDB DEFAULT CHAR SET = 'utf8';
 CREATE INDEX ss_medical_legal_sort_update_time_index ON ss_medical.ss_medical_legal (sort, update_time DESC);
 CREATE INDEX ss_medical_legal_title_index ON ss_medical.ss_medical_legal (title);
 CREATE INDEX ss_medical_legal_create_time_status_index ON ss_medical.ss_medical_legal (create_time, status);
 ALTER TABLE ss_medical.ss_medical_legal COMMENT = '法律法规表';
+
+
+CREATE TABLE ss_medical.ss_medical_notice
+(
+  id BIGINT(64) PRIMARY KEY COMMENT '主键Id',
+  notice_no VARCHAR(64) NOT NULL COMMENT '通知编码',
+  title VARCHAR(100) NOT NULL COMMENT '标题',
+  sub_title VARCHAR(100) COMMENT '副标题',
+  title_images VARCHAR(200) NOT NULL COMMENT '标题图片',
+  sort INT NOT NULL COMMENT '排序',
+  topping INT COMMENT '置顶',
+  text_data TEXT NOT NULL COMMENT '内容',
+  status INT NOT NULL COMMENT '状态：1:正常、2:下线、0:配置中',
+  create_time DATETIME NOT NULL COMMENT '创建时间',
+  creator VARCHAR(64) NOT NULL COMMENT '创建者',
+  update_time DATETIME NOT NULL COMMENT '修改时间',
+  updater VARCHAR(64) NOT NULL COMMENT '修改者'
+) ENGINE=InnoDB DEFAULT CHAR SET = 'utf8';
+CREATE INDEX ss_medical_notice_sort_update_time_index ON ss_medical.ss_medical_notice (sort, update_time DESC);
+CREATE INDEX ss_medical_notice_title_index ON ss_medical.ss_medical_notice (title);
+CREATE INDEX ss_medical_notice_create_time_status_index ON ss_medical.ss_medical_notice (create_time, status);
+ALTER TABLE ss_medical.ss_medical_notice COMMENT = '通知表';
+
+
+CREATE TABLE ss_medical.ss_medical_work_news
+(
+  id BIGINT(64) PRIMARY KEY COMMENT '主键Id',
+  work_news_no VARCHAR(64) NOT NULL COMMENT '工作动态编码',
+  title VARCHAR(100) NOT NULL COMMENT '标题',
+  sub_title VARCHAR(100) COMMENT '副标题',
+  title_images VARCHAR(200) NOT NULL COMMENT '标题图片',
+  sort INT NOT NULL COMMENT '排序',
+  topping INT COMMENT '置顶',
+  text_data TEXT NOT NULL COMMENT '内容',
+  status INT NOT NULL COMMENT '状态：1:正常、2:下线、0:配置中',
+  create_time DATETIME NOT NULL COMMENT '创建时间',
+  creator VARCHAR(64) NOT NULL COMMENT '创建者',
+  update_time DATETIME NOT NULL COMMENT '修改时间',
+  updater VARCHAR(64) NOT NULL COMMENT '修改者'
+) ENGINE=InnoDB DEFAULT CHAR SET = 'utf8';
+CREATE INDEX ss_medical_work_news_sort_update_time_index ON ss_medical.ss_medical_work_news (sort, update_time DESC);
+CREATE INDEX ss_medical_work_news_title_index ON ss_medical.ss_medical_work_news (title);
+CREATE INDEX ss_medical_work_news_create_time_status_index ON ss_medical.ss_medical_work_news (create_time, status);
+ALTER TABLE ss_medical.ss_medical_work_news COMMENT = '工作动态表';
+
+
+CREATE TABLE ss_medical.ss_medical_information
+(
+  id BIGINT(64) PRIMARY KEY COMMENT '主键Id',
+  information_no VARCHAR(64) NOT NULL COMMENT '卫生知识编码',
+  title VARCHAR(100) NOT NULL COMMENT '标题',
+  sub_title VARCHAR(100) COMMENT '副标题',
+  title_images VARCHAR(200) NOT NULL COMMENT '标题图片',
+  sort INT NOT NULL COMMENT '排序',
+  topping INT COMMENT '置顶',
+  text_data TEXT NOT NULL COMMENT '内容',
+  status INT NOT NULL COMMENT '状态：1:正常、2:下线、0:配置中',
+  create_time DATETIME NOT NULL COMMENT '创建时间',
+  creator VARCHAR(64) NOT NULL COMMENT '创建者',
+  update_time DATETIME NOT NULL COMMENT '修改时间',
+  updater VARCHAR(64) NOT NULL COMMENT '修改者'
+) ENGINE=InnoDB DEFAULT CHAR SET = 'utf8';
+CREATE INDEX ss_medical_information_sort_update_time_index ON ss_medical.ss_medical_information (sort, update_time DESC);
+CREATE INDEX ss_medical_information_title_index ON ss_medical.ss_medical_information (title);
+CREATE INDEX ss_medical_information_create_time_status_index ON ss_medical.ss_medical_information (create_time, status);
+ALTER TABLE ss_medical.ss_medical_information COMMENT = '卫生知识表';

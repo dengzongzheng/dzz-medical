@@ -2,7 +2,7 @@ package com.dzz.medical.controller.backend_medical_manage.dao;
 
 import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalDetailBO;
 import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalListBO;
-import com.dzz.medical.controller.backend_medical_manage.domain.dto.MedicalLegalListQueryDTO;
+import com.dzz.medical.controller.backend_medical_manage.domain.dto.MedicalListQueryDTO;
 import com.dzz.medical.controller.backend_medical_manage.domain.dto.UpdateMedicalLegalDTO;
 import com.dzz.medical.controller.backend_medical_manage.domain.model.SsMedicalLegal;
 import com.dzz.medical.controller.frontend_medical.domain.bo.ListLegalBO;
@@ -25,7 +25,7 @@ public interface SsMedicalLegalMapper extends Mapper<SsMedicalLegal> {
      * @param param 参数
      * @return 结果
      */
-    List<MedicalLegalListBO> listMedicalLegal(MedicalLegalListQueryDTO param);
+    List<MedicalLegalListBO> listMedicalLegal(MedicalListQueryDTO param);
 
 
     /**
