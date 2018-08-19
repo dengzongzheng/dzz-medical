@@ -84,6 +84,25 @@ public class WxManageController {
             log.info("接到的参数：{},数据：{}",param,request.getParameter(param));
 
         }
+
+        String signature = request.getParameter("signature");
+        String timestamp = request.getParameter("timestamp");
+        String nonce = request.getParameter("nonce");
+        String echoString = request.getParameter("echostr");
+
+        List<String> tempArray = new ArrayList<>(3);
+        tempArray.add(timestamp);
+        tempArray.add(nonce);
+        tempArray.add(wxConfig.getToken());
+
+        Collections.sort(tempArray);
+        StringBuilder decodeString = new StringBuilder(tempArray.get(0)).append(tempArray.get(1))
+                .append(tempArray.get(2));
+        String codeSha1 = DigestUtils.sha1Hex(decodeString.toString());
+        log.info("signature:{},codeSha1:{}", signature, codeSha1);
+        if (signature.equals(codeSha1)) {
+            return echoString;
+        }
         return wxManageService.messageEventHandler(key,openId);
     }
 }
