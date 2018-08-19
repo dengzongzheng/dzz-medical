@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dzz.medical.controller.backend_medical_manage.dao.SsMedicalInformationMapper">
+  <resultMap id="BaseResultMap" type="com.dzz.medical.controller.backend_medical_manage.domain.model.SsMedicalInformation">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="information_no" jdbcType="VARCHAR" property="informationNo" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+    <result column="title_images" jdbcType="VARCHAR" property="titleImages" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="topping" jdbcType="INTEGER" property="topping" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
+    <result column="text_data" jdbcType="LONGVARCHAR" property="textData" />
+  </resultMap>
+
+  <resultMap id="ListMedicalInformationResultMap" type="com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalInformationListBO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="information_no" jdbcType="VARCHAR" property="informationNo" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="topping" jdbcType="INTEGER" property="topping" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+
+  <resultMap id="ListInformationResultMap" type="com.dzz.medical.controller.frontend_medical.domain.bo.ListInformationBO">
+    <result column="information_no" jdbcType="VARCHAR" property="informationNo" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+    <result column="title_images" jdbcType="VARCHAR" property="titleImages" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <resultMap id="DetailMedicalInformationResultMap" type="com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalInformationDetailBO">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="information_no" jdbcType="VARCHAR" property="informationNo" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+    <result column="title_images" jdbcType="VARCHAR" property="titleImages" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="topping" jdbcType="INTEGER" property="topping" />
+    <result column="text_data" jdbcType="LONGVARCHAR" property="textData" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <select id="listMedicalInformation" resultMap="ListMedicalInformationResultMap">
+    select id,information_no,title,sub_title,sort,topping,status,create_time from ss_medical_legal where 1=1
+
+    <if test="title!=null and title!='' ">
+      and title=#{param.title}
+    </if>
+
+    <if test="topping!=null and topping!='' ">
+      and topping=#{topping}
+    </if>
+
+    <if test="status!=null and status!='' ">
+      and status=#{status}
+    </if>
+
+    <if test="createTime!=null and createTime!='' ">
+      and createTime=#{createTime}
+    </if>
+
+    order by create_time desc
+
+
+  </select>
+
+  <select id="listInformation" resultMap="ListInformationResultMap">
+
+    select information_no,title,sub_title,title_images,update_time from ss_medical_legal order by sort desc,update_time desc
+  </select>
+
+
+  <update id="updateStatus">
+    update ss_medical_legal set status=#{status} where information_no=#{informationNo}
+  </update>
+
+
+  <select id="detailMedicalInformation" resultMap="DetailMedicalInformationResultMap">
+
+    select id,information_no,title,sub_title,sort,topping,title_images,text_data,create_time from ss_medical_legal
+
+    where information_no=#{informationNo};
+
+  </select>
+</mapper>
