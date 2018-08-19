@@ -18,7 +18,9 @@ $().ready(function () {
         beforeSend:function (xhr) {
           var token = $("meta[name='_csrf']").attr("content");
           var header = $("meta[name='_csrf_header']").attr("content");
-          xhr.setRequestHeader(header, token);
+          if(token&&header) {
+            xhr.setRequestHeader(header, token);
+          }
         },
         success: function(data){
           if(data.code==="1"){
@@ -64,7 +66,7 @@ $().ready(function () {
   var addFormValidate = $("#addForm").validate({
     ignore: [],
     onkeyup: false,
-    debug: true,
+    debug: false,
     rules: {
       'title': {
         required: true,
