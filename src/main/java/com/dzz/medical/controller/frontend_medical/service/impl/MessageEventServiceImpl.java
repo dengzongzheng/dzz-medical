@@ -70,7 +70,9 @@ public class MessageEventServiceImpl implements MessageEventService {
                     + "生活饮用水卫生、消毒产品和医疗执业等违反卫生法律法规等规定行为。\n"
                             + "投诉举报请拨：（0855）4529489\n");
                     xStream.processAnnotations(TextMessage.class);
-                    return xStream.toXML(textMessage);
+                    String message = xStream.toXML(textMessage);
+                    log.info("发送的消息为：{}", message);
+                    return message;
                 }
             }
 
