@@ -66,9 +66,8 @@ public class MessageEventServiceImpl implements MessageEventService {
                     textMessage.setMsgType("text");
                     textMessage.setCreateTime(System.currentTimeMillis());
                     textMessage.setMsgId(idService.getId());
-                    textMessage.setContent("我们受理的投诉举报职责范围包括：涉及传染病防治、放射卫生、公共场所卫生、学校卫生、"
-                    + "生活饮用水卫生、消毒产品和医疗执业等违反卫生法律法规等规定行为。\n"
-                            + "投诉举报请拨：（0855）4529489\n");
+                    textMessage.setFromUserName(wxConfig.getAppId());
+                    textMessage.setContent(messageConfig.getComplaintMessage());
                     xStream.processAnnotations(TextMessage.class);
                     String message = xStream.toXML(textMessage);
                     log.info("发送的消息为：{}", message);
