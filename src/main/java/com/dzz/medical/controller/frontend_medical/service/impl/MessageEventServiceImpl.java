@@ -46,6 +46,7 @@ public class MessageEventServiceImpl implements MessageEventService {
     public String messageEventHandler(HttpServletRequest request) {
 
         XStream xStream = new XStream();
+        xStream.ignoreUnknownElements();
         xStream.autodetectAnnotations(true);
         try {
             StringWriter writer = new StringWriter();
