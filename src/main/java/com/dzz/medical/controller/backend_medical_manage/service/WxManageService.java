@@ -10,11 +10,5 @@ package com.dzz.medical.controller.backend_medical_manage.service;
 
 public interface WxManageService {
 
-    /**
-     * 消息事件处理
-     * @param key 消息关键字
-     * @param openId openId
-     * @return 处理结果
-     */
-    String messageEventHandler(String key,String openId);
+
 }
