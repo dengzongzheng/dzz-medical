@@ -66,7 +66,6 @@ public class MessageEventServiceImpl implements MessageEventService {
                     textMessage.setMsgType("text");
                     textMessage.setCreateTime(System.currentTimeMillis());
                     textMessage.setMsgId(idService.getId());
-                    textMessage.setFromUserName(wxConfig.getAppId());
                     textMessage.setContent(messageConfig.getComplaintMessage());
                     xStream.processAnnotations(TextMessage.class);
                     String message = xStream.toXML(textMessage);
