@@ -2,8 +2,12 @@ package com.dzz.medical.controller.frontend_medical.service.impl;
 
 import com.dzz.medical.config.wx.MessageConfig;
 import com.dzz.medical.config.wx.WxConfig;
+import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.MessageEvent;
+import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.MessageTypeEnums;
 import com.dzz.medical.controller.frontend_medical.domain.bo.WxMessageEventBO;
+import com.dzz.medical.controller.frontend_medical.domain.message.TextMessage;
 import com.dzz.medical.controller.frontend_medical.service.MessageEventService;
+import com.dzz.medical.controller.util.service.IdService;
 import com.thoughtworks.xstream.XStream;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -14,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +37,9 @@ public class MessageEventServiceImpl implements MessageEventService {
     private WxConfig wxConfig;
 
     @Autowired
+    private IdService idService;
+
+    @Autowired
     private MessageConfig messageConfig;
 
     @Override
@@ -44,8 +52,28 @@ public class MessageEventServiceImpl implements MessageEventService {
             IOUtils.copy(request.getInputStream(), writer, StandardCharsets.UTF_8.name());
             String str = writer.toString();
             log.info("接收到的数据为：{}", str);
-            WxMessageEventBO wxMessageEventBO = (WxMessageEventBO) xStream.fromXML(request.getInputStream());
+            xStream.processAnnotations(WxMessageEventBO.class);
+            WxMessageEventBO wxMessageEventBO = (WxMessageEventBO) xStream.fromXML(str);
             log.info("消息数据为：{}",wxMessageEventBO.toString());
+            if (wxMessageEventBO.getMsgType().equalsIgnoreCase(MessageTypeEnums.EVENT.getName())) {
+
+                String eventKey = wxMessageEventBO.getEventKey();
+                if (eventKey.equalsIgnoreCase(MessageEvent.COMPLAINT.getCode()) || eventKey
+                        .equalsIgnoreCase(MessageEvent.GUIDE.getCode())) {
+
+                    TextMessage textMessage = new TextMessage();
+                    BeanUtils.copyProperties(wxMessageEventBO, textMessage);
+                    textMessage.setMsgType("text");
+                    textMessage.setCreateTime(System.currentTimeMillis());
+                    textMessage.setMsgId(idService.getId());
+                    textMessage.setContent("我们受理的投诉举报职责范围包括：涉及传染病防治、放射卫生、公共场所卫生、学校卫生、"
+                    + "生活饮用水卫生、消毒产品和医疗执业等违反卫生法律法规等规定行为。\n"
+                            + "投诉举报请拨：（0855）4529489\n");
+                    xStream.processAnnotations(TextMessage.class);
+                    return xStream.toXML(textMessage);
+                }
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -64,4 +92,5 @@ public class MessageEventServiceImpl implements MessageEventService {
         log.info("signature:{},codeSha1:{}", signature, codeSha1);
         return signature.equals(codeSha1);
     }
+
 }

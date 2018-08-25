@@ -155,7 +155,8 @@ public interface WxManageEnums {
 
     enum MessageTypeEnums{
 
-        TEXT(1, "text");
+        TEXT(1, "text"),
+        EVENT(2,"event");
 
         /** code */
         private Integer code;

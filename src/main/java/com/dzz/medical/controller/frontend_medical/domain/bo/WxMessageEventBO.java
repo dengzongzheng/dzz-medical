@@ -1,5 +1,6 @@
 package com.dzz.medical.controller.frontend_medical.domain.bo;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import java.io.Serializable;
 import lombok.Data;
 
@@ -10,67 +11,28 @@ import lombok.Data;
  * @version 1.0.0
  * @since 2018年08月25 上午7:55
  */
+@XStreamAlias("xml")
 @Data
 public class WxMessageEventBO implements Serializable{
 
     private static final long serialVersionUID = -8316559905311400292L;
 
+    @XStreamAlias("ToUserName")
     private String toUserName;
 
+    @XStreamAlias("FromUserName")
     private String fromUserName;
 
+    @XStreamAlias("CreateTime")
     private Integer createTime;
 
+    @XStreamAlias("MsgType")
     private String msgType;
 
+    @XStreamAlias("Event")
     private String event;
 
+    @XStreamAlias("EventKey")
     private String eventKey;
-
-    private String ticket;
-
-    private String latitude;
-
-    private String longitude;
-
-    private String precision;
-
-    private String msgId;
-
-    private String content;
-
-    private String picUrl;
-
-    private String mediaId;
-
-    private String format;
-
-    private String recognition;
-
-    private String thumbMediaId;
-
-    private String location_X;
-
-    private String location_Y;
-
-    private String scale;
-
-    private String label;
-
-    private String title;
-
-    private String description;
-
-    private String url;
-
-    private String status;
-
-    private Integer totalCount;
-
-    private Integer filterCount;
-
-    private Integer sentCount;
-
-    private Integer errorCount;
 
 }

@@ -6,6 +6,7 @@ import com.dzz.medical.common.response.ResponseDzz;
 import com.dzz.medical.config.wx.UtilConfig;
 import com.dzz.medical.config.wx.WxConfig;
 import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.MedicalStatusEnums;
+import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.MessageEvent;
 import com.dzz.medical.controller.backend_medical_manage.common.enums.WxManageEnums.ToppingEnums;
 import com.dzz.medical.controller.backend_medical_manage.domain.bo.MedicalLegalDetailBO;
 import com.dzz.medical.controller.backend_medical_manage.domain.dto.AddMedicalDTO;
@@ -197,8 +198,8 @@ public class WxFrontLegalManageController extends BaseController{
         JSONObject menuJSON = new JSONObject();
         JSONObject firstMenuJSON = wxService.createMenuJSONObject("为您服务","","","");
         JSONArray firstMenuJSONSub = new JSONArray();
-        JSONObject firstSub1 = wxService.createMenuJSONObject("我要投诉","click","", "V1001");
-        JSONObject firstSub2 = wxService.createMenuJSONObject("办事指南","click","","V1002");
+        JSONObject firstSub1 = wxService.createMenuJSONObject("我要投诉","click","", MessageEvent.COMPLAINT.getCode());
+        JSONObject firstSub2 = wxService.createMenuJSONObject("办事指南","click","",MessageEvent.GUIDE.getCode());
         JSONObject firstSub3 = wxService.createMenuJSONObject("法律法规","view",wxConfig.getMServerPath() + "/for-service/legal","");
         firstMenuJSONSub.add(firstSub1);
         firstMenuJSONSub.add(firstSub2);
