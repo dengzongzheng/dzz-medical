@@ -1,7 +1,6 @@
 package com.dzz.medical.controller.frontend_medical.domain.bo;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Data;
 
 /**
@@ -11,7 +10,6 @@ import lombok.Data;
  * @version 1.0.0
  * @since 2018年08月25 上午7:55
  */
-@XmlRootElement(name = "xml")
 @Data
 public class WxMessageEventBO implements Serializable{
 

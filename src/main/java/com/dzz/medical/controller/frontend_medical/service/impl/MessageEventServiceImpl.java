@@ -6,11 +6,14 @@ import com.dzz.medical.controller.frontend_medical.domain.bo.WxMessageEventBO;
 import com.dzz.medical.controller.frontend_medical.service.MessageEventService;
 import com.thoughtworks.xstream.XStream;
 import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +40,10 @@ public class MessageEventServiceImpl implements MessageEventService {
         XStream xStream = new XStream();
         xStream.autodetectAnnotations(true);
         try {
+            StringWriter writer = new StringWriter();
+            IOUtils.copy(request.getInputStream(), writer, StandardCharsets.UTF_8.name());
+            String str = writer.toString();
+            log.info("接收到的数据为：{}", str);
             WxMessageEventBO wxMessageEventBO = (WxMessageEventBO) xStream.fromXML(request.getInputStream());
             log.info("消息数据为：{}",wxMessageEventBO.toString());
         } catch (IOException e) {
