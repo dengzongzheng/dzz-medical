@@ -66,9 +66,10 @@ public class WxMessageEventController {
         }else{
             messageHandlerResult = messageEventService.messageEventHandler(request);
         }
-
+        log.info("响应事件报文为：{}",messageHandlerResult);
         try (PrintWriter printWriter = response.getWriter()) {
             printWriter.print(messageHandlerResult);
+            printWriter.flush();
         } catch (IOException ex) {
             log.error("IO异常了", ex);
         }

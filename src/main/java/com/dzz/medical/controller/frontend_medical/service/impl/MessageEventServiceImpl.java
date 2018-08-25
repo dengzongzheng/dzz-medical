@@ -54,7 +54,6 @@ public class MessageEventServiceImpl implements MessageEventService {
             log.info("接收到的数据为：{}", str);
             xStream.processAnnotations(WxMessageEventBO.class);
             WxMessageEventBO wxMessageEventBO = (WxMessageEventBO) xStream.fromXML(str);
-            log.info("消息数据为：{}",wxMessageEventBO.toString());
             if (wxMessageEventBO.getMsgType().equalsIgnoreCase(MessageTypeEnums.EVENT.getName())) {
 
                 String eventKey = wxMessageEventBO.getEventKey();
