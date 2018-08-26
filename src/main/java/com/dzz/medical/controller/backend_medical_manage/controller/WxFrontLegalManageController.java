@@ -218,19 +218,19 @@ public class WxFrontLegalManageController extends BaseController{
         secondMenuJSONSub.add(secondSub4);
         secondMenuJSON.put("sub_button", secondMenuJSONSub);
 
-        JSONObject thirdMenuJSON = wxService.createMenuJSONObject("诚信自律","","","");
-        JSONArray thirdMenuJSONSub = new JSONArray();
-        JSONObject thirdSub1 = wxService.createMenuJSONObject("公共场所","view",wxConfig.getServerPath() + "/honesty/publicPlace","");
-        JSONObject thirdSub2 = wxService.createMenuJSONObject("学校卫生","view",wxConfig.getServerPath() + "/honesty/schoolPlace","");
-        JSONObject thirdSub3 = wxService.createMenuJSONObject("医疗机构","view",wxConfig.getServerPath() + "/honesty/medicalPlace","");
-        JSONObject thirdSub4 = wxService.createMenuJSONObject("供水单位","view",wxConfig.getServerPath() + "/honesty/waterSupplyPlace","");
-        JSONObject thirdSub5 = wxService.createMenuJSONObject("监督管理","view",wxConfig.getServerPath() + "/honesty/controlManage","");
-        thirdMenuJSONSub.add(thirdSub1);
-        thirdMenuJSONSub.add(thirdSub2);
-        thirdMenuJSONSub.add(thirdSub3);
-        thirdMenuJSONSub.add(thirdSub4);
-        thirdMenuJSONSub.add(thirdSub5);
-        thirdMenuJSON.put("sub_button", thirdMenuJSONSub);
+        JSONObject thirdMenuJSON = wxService.createMenuJSONObject("诚信自律","view",wxConfig.getMServerPath() +"/honesty/honesty","");
+//        JSONArray thirdMenuJSONSub = new JSONArray();
+//        JSONObject thirdSub1 = wxService.createMenuJSONObject("公共场所","view",wxConfig.getServerPath() + "/honesty/publicPlace","");
+//        JSONObject thirdSub2 = wxService.createMenuJSONObject("学校卫生","view",wxConfig.getServerPath() + "/honesty/schoolPlace","");
+//        JSONObject thirdSub3 = wxService.createMenuJSONObject("医疗机构","view",wxConfig.getServerPath() + "/honesty/medicalPlace","");
+//        JSONObject thirdSub4 = wxService.createMenuJSONObject("供水单位","view",wxConfig.getServerPath() + "/honesty/waterSupplyPlace","");
+//        JSONObject thirdSub5 = wxService.createMenuJSONObject("监督管理","view",wxConfig.getServerPath() + "/honesty/controlManage","");
+//        thirdMenuJSONSub.add(thirdSub1);
+//        thirdMenuJSONSub.add(thirdSub2);
+//        thirdMenuJSONSub.add(thirdSub3);
+//        thirdMenuJSONSub.add(thirdSub4);
+//        thirdMenuJSONSub.add(thirdSub5);
+//        thirdMenuJSON.put("sub_button", thirdMenuJSONSub);
 
         JSONArray buttonArray = new JSONArray();
         buttonArray.add(firstMenuJSON);
